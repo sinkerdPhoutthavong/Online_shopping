@@ -129,7 +129,6 @@ class ProductsController extends Controller
             return view('admin.products.edit_products')->with(compact('productDetails','categories_dropdown'));
             //return redirect('/admin/view-product')->with('flash_message_success','ອັບເດດ ສິນຄ້າ ສຳເລັດແລ້ວ!!');       
     }
-
     public function deleteProductImage($id = null){
         Product :: where(['id'=>$id])->update(['image'=>'']);
         return redirect()->back()->with('flash_message_success','ຮູບພາບສິນຄ້າຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
@@ -139,5 +138,8 @@ class ProductsController extends Controller
             Product::where(['id'=>$id])->delete();
             return redirect('/admin/view-products')->with('flash_message_success','ລຶບສິນຄ້າສຳເລັດແລ້ວ!!');
         }
+    }
+    public function addAttributes(Request $request,$id=null){
+        return view('admin.products.add_attributes');
     }
 }
