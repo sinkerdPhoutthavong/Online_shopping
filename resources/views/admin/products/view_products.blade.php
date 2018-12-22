@@ -73,6 +73,7 @@
 
                                   <button data-dismiss="modal" class="close" type="button">×</button>
                                   <h3>{{$product->product_name}} ລາຍລະອຽດທັງໝົດ</h3>
+                                  <h2>ee</h2>
                                 </div>
                                 <div class="modal-body">
                                   <p>ລະຫັດສິນຄ້າ:  {{$product->id}}</p>
