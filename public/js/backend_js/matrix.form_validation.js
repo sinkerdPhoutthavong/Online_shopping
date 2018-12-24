@@ -257,14 +257,14 @@ $(document).ready(function(){
 		var maxField = 10; //Input fields increment limitation
 		var addButton = $('.add_button'); //Add button selector
 		var wrapper = $('.field_wrapper'); //Input field wrapper
-		var fieldHTML = '<div class="field_wrapper" style="margin-left:180px;"><input type="text" name="sku[]" name="sku[]" id="sku" placeholder="SKU" style="width:120px;"/><input type="text" name="size[]" id="size" placeholder="ຂະໜາດ" style="width:120px;margin-:3px;"/><input type="text" name="price[]" id="price" placeholder="ລາຄາ" style="width:120px;"/><input type="text" name="stock[]"  id="stock" placeholder="ເຄື່ອງໃນສາງ" style="width:120px;"/><a href="javascript:void(0);" class="remove_button"> ລຶບ</a></div>'; //New input field html 
+		var fieldHTML = '<div class="field_wrapper" style="margin-left:180px;"><input type="text" name="sku[]" name="sku[]" id="sku" placeholder="SKU" style="width:120px;margin-right:4px;margin-top:5px;"/><input type="text" name="size[]" id="size" placeholder="ຂະໜາດ" style="width:120px;margin-right:4px;margin-top:5px;"/><input type="text" name="price[]" id="price" placeholder="ລາຄາ" style="width:120px;margin-right:4px;margin-top:5px;"/><input type="text" name="stock[]"  id="stock" placeholder="ເຄື່ອງໃນສາງ" style="width:120px;margin-right:4px;margin-top:5px;"/><a href="javascript:void(0);" class="remove_button"> ລຶບ</a></div>'; //New input field html 
 		var x = 1; //Initial field counter is 1
 		
 		//Once add button is clicked
 		$(addButton).click(function(){
 			//Check maximum number of input fields
 			if(x < maxField){ 
-				x++; //Increment field counter
+				x++; //Increment field counter   
 				$(wrapper).append(fieldHTML); //Add field html
 			}
 		});

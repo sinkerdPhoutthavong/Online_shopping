@@ -33,8 +33,9 @@
               <h4>ເພີ່ມຄຸນລັກສະນະຂອງສິນຄ້າ</h4>
             </div>
             <div class="widget-content nopadding">
-                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('admin/add-attribute/.$productDetails->id')}}" name="add_product" id="add_attribute" novalidate="novalidate">
+                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('admin/add-attributes/'.$productDetails->id)}}" name="add_product" id="add_attribute" novalidate="novalidate">
                   {{csrf_field()}}
+                  <input type="hidden" name="product_id" value="{{$productDetails->id}}">
                   <div class="control-group">
                     <label class="control-label">ຊື່ສິນຄ້າ :</label>
                     <label class="control-label"><strong>{{$productDetails->product_name}}</strong></label>

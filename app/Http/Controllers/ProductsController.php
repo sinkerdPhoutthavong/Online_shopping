@@ -9,6 +9,7 @@ use Session;
 use Image;
 use App\Category;
 use App\Product;
+use App\ProductsAttribute;
 
 class ProductsController extends Controller
 {
@@ -72,7 +73,6 @@ class ProductsController extends Controller
         }
         return view('admin.products.view_products')->with(compact('products'));
     }
-
     public function editProduct(Request $request,$id= null){
         if($request->isMethod('post')){
            $data = $request->all();
@@ -141,6 +141,22 @@ class ProductsController extends Controller
     }
     public function addAttributes(Request $request,$id=null){
         $productDetails = Product::where(['id'=>$id])->first();
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //echo "<pre>";print_r($data);die;
+            foreach($data['sku'] as $key => $val) {
+                if(!empty($val)){
+                    $attribute = new ProductsAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->sku = $val;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->save();
+                }
+            }
+            return redirect('admin/add-attributes/'.$id)->with('flash_message_success',' !! ເພີ່ມຄຸນລັກສະນະຂອງສິນຄ້າສຳເລັດແລ້ວ !!');
+        }
         return view('admin.products.add_attributes')->with(compact('productDetails'));
     }
 }
