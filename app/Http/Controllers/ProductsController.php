@@ -140,6 +140,7 @@ class ProductsController extends Controller
         }
     }
     public function addAttributes(Request $request,$id=null){
-        return view('admin.products.add_attributes');
+        $productDetails = Product::where(['id'=>$id])->first();
+        return view('admin.products.add_attributes')->with(compact('productDetails'));
     }
 }
