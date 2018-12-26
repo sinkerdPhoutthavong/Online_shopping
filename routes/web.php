@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//front page
+
+Route::get('/','IndexController@index');
+
+//endfront Page
 Route::match(['get','post'],'/admin','AdminController@login');
 
 Auth::routes();
