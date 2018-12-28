@@ -167,4 +167,10 @@ class ProductsController extends Controller
             return redirect()->back()->with('flash_message_success','ລຶບຄຸນລັກສະນະສິນຄ້າສຳເລັດແລ້ວ!!');
         }
     }
+    public function products($url = null){
+        $cateogoryDetails = Category::where([ 'url' => $url])->first();
+        $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->get();
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+        return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
+    }
 }

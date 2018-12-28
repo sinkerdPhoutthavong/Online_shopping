@@ -22,7 +22,9 @@ Route::get('/','IndexController@index');
 Route::match(['get','post'],'/admin','AdminController@login');
 
 Auth::routes();
-
+//Category Listen Page
+Route::get('/products/{url}','ProductsController@products');
+//end
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','AdminController@logout');
 

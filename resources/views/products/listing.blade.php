@@ -129,7 +129,7 @@
             
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center"><font face="phetsarath OT">ສິນຄ້າທັງໝົດ</font></h2>
+                    <h2 class="title text-center"><font face="phetsarath OT">{{$cateogoryDetails->name}}</font></h2>
                     @foreach ($productsAll as $product)   
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
