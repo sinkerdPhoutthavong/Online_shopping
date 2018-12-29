@@ -168,9 +168,24 @@ class ProductsController extends Controller
         }
     }
     public function products($url = null){
+        //for show product in sub category only
         $cateogoryDetails = Category::where([ 'url' => $url])->first();
-        $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->get();
+        
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+
+        //for show product in sub category of all for maincatrgories
+        if($cateogoryDetails->parent_id==0){
+            // if url is Main category url
+            $subCategories = Category::where(['parent_id'=>$cateogoryDetails->id])->get();
+            $cat_ids= "";
+            foreach ($subCategories as $subcat) {
+                $cat_ids .= $subcat->id.",";
+            }
+            $productsAll = Product::whereIn('category_id',array($cat_ids))->get();
+        }else{
+            // if url is sub category url
+            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->get();
+        }
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
     }
 }
