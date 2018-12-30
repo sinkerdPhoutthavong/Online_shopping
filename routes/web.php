@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 //front page
-
+ 
 Route::get('/','IndexController@index');
 
 //endfront Page
