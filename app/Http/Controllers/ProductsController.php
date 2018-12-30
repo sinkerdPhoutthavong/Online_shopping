@@ -169,7 +169,7 @@ class ProductsController extends Controller
     }
     public function products($url = null){
         //Show 404 page if Category URL dose not exist
-        $countCategory = Category::where(['url'=>$url])->count();
+        $countCategory = Category::where(['url'=>$url,'status'=>1])->count();
         if ($countCategory==0) {
             abort(404);
         }

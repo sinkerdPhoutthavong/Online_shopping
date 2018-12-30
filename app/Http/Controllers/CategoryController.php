@@ -11,11 +11,17 @@ class CategoryController extends Controller
     public function addCategory(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
             $category = new Category();
             $category->name = $data['category_name'];
             $category->parent_id = $data['parent_id'];
             $category->description = $data['description'];
             $category->url = $data['url'];
+            $category->status = $status;
             $category->save();
             return redirect('/admin/view-categories')->with('flash_message_success','ເພີ່ມ Category ສຳເລັດແລ້ວ!!');
         }
@@ -30,7 +36,12 @@ class CategoryController extends Controller
     public function editCategory(Request $request,$id= null){
         if($request->isMethod('post')){
             $data = $request->all();
-            Category::where(['id'=>$id])->update(['name'=>$data['category_name'],'description'=>$data['description'],'url'=>$data['url']]);
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            Category::where(['id'=>$id])->update(['name'=>$data['category_name'],'description'=>$data['description'],'url'=>$data['url'],'status'=>$status]);
             return redirect('/admin/view-categories')->with('flash_message_success','ອັບເດດ Category ສຳເລັດແລ້ວ!!');
         }
         $categoryDetails = Category::where(['id'=>$id])->first();

@@ -41,6 +41,7 @@
                         <th>ຊື່ Category</th>
                         <th>ລະດັບ Category</th>
                         <th>Category URL</th>
+                        <th>ການໃຊ້ງານ Category</th>
                         <th>ການຈັດການ</th>
                       </tr>
                     </thead>
@@ -51,6 +52,7 @@
                            <td>{{$category->name}}</td>
                            <td>{{$category->parent_id}}</td>
                            <td>{{$category->url}}</td>
+                           <td>{{$category->status}}</td>
                            <td class="center">
                                 <a href="{{url('/admin/edit-category/'.$category->id)}}" class="btn btn-primary">ແກ້ໄຂ</a>
                                 <a <?php /*href="{{url('/admin/delete-product/'.$product->id)}}" */?> herf="javascript:" rel="{{$category->id}}" rel1="delete-category" class="btn btn-danger deleteRecord">ລືບ</a></td>
