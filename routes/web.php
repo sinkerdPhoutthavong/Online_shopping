@@ -31,6 +31,9 @@ Route::get('/logout','AdminController@logout');
 // Route for Products Detail
 Route::get('product/{id}','ProductsController@product');
 
+// Route for get product arrtibutes prices for product details
+Route::get('get-product-price','ProductsController@getProductPrice');
+
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');

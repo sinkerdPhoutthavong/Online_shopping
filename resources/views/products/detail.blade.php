@@ -81,10 +81,17 @@
 							<div class="product-information"><!--/product-information-->
                             <img src="" class="newarrival" alt="" />
 								<h2><font face="phetsarath OT">{{$productDetails->product_name}}</font></h2>
-								<p><font face="phetsarath OT">ລະຫັດສິນຄ້າ</font>: {{$productDetails->product_code}}</p>
-                                <img src="images/product-details/rating.png" alt="" />
+                                <p><font face="phetsarath OT">ລະຫັດສິນຄ້າ</font>: {{$productDetails->product_code}}</p>
+                                <p>
+                                    <select id="selSize" name="size" style="width:150px;">
+                                        <option value="">select size</option>
+                                        @foreach ($productDetails->attributes as $sizes)
+                                        <option value="{{$productDetails->id}}-{{$sizes->size}}">{{$sizes->size}}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
                                 <span>
-                                <span><font face="phetsarath OT">ລາຄາ: {{$productDetails->price}} ກີບ</font></span>
+                                <span id="getPrice"><font face="phetsarath OT">ລາຄາ: {{$productDetails->price}} ກີບ</font></span>
                                 </span>
                                 <span>
 									<label><font face="phetsarath OT">ຈໍານວນ:</font></label>
@@ -96,7 +103,6 @@
 								</span>
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
