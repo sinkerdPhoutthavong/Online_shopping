@@ -168,6 +168,11 @@ class ProductsController extends Controller
         }
     }
     public function products($url = null){
+        //Show 404 page if Category URL dose not exist
+        $countCategory = Category::where(['url'=>$url])->count();
+        if ($countCategory==0) {
+            abort(404);
+        }
         //for show product in sub category only
         $cateogoryDetails = Category::where([ 'url' => $url])->first();
         
@@ -188,4 +193,6 @@ class ProductsController extends Controller
         }
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
     }
+
+
 }
