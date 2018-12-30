@@ -100,34 +100,6 @@
                                 @endforeach
 							</div>
                     </div><!--/category-products-->
-                
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
-                    
-                    <div class="price-range"><!--price-range-->
-                        <h2>Price Range</h2>
-                        <div class="well text-center">
-                             <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                             <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                        </div>
-                    </div><!--/price-range-->
-                    
-                    <div class="shipping text-center"><!--shipping-->
-                        <img src="{{asset('images/frontend_images/images/home/shipping.jpg')}}" alt="" />
-                    </div><!--/shipping-->
-                
                 </div>
             </div>
             
@@ -142,7 +114,7 @@
                                         <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:200px;">
                                         <h2>{{$product->price}}<font face="phetsarath OT"> ກີບ</font></h2>
                                         <p><font face="phetsarath OT"> {{$product->product_name}}</font></p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT">ເພີ່ມລົງກະຕ່າ</font></a>
+                                        <a href="{{url('product/'.$product->id)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT">ເພີ່ມລົງກະຕ່າ</font></a>
                                     </div>
                                     {{-- <div class="product-overlay">
                                         <div class="overlay-content">

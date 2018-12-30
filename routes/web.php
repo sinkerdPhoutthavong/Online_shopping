@@ -28,6 +28,10 @@ Route::get('/products/{url}','ProductsController@products');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','AdminController@logout');
 
+// Route for Products Detail
+Route::get('product/{id}','ProductsController@product');
+
+// Route for admin
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');
     Route::get('/admin/settings','AdminController@settings');

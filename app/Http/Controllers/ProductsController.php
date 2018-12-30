@@ -210,6 +210,15 @@ class ProductsController extends Controller
         }
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
     }
+    public function product($id = null){
+        //get Product Detials 
+        $productDetails = Product::where('id',$id)->first();
+        //Get all Categories and Sub Categories
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+
+        return view('products.detail')->with(compact('productDetails','categories'));
+    }
+
 
 
 }
