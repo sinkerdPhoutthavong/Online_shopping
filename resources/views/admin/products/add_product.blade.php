@@ -84,7 +84,7 @@
                         <div class="controls">
                           <input type="file" name="image" id="image"/>
                         </div>
-                      </div>
+                    </div>
                 <div class="form-actions">
                   <input type="submit" value="Add Product" class="btn btn-success">
                 </div>

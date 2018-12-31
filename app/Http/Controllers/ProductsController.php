@@ -10,7 +10,7 @@ use Image;
 use App\Category;
 use App\Product;
 use App\ProductsAttribute;
-
+use App\ProductImage;
 class ProductsController extends Controller
 {
     public function addProduct(Request $request){
@@ -238,7 +238,37 @@ class ProductsController extends Controller
         $proAttr = ProductsAttribute::where(['product_id'=>$proArr[0],'size'=>$proArr[1]])->first();
         echo $proAttr->price;
     }
-
-
+    public function addImages(Request $request,$id=null){
+        $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
+        $categoryDetails = Category::where(['id'=>$productDetails->category_id])->first();
+        $category_name = $categoryDetails->name;
+        if($request->isMethod('post')){
+                $data = $request->all();
+                //echo "<pre>";print_r($data);die;
+                if($request->hasFile('image')){
+                    $files = $request->file('image');
+                    foreach ($files as $file) {
+                        //echo "<pre>";print_r($files);die;
+                        //Upload product to folder and insert to database with name
+                        $Image = new ProductImage;
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = rand(111,99999).'.'.$extension;
+                        $large_image_path = 'images/backend_images/products/large/'.$fileName;
+                        $medium_image_path = 'images/backend_images/products/medium/'.$fileName;
+                        $small_image_path = 'images/backend_images/products/small/'.$fileName;
+                        //Resize Images
+                        Image::make($file)->save($large_image_path);
+                        Image::make($file)->resize(600,600)->save($medium_image_path);
+                        Image::make($file)->resize(300,300)->save($small_image_path);
+                        //Store Image name in Products table
+                        $Image->image = $fileName;
+                        $Image->product_id = $data['product_id'];
+                        $Image->save();
+                    }
+                }
+            return redirect('admin/add-images/'.$id)->with('flash_message_success','ເພີ່ມຮູບພາບສໍາເລັດແລ້ວ!!');
+        }
+        return view('admin.products.add_images')->with(compact('productDetails'));
+    }
 
 }

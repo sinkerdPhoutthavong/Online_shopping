@@ -64,10 +64,11 @@
                                 @endif
                            </td>
                            <td class="center">
-                                <a href="#myModal{{$product->id}}" data-toggle="modal" class="btn btn-warning">ລາຍລະອຽດ</a>
-                                <a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-primary ">ແກ້ໄຂ</a>
-                                <a href="{{url('/admin/add-attributes/'.$product->id)}}" class="btn btn-success">ເພີ່ມ</a>
-                           <a <?php /*href="{{url('/admin/delete-product/'.$product->id)}}" */?> herf="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger deleteRecord">ລືບ</a></td>
+                                <a href="#myModal{{$product->id}}" data-toggle="modal" class="btn btn-warning btn-mini" title="ລາຍລະອຽດສິນຄ້າ">ລາຍລະອຽດ</a>
+                                <a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-primary btn-mini" title="ແກ້ໄຂສິນຄ້າ">ແກ້ໄຂ</a>
+                                <a href="{{url('/admin/add-attributes/'.$product->id)}}" class="btn btn-success btn-mini" title="ເພີ່ມຄຸນນລັກສະນະຂອງສິນຄ້າ">ເພີ່ມ</a>
+                                <a href="{{url('/admin/add-images/'.$product->id)}}" class="btn btn-info btn-mini" title="ເພີ່ມຮູບພາບຂອງສິນຄ້າ">ເພີ່ມຮູບພາບ</a>
+                           <a <?php /*href="{{url('/admin/delete-product/'.$product->id)}}" */?> herf="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord" title="ລຶບສິນຄ້າ">ລືບ</a></td>
                            </tr>
                               <div id="myModal{{$product->id}}" class="modal hide">
                                 <div class="modal-header">
