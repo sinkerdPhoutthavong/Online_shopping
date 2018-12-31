@@ -167,7 +167,17 @@ class ProductsController extends Controller
             //echo "<pre>";print_r($data);die;
             foreach($data['sku'] as $key => $val) {
                 if(!empty($val)){
-                    $attribute = new ProductsAttribute;
+                    //prevent duplicate SKu CHECK
+                    $attrCountSKU = ProductsAttribute::where('sku',$val)->count();
+                    if($attrCountSKU>0){
+                        return redirect('admin/add-attributes/'.$id)->with('flash_message_error','ລະຫັດ SKU ທີ່ທ່ານປ້ອນມີຢູ່ແລ້ວ!! ກາລຸນາລອງ SKU ໃໝ່ອີກຄັ້ງ.');
+                    }
+                    //prevent duplicate SKu CHECK
+                    $attrCountSizes = ProductsAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
+                    if($attrCountSizes>0){
+                        return redirect('admin/add-attributes/'.$id)->with('flash_message_error','ຂະໜາດ "'.$data['size'][$key].'" ຂອງສິນຄ້າທີ່ທ່ານປ້ອນມີຢູ່ແລ້ວ!! ກາລຸນາລອງໃໝ່ອີກຄັ້ງ.');
+                    }
+                    $attribute = new ProductsAttribute; 
                     $attribute->product_id = $id;
                     $attribute->sku = $val;
                     $attribute->size = $data['size'][$key];
