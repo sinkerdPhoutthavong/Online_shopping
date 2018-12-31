@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="left-sidebar">
+                {{-- <div class="left-sidebar">
                     <h2>Category</h2>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                        
@@ -101,7 +101,8 @@
 							</div>
                     </div><!--/category-products-->
                 
-                </div>
+                </div> --}}
+                @include('Layouts.frontLayout.front_sidebar')
             </div>
             
             <div class="col-sm-9 padding-right">

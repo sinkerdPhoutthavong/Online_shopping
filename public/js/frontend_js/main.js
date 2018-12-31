@@ -29,6 +29,7 @@ $(document).ready(function(){
 	});
 });
 
+// show product attributes on html product details
 $(document).ready(function(){ 
 	$("#selSize").change(function(){
 			var idSize = $(this).val();

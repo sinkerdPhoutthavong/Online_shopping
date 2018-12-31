@@ -30,6 +30,7 @@ class ProductsController extends Controller
             }else{
                 $product->description = '';
             }
+            $product->care = $data['care'];
             $product->price = $data['price'];
             // Upload Image
             if($request->hasFile('image')){
@@ -65,12 +66,13 @@ class ProductsController extends Controller
         return view('admin.products.add_product')->with(compact('categories_dropdown'));
     }
     public function viewProducts(){
-        $products = Product::get();
+        $products = Product::orderBy('id','DESC')->get();
         $products = json_decode(json_encode($products ));
         foreach ($products as $key => $val) {
             $category_name = Category::where(['id'=>$val->category_id])->first();
             $products[$key]->category_name = $category_name->name;
         }
+        //echo "<pre>";print_r($products);die;
         return view('admin.products.view_products')->with(compact('products'));
     }
     public function editProduct(Request $request,$id= null){
@@ -99,7 +101,7 @@ class ProductsController extends Controller
              $data['description'] = '';
          }
           // echo "<pre>";print_r($data);die;  test for show data
-          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'price'=>$data['price'],'image'=>$filename]);
+          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename]);
                  return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
         }
         // show product in form

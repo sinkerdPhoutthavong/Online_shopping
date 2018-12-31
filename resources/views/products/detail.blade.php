@@ -4,38 +4,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-                        <div class="left-sidebar">
-                                <h2>Category</h2>
-                                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                                   
-                                    <div class="panel panel-default">
-                                            @foreach ($categories as $cat)
-                                            @if ($cat->status == 1)
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordian" href="#{{$cat->id}}">
-                                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                        {{$cat->name}}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="{{$cat->id}}" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul>
-                                                        @foreach ($cat->categories as $subcat)
-                                                            @if ($subcat->status == 1)
-                                                            <li><a href="{{ asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a></li>
-                                                            @endif
-                                                        @endforeach	
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @endif
-                                            @endforeach
-                                        </div>
-                                </div><!--/category-products-->
-                            
-                            </div>
+                       @include('Layouts.frontLayout.front_sidebar');
 				</div>
 				
 				<div class="col-sm-9 padding-right">
@@ -110,164 +79,30 @@
 					<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li><a href="#details" data-toggle="tab"><font face="phetsarath OT">ລາຍລະອຽດ</font></a></li>
-								<li><a href="#companyprofile" data-toggle="tab"><font face="phetsarath OT">ຂໍ້ມູນຂອງບໍລິສັດ</font></a></li>
-								<li><a href="#tag" data-toggle="tab">Tag</a></li>
+								<li><a href="#description" data-toggle="tab"><font face="phetsarath OT">ຄໍາອະທິບາຍ</font></a></li>
+								<li><a href="#care" data-toggle="tab"><font face="phetsarath OT">ວັດສະດຸ</font></a></li>
+								<li><a href="#delivery" data-toggle="tab"><font face="phetsarath OT">ຮູບແບບການຈັດສົ່ງ</font></a></li>
 								<li class="active"><a href="#reviews" data-toggle="tab"><font face="phetsarath OT">ຄໍາແນະນໍາ (5)</font></a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
-							<div class="tab-pane fade" id="details" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="tab-pane fade active in" id="description" >
+                                    <div class="col-sm-12">
+                                            <center><p> {{$productDetails->description}}</p></center>
+                                    </div>
 							</div>
 							
-							<div class="tab-pane fade" id="companyprofile" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="tab-pane fade active in" id="care" >
+                                    <div class="col-sm-12">
+                                        <center><p> {{$productDetails->care}}</p></center>
+                                    </div>
 							</div>
 							
-							<div class="tab-pane fade" id="tag" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="tab-pane fade active in" id="delivery" >
+                                    <div class="col-sm-12">
+                                            <center><P> ສິນຄ້າຂອງແທ້ 100% ຮັບປະກັນຄຸນນະພາບ<br>
+                                            ຈ່າຍເງິນທີ່ປາຍທາງ</P></center>
+                                    </div>
 							</div>
 							
 							<div class="tab-pane fade active in" id="reviews" >
