@@ -230,7 +230,10 @@ class ProductsController extends Controller
         //Get all Categories and Sub Categories
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
 
-        return view('products.detail')->with(compact('productDetails','categories'));
+        //Get Product Alternate Images
+        $productAltImage = ProductImage::where('product_id',$id)->get();
+
+        return view('products.detail')->with(compact('productDetails','categories','productAltImage'));
     }
     public function getProductPrice(Request $request){
         $data = $request->all();

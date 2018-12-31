@@ -31,12 +31,14 @@ $(document).ready(function(){
 
 // show product attributes on html product details
 $(document).ready(function(){ 
+	//Change price with size
 	$("#selSize").change(function(){
 			var idSize = $(this).val();
 			if(idSize== ""){
 				return false;
 			}
 			$.ajax({
+
 				type: 'get',
 				url:'/get-product-price',
 				data:{idSize},
@@ -46,6 +48,15 @@ $(document).ready(function(){
 				},error:function(){
 					alert("Erorr");
 				}
-			})
+			});
 	});
 });
+  
+//Replace Main Image with select  Alternate Image
+$(document).ready(function(){ 
+	$(".ChangeImage").click(function(){
+		var image = $(this).attr('src');
+		$(".MainImage").attr("src",image);
+	});
+});
+
