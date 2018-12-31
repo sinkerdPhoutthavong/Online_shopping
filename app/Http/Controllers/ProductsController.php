@@ -268,7 +268,30 @@ class ProductsController extends Controller
                 }
             return redirect('admin/add-images/'.$id)->with('flash_message_success','ເພີ່ມຮູບພາບສໍາເລັດແລ້ວ!!');
         }
-        return view('admin.products.add_images')->with(compact('productDetails'));
+
+        $productImages = ProductImage::where(['product_id'=>$id])->get();
+        return view('admin.products.add_images')->with(compact('productDetails','productImages'));
+    }
+    public function deleteAltImage($id=null){
+        // get Product Image name
+        $productImage = ProductImage::where(['id'=>$id])->first();
+        // get Product Image Paths
+        $large_image_path = 'images/backend_images/products/large/';
+        $medium_image_path = 'images/backend_images/products/medium/';
+        $small_image_path = 'images/backend_images/products/small/';
+        //Delete Large Image id net exists in folder
+        if(file_exists($large_image_path.$productImage->image)){
+            unlink($large_image_path.$productImage->image);
+        }
+        if(file_exists($medium_image_path.$productImage->image)){
+            unlink($medium_image_path.$productImage->image);
+        }
+        if(file_exists($small_image_path.$productImage->image)){
+            unlink($small_image_path.$productImage->image);
+        }
+        // delete image from product table
+        ProductImage :: where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success','ຮູບພາບສິນຄ້າຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
     }
 
 }

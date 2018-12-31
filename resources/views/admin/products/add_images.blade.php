@@ -75,7 +75,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($productImages as $image)
+                        <tr>
+                            <td>{{$image->id}}</td>
+                            <td>{{$image->product_id}}</td>
+                            <td style="width:200px;"><img src="{{asset('images/backend_images/products/small/'.$image->image)}}" alt=""></td>
+                            <td>
+                                    <a herf="javascript:" rel="{{$image->id}}" rel1="delete-alt-image" class="btn btn-danger deleteRecord" title="ລຶບຮູບພາບສິນຄ້າ">ລືບ</a></td>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
               </table>
             </div>
