@@ -11,16 +11,26 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-                                    <img class="MainImage" src="{{asset('images/backend_images/products/medium/'.$productDetails->image)}}"  alt="" />
-								<h3><font face="phetsarath OT">ຊຸມ</font></h3>
+									<div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+										<a href="{{asset('images/backend_images/products/large/'.$productDetails->image)}}">
+                                    		<img style="width:300px;" class="MainImage" src="{{asset('images/backend_images/products/medium/'.$productDetails->image)}}"  alt="" />
+										{{-- <h3><font face="phetsarath OT">ຊຸມ</font></h3> --}}
+										</a>
+									</div>	
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
-										<div class="item active">
+										<div class="item active thumbnails">
+												<a href="{{asset('images/backend_images/products/large/'.$productDetails->image)}}" data-standard="{{asset('images/backend_images/products/large/'.$productDetails->image)}}">
+													<img class="ChangeImage" style="width:50px;" class="MainImage" src="{{asset('images/backend_images/products/medium/'.$productDetails->image)}}"  alt="" />
+												{{-- <h3><font face="phetsarath OT">ຊຸມ</font></h3> --}}
+												</a>
 										@foreach ($productAltImage as $image)
-										<a href=""><img class="ChangeImage" style="width:80px; cursor:pointer;" src="{{asset('images/backend_images/products/small/'.$image->image)}}" alt=""></a>
+										<a href="{{asset('images/backend_images/products/medium/'.$image->image)}}" data-standard="{{asset('images/backend_images/products/medium/'.$image->image)}}">
+										<img class="ChangeImage" style="width:50px; cursor:pointer;" src="{{asset('images/backend_images/products/medium/'.$image->image)}}" alt="">
+										</a>
 										@endforeach
 										</div>
 									</div>
