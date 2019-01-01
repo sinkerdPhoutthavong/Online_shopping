@@ -29,7 +29,7 @@
 												</a>
 										@foreach ($productAltImage as $image)
 										<a href="{{asset('images/backend_images/products/medium/'.$image->image)}}" data-standard="{{asset('images/backend_images/products/medium/'.$image->image)}}">
-										<img class="ChangeImage" style="width:5 0px; cursor:pointer;" src="{{asset('images/backend_images/products/medium/'.$image->image)}}" alt="">
+										<img class="ChangeImage" style="width:50px; cursor:pointer;" src="{{asset('images/backend_images/products/medium/'.$image->image)}}" alt="">
 										</a>
 										@endforeach
 										</div>

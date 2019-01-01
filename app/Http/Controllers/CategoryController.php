@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 
 class CategoryController extends Controller
-{
+{ 
     public function addCategory(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();

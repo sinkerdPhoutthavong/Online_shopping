@@ -17,6 +17,11 @@ class ProductsController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<pre>"; print_r($data); die;
+            if(empty($data['status'])){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
             $product = new Product;
             if(empty($data['category_id'])){
                 return redirect()->back()->with('flash_message_error','ບໍ່ສາມາດເພີ່ມສິນຄ້າ ກາລຸນາລອງໃໝ່ອີກຄັ້ງ !!');
@@ -49,6 +54,7 @@ class ProductsController extends Controller
                     $product->image = $filename;
                 }
             }
+            $product->status = $status;
             $product->save();
             return redirect('/admin/view-products')->with('flash_message_success','ເພີ່ມສິນຄ້າຮຽບຮ້ອຍແລ້ວ!!');
         }
@@ -78,6 +84,11 @@ class ProductsController extends Controller
     public function editProduct(Request $request,$id= null){
         if($request->isMethod('post')){
            $data = $request->all();
+           if(empty($data['status'])){
+            $status = 0;
+            }else{
+                $status = 1;
+            }
            // Upload Image
            if($request->hasFile('image')){
             $image_tmp = Input::file('image');
@@ -101,7 +112,7 @@ class ProductsController extends Controller
              $data['description'] = '';
          }
           // echo "<pre>";print_r($data);die;  test for show data
-          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename]);
+          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'status'=>$status]);
                  return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
         }
         // show product in form
@@ -215,14 +226,19 @@ class ProductsController extends Controller
             foreach ($subCategories as $subcat) {
                 $cat_ids[] = $subcat->id;
             }
-            $productsAll = Product::whereIn('category_id',$cat_ids)->get();
+            $productsAll = Product::whereIn('category_id',$cat_ids)->with('status',1)->get();
         }else{
             // if url is sub category url
-            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->get();
+            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->with('status',1)->get();
         }
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
     }
     public function product($id = null){
+        //Show 404 page if product disable
+        $countProduct = Product::where(['id'=>$id,'status'=>1])->count();
+        if ($countProduct==0) {
+            abort(404);
+        }
         //get Product Detials 
         $productDetails = Product::with('attributes')->where('id',$id)->first();
         // $productDetails = json_decode(json_encode($productDetails));

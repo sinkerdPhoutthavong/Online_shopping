@@ -78,8 +78,8 @@
                       <div class="controls">
                         <input type="text" name="price" id="price" value="{{$productDetails->price}}">
                       </div>
-                    </div>
-                    <div class="control-group">
+                  </div>
+                  <div class="control-group">
                         <label class="control-label">ຮູບພາບ</label>
                         <div class="controls">
                           <input type="file" name="image" id="image"/>
@@ -89,7 +89,13 @@
                                 <a href="{{url('/admin/delete-product-image/'.$productDetails->id)}}"> || ລືບຮູບພາບ</a>
                           @endif
                         </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label">ການໃຊ້ງານ ສິນຄ້າ</label>
+                      <div class="controls">
+                        <input type="checkbox" name="status" id="status"  @if ($productDetails->staus == 1) checked @endif value="1">
                       </div>
+                    </div>
                 <div class="form-actions">
                   <input type="submit" value="Edit Product" class="btn btn-success">
                 </div>

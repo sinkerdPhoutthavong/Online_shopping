@@ -79,12 +79,18 @@
                         <input type="text" name="price" id="price">
                       </div>
                     </div>
-                    <div class="control-group">
+                  <div class="control-group">
                         <label class="control-label">ຮູບພາບ</label>
                         <div class="controls">
                           <input type="file" name="image" id="image"/>
                         </div>
-                    </div>
+                  </div>
+                  <div class="control-group">
+                      <label class="control-label">ໃຊ້ງານ</label>
+                      <div class="controls">
+                        <input type="checkbox" name="status" id="status">
+                      </div>
+                  </div>
                 <div class="form-actions">
                   <input type="submit" value="Add Product" class="btn btn-success">
                 </div>

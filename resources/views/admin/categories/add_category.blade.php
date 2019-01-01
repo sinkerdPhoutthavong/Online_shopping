@@ -49,9 +49,9 @@
                 <div class="control-group">
                     <label class="control-label">ໃຊ້ງານ</label>
                     <div class="controls">
-                      <input type="checkbox" name="status id="status">
+                      <input type="checkbox" name="status" id="status">
                     </div>
-                  </div>
+                </div>
                 <div class="form-actions">
                   <input type="submit" value="Add Category" class="btn btn-success">
                 </div>
