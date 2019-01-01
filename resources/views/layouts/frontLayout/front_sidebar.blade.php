@@ -1,6 +1,6 @@
 
 <div class="left-sidebar">
-        <h2>Category</h2>
+        <h2><font face="phetsarath OT">ປະເພດຂອງສິນຄ້າ</font></h2>
         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
            
             <div class="panel panel-default">
