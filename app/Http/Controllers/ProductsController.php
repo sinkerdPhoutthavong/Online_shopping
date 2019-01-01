@@ -236,7 +236,17 @@ class ProductsController extends Controller
         //cal culate for product instock and show in detail page
          $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
 
-        return view('products.detail')->with(compact('productDetails','categories','productAltImage','total_stock'));
+        // for reacommend prosuct with the same category
+        $ralatedProducts = Product::where('id','!=',$id)->where(['category_id'=>$productDetails->category_id])->get(); 
+        // foreach($ralatedProducts->chunk(3) as $chunk){
+        //     foreach($chunk as $items){
+        //         echo $items;echo "<br>";
+        //     }
+        //     echo "<br><br><br>";
+        //     die;
+           
+        // }  
+        return view('products.detail')->with(compact('productDetails','categories','productAltImage','total_stock','ralatedProducts'));
     }
     public function getProductPrice(Request $request){
         $data = $request->all();
