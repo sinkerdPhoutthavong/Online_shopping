@@ -1,5 +1,6 @@
 @extends('layouts.frontLayout.front_design')
 @section('content')
+
 <section>
 		<div class="container">
 			<div class="row">
@@ -9,6 +10,26 @@
 				
 				<div class="col-sm-9 padding-right">
 					<div class="product-details"><!--product-details-->
+						@if (Session::has('flash_message_error'))
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                            <font face="phetsarath OT" size="2px">
+                                    <center>
+                            <strong>{!!session('flash_message_error')!!}</strong>
+                                     </center>
+                            </font> 
+                          </div>
+                    @endif  
+                    @if (Session::has('flash_message_success'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                            <font face="phetsarath OT" size="2px">
+                                    <center>
+                            <strong>{!!session('flash_message_success')!!}</strong>
+                                     </center>
+                            </font> 
+                          </div>
+                    @endif 
 						<div class="col-sm-5">
 							<div class="view-product">
 									<div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
@@ -79,7 +100,7 @@
 											@else
 												<button type="button" class="btn btn-fefault cart" id="cartButton1">
 													<i class="fa fa-shopping-cart"></i>
-													<font face="phetsarath OT">ຂໍອະໄພ ສິນຄ້າໝົດ/font>
+													<font face="phetsarath OT">ຂໍອະໄພ ສິນຄ້າໝົດ</font>
 												</button>
 											@endif
 										</span>

@@ -228,10 +228,10 @@ class ProductsController extends Controller
             foreach ($subCategories as $subcat) {
                 $cat_ids[] = $subcat->id;
             }
-            $productsAll = Product::whereIn('category_id',$cat_ids)->with('status',1)->get();
+            $productsAll = Product::whereIn('category_id',$cat_ids)->where('status',1)->get();
         }else{
             // if url is sub category url
-            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->with('status',1)->get();
+            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->get();
         }
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
     }
@@ -357,10 +357,28 @@ class ProductsController extends Controller
             if(empty($data['session_id'])){
                 $data['session_id'] = " ";
             }
+            if(empty($data['size'])){
+                return redirect()->back()->with('flash_message_error','ກາລຸນາເລືອກຂະໜາດຂອງສີນຄ້າ');
+            }
+
+            $session_id = Session::get('session_id');
+            if(empty($session_id)){
+                $session_id = str_random(40);
+                Session::put('session_id',$session_id);
+            }
             $sizeArr = explode("-",$data['size']);
             DB::table('cart')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],
             'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],
-            'session_id'=>$data['session_id']]);
+            'session_id'=>$session_id]);
         }
+        return redirect('/cart')->with('flash_message_success','ເພີ່ມສິນຄ້າລົງກະຕ່າສໍາເລັດແລ້ວ');
+    }
+    public function cart(){
+        $session_id = Session::get('session_id');
+        $userCart = DB::table('cart')->where(['session_id'=>$session_id])->get();
+         //Get Product Alternate Images
+        // $productAltImage = ProductImage::where('product_id',$id)->get();
+        //echo "<pre>";print_r($userCart);die;
+        return view('products.cart')->with(compact('userCart'));
     }
 }

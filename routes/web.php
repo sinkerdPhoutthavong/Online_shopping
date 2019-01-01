@@ -15,8 +15,6 @@
 //     return view('welcome');
 // });
 //front page
- 
-Route::get('/','IndexController@index');
 
 //endfront Page
 Route::match(['get','post'],'/admin','AdminController@login'); 
@@ -26,6 +24,10 @@ Auth::routes();
 Route::get('/products/{url}','ProductsController@products');
 //end
 Route::get('/home', 'HomeController@index')->name('home');
+//Index Pge
+Route::get('/','IndexController@index');
+
+//logout
 Route::get('/logout','AdminController@logout');
 
 // Route for Products Detail
@@ -33,6 +35,9 @@ Route::get('product/{id}','ProductsController@product');
 
 //Add to cart Route
 Route::match(['get','post'],'/add-cart','ProductsController@addtoCart');
+
+//Cart Page
+Route::match(['get','post'],'/cart','ProductsController@cart');
 
 // Route for get product arrtibutes prices for product details
 Route::get('get-product-price','ProductsController@getProductPrice');
