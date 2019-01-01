@@ -374,7 +374,9 @@ class ProductsController extends Controller
             if($countProducts>0){
                 return redirect()->back()->with('flash_message_error','ສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
             }else{
-                DB::table('carts')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],
+                $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$sizeArr[1]])->first();
+
+                DB::table('carts')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$getSKU->sku,
                 'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],
                 'session_id'=>$session_id]);
             }
@@ -400,7 +402,16 @@ class ProductsController extends Controller
         }
     }
     public function updateCartQuantity($id=null,$quantity=null){
-        $cartQuantity = Cart::where('id',$id)->increment('quantity',$quantity);
-        return redirect('cart')->with('flash_message_success','ເພີ່ມຈໍານວນສິນຄ້າສໍາເລັດແລ້ວ!!');
+        $getCartDetails = Cart::where('id',$id)->first();
+        $getAttributeStock = ProductsAttribute::where('sku',$getCartDetails->product_code)->first();
+
+        //echo $getAttributeStock->stock;
+        //echo "--";
+        $updated_quantity = $getCartDetails->quantity+$quantity;
+        if($getAttributeStock->stock >= $updated_quantity){
+            $cartQuantity = Cart::where('id',$id)->increment('quantity',$quantity);
+            return redirect('cart')->with('flash_message_success','ເພີ່ມຈໍານວນສິນຄ້າສໍາເລັດແລ້ວ!!');
+        }
+        return redirect('cart')->with('flash_message_error','ຈໍານວນສິນຄ້າທີ່ທ່ານຕ້ອງການບໍ່ສາມາດໃຊ້ງານໄດ້!!');
     }
 }
