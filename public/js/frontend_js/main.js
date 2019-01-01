@@ -46,6 +46,7 @@ $(document).ready(function(){
 					//define this for show product becuase 2500#0 2500 is price and 0 instock
 					var arr = resp.split('#');
 					$("#getPrice").html("<font face='phetsarath OT'>ລາຄາ: "+arr[0]+" ກີບ</font>");
+					$("#price").val(arr[0]); 
 					if(arr[1]==0){
 						$("#cartButton1").show();
 						$("#Availability").html("<font face='phetsarath OT' color='red'><b>ຂໍອະໄພ !! ສິນຄ້າໝົດ</b></font>");

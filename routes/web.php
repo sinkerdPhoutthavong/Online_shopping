@@ -19,7 +19,7 @@
 Route::get('/','IndexController@index');
 
 //endfront Page
-Route::match(['get','post'],'/admin','AdminController@login');
+Route::match(['get','post'],'/admin','AdminController@login'); 
 
 Auth::routes();
 //Category Listen Page
@@ -30,6 +30,9 @@ Route::get('/logout','AdminController@logout');
 
 // Route for Products Detail
 Route::get('product/{id}','ProductsController@product');
+
+//Add to cart Route
+Route::match(['get','post'],'/add-cart','ProductsController@addtoCart');
 
 // Route for get product arrtibutes prices for product details
 Route::get('get-product-price','ProductsController@getProductPrice');
