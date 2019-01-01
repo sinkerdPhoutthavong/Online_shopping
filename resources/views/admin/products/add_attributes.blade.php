@@ -75,6 +75,8 @@
               <h5>ລາຍລະອຽດທັງໝົດຂອງສິນຄ້າ</h5>
             </div>
             <div class="widget-content nopadding">
+            <form action="{{url('admin/edit-attributes/'.$productDetails->id)}}" method="POST">
+              {{ csrf_field() }}
               <table class="table table-bordered data-table">
                 <thead>
                   <tr>
@@ -89,17 +91,19 @@
                 <tbody>
                     @foreach ($productDetails['attributes'] as $attribute)
                        <tr class="gradeX">
-                       <td>{{$attribute->id}}</td>
+                       <td> <input type="hidden" name="idAttr[]" value="{{$attribute->id}}"> {{$attribute->id}}</td>
                        <td>{{$attribute->sku}}</td>
                        <td>{{$attribute->size}}</td>
-                       <td>{{$attribute->price}}</td>
-                       <td>{{$attribute->stock}}</td>
+                       <td><input type="text" name="price[]" value="{{$attribute->price}}"></td>
+                       <td><input type="text" name="stock[]" value="{{$attribute->stock}}"></td>
                        <td class="center">
-                       <a  herf="javascript:" rel="{{$attribute->id}}" rel1="delete-attribute" class="btn btn-danger deleteRecord">ລືບ</a></td>
+                         <input type="submit" value="Update" class="btn btn-primary btn-mini">
+                        <a  herf="javascript:" rel="{{$attribute->id}}" rel1="delete-attribute" class="btn btn-danger btn-mini deleteRecord">ລືບ</a></td>
                        </tr>
                     @endforeach
                 </tbody>
               </table>
+              </form>
             </div>
           </div>
         </div>

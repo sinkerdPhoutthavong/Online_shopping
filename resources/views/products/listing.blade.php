@@ -129,8 +129,8 @@
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    <li><a href="#"><i class="fa fa-plus-square"></i><font face="phetsarath OT">ເພີ່ມສີ່ງທີ່ຢາກໄດ້</font></a></li>
+                                    <li><a href="#"><i class="fa fa-plus-square"></i><font face="phetsarath OT">ເພີ່ມເພື່ອປຽບທຽບ</font></a></li>
                                 </ul>
                             </div>
                         </div>

@@ -296,5 +296,21 @@ class ProductsController extends Controller
         ProductImage :: where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success','ຮູບພາບສິນຄ້າຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
     }
+    public function editAttributes(Request $request,$id=null){
+        if($request->isMethod('post')){
+            $data = $request->all();  
+            //echo "<pre>";print_r($data);die; 
+           foreach ($data['idAttr'] as $key => $attr) {
+                if($data['price'][$key]==""){
+                    return redirect()->back()->with('flash_message_error','ບໍ່ສາມາດອັບເດດສິນຄ້າໄດ້ !! ກາລຸນາປ້ອນລາຄາສິນຄ້າໃຫ້ຄົບຖ້ວນ!!');
+                }
+                if($data['stock'][$key]==""){
+                    return redirect()->back()->with('flash_message_error','ບໍ່ສາມາດອັບເດດສິນຄ້າໄດ້ !! ກາລຸນາປ້ອນຈໍານວນສິນຄ້າໃຫ້ຄົບຖ້ວນ!!');
+                }
+               ProductsAttribute::where(['id'=>$data['idAttr'][$key]])->update(['price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
+           }
+           return redirect()->back()->with('flash_message_success','ອັບເດດຂໍ້ມູນສໍາເລັດແລ້ວ!!');
+        }
 
+    }
 }
