@@ -29,7 +29,7 @@
 												</a>
 										@foreach ($productAltImage as $image)
 										<a href="{{asset('images/backend_images/products/medium/'.$image->image)}}" data-standard="{{asset('images/backend_images/products/medium/'.$image->image)}}">
-										<img class="ChangeImage" style="width:50px; cursor:pointer;" src="{{asset('images/backend_images/products/medium/'.$image->image)}}" alt="">
+										<img class="ChangeImage" style="width:5 0px; cursor:pointer;" src="{{asset('images/backend_images/products/medium/'.$image->image)}}" alt="">
 										</a>
 										@endforeach
 										</div>
@@ -64,12 +64,29 @@
                                 <span>
 									<label><font face="phetsarath OT">ຈໍານວນ:</font></label>
 									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										<font face="phetsarath OT"> ເພີ່ມລົງກະຕ່າ</font>
-									</button>
+									@if ($total_stock>0)
+										<button type="button" class="btn btn-fefault cart" id="cartButton">
+											<i class="fa fa-shopping-cart"></i>
+											<font face="phetsarath OT"> ເພີ່ມລົງກະຕ່າ</font>
+										</button>	
+									@else
+										<button type="button" class="btn btn-fefault cart" id="cartButton1">
+											<i class="fa fa-shopping-cart"></i>
+											<font face="phetsarath OT">ຂໍອະໄພ ສິນຄ້າໝົດ/font>
+										</button>
+									@endif
 								</span>
-								<p><b>Availability:</b> In Stock</p>
+								<p><b><font face="phetsarath OT">ສະຖານະຂອງສິນຄ້າ: </font></b>
+									<span id="Availability">
+									@if ($total_stock>0)
+											
+										<font face="phetsarath OT" color="green"> <b>ສິນຄ້າມີໃນສາງ </b> </font>
+											
+										@else
+											
+										<font face="phetsarath OT" color="red"><b>ຂໍອະໄພ !! ສິນຄ້າໝົດ</b></font>
+									@endif
+								</span></p>
 								<p><b>Condition:</b> New</p>
 							</div><!--/product-information-->
 						</div>

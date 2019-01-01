@@ -31,20 +31,28 @@ $(document).ready(function(){
 
 // show product attributes on html product details
 $(document).ready(function(){ 
-	//Change price with size
+	//Change price && size in stock with size
 	$("#selSize").change(function(){
 			var idSize = $(this).val();
 			if(idSize== ""){
 				return false;
 			}
 			$.ajax({
-
 				type: 'get',
 				url:'/get-product-price',
 				data:{idSize},
 				success:function(resp){
 					// alert(resp);
-					$("#getPrice").html("<font face='phetsarath OT'>ລາຄາ: "+resp+" ກີບ</font>");
+					//define this for show product becuase 2500#0 2500 is price and 0 instock
+					var arr = resp.split('#');
+					$("#getPrice").html("<font face='phetsarath OT'>ລາຄາ: "+arr[0]+" ກີບ</font>");
+					if(arr[1]==0){
+						$("#cartButton1").show();
+						$("#Availability").html("<font face='phetsarath OT' color='red'><b>ຂໍອະໄພ !! ສິນຄ້າໝົດ</b></font>");
+					}else{
+						$("#cartButton").show();
+						$("#Availability").html("<font face='phetsarath OT' color='green'> <b>ສິນຄ້າມີໃນສາງ </b> </font>");
+					}
 				},error:function(){
 					alert("Erorr");
 				}
