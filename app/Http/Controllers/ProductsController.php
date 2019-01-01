@@ -12,6 +12,7 @@ use App\Product;
 use App\ProductsAttribute;
 use App\ProductImage;
 use DB;
+use App\cart;
 
 class ProductsController extends Controller
 {
@@ -367,7 +368,7 @@ class ProductsController extends Controller
                 Session::put('session_id',$session_id);
             }
             $sizeArr = explode("-",$data['size']);
-            DB::table('cart')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],
+            DB::table('carts')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],
             'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],
             'session_id'=>$session_id]);
         }
@@ -375,10 +376,20 @@ class ProductsController extends Controller
     }
     public function cart(){
         $session_id = Session::get('session_id');
-        $userCart = DB::table('cart')->where(['session_id'=>$session_id])->get();
+        $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
          //Get Product Alternate Images
         // $productAltImage = ProductImage::where('product_id',$id)->get();
         //echo "<pre>";print_r($userCart);die;
-        return view('products.cart')->with(compact('userCart'));
+        foreach ($userCart as $key => $product) {
+            $productDetails = Product::where('id',$product->product_id)->first();
+            $userCart[$key]->image = $productDetails->image;
+        }
+        return view('products.cart')->with(compact('userCart',''));
+    }
+    public function deleteCartproduct($id=null){
+        if(!empty($id)){
+            Cart::where(['id'=>$id])->delete();
+            return redirect('cart')->with('flash_message_success','ລຶບສິນຄ້າສຳເລັດແລ້ວ!!');
+        }
     }
 }

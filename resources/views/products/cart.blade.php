@@ -45,7 +45,7 @@
                         @foreach ($userCart as $cart)
                         <tr>
                                 <td class="cart_product">
-                                    <a href=""><img src="" alt=""></a>
+                                <a href=""><img style="width:100px;" src="{{asset('images/backend_images/products/medium/'.$cart->image)}}" alt=""></a>
                                 </td>
                                 <td class="cart_description">
                                     <h4><a href=""><font face="phetsarath OT">{{$cart->product_name}}</font></a></h4>
@@ -68,7 +68,7 @@
                                 <p class="cart_total_price">{{$cart->price * $cart->quantity}}<font face="phetsarath OT"> ກີບ</font></p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                <a class="cart_quantity_delete" href="{{url('/cart/delete-product/'.$cart->id)}}"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                         @endforeach
