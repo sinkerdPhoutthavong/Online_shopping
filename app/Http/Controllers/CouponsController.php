@@ -28,4 +28,21 @@ class CouponsController extends Controller
         }
         return view('admin.coupons.add_coupon');
     }
+    public function viewCoupons(){
+        // $coupons = Coupon::orderBy('id','DESC')->get();
+        // $coupons= json_decode(json_encode($coupons));
+        // // foreach ($coupons as $key => $val) {
+        // //     $category_name = Category::where(['id'=>$val->category_id])->first();
+        // //     $products[$key]->category_name = $category_name->name;
+        // // }
+        // //echo "<pre>";print_r($products);die;
+        $coupons = Coupon::get();
+        return view('admin.coupons.view_coupons')->with(compact('coupons'));
+    }
+    public function deleteCoupon($id=null){
+        if(!empty($id)){
+            Coupon::where(['id'=>$id])->delete();
+            return redirect('/admin/view-coupons')->with('flash_message_success','ລຶບ Coupon ສຳເລັດແລ້ວ!!');
+        }
+    }
 }
