@@ -16,7 +16,7 @@
       </li>
       <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Coupons</span> <span class="label label-important">1</span></a>
         <ul>
-        <li><a href="{{url('/admin/add-product')}}">ເພີ່ມ Coupon</a></li>
+        <li><a href="{{url('/admin/add-coupon')}}">ເພີ່ມ Coupon</a></li>
           <li><a href="{{url('/admin/view-products')}}">Coupon ທັງໝົດ</a></li>
         </ul>
       </li>

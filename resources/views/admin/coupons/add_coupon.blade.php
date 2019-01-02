@@ -33,25 +33,25 @@
               <h4>ເພີ່ມ Coupon</h4>
             </div>
             <div class="widget-content nopadding">
-              <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('admin/add-coupon')}}" name="add_coupon" id="add_coupon" novalidate="novalidate">
+              <form class="form-horizontal"  method="post" action="{{url('admin/add-coupon')}}" name="add_coupon" id="add_coupon" novalidate="novalidate">
                 {{csrf_field()}}
                 <div class="control-group">
                   <label class="control-label">ລະຫັດ Coupon</label>
                   <div class="controls">
-                    <input type="text" name="coupon_code" id="coupon_code">
+                    <input type="text" name="coupon_code" id="coupon_code" minlength="5" maxlength="15">
                   </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">ຈໍານວນ</label>
                     <div class="controls">
-                      <input type="text" name="amount" id="amount">
+                      <input type="number" name="amount" id="amount" min="1" required>
                     </div>
                 </div>
                 <div class="control-group">
                         <label class="control-label">ປະເພດສ່ວນຫຼຸດ</label>
                         <div class="controls">
                             <select name="amount_type" id="amount_type" style="width:220px;">
-                              <option value="Percentage">ສ່ວນຫຼຸດເປັນເປີເຊັນ %</option>
+                              <option value="Percentage"><font face="phetsarath OT">ສ່ວນຫຼຸດເປັນເປີເຊັນ %</font></option>
                               <option value="Fixed">Fixed</option>
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                 <div class="control-group">
                       <label class="control-label">ວັນໝົດອາຍຸ</label>
                       <div class="controls">
-                        <input type="text" name="Expiry_date" id="Expiry_date">
+                        <input type="text" name="datepicker" id="datepicker" required>
                       </div>
                     </div>
                 <div class="control-group">
