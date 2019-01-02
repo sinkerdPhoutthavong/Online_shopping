@@ -47,6 +47,7 @@ Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCar
 // Route for get product arrtibutes prices for product details
 Route::get('get-product-price','ProductsController@getProductPrice');
 
+
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');
@@ -73,5 +74,8 @@ Route::group(['middleware' => ['auth']],function(){
     Route::match(['get','post'],'/admin/add-images/{id}','ProductsController@addImages');
     Route::get('/admin/delete-attribute/{id}','ProductsController@deleteAttribute');
     Route::match(['get','post'],'/admin/edit-attributes/{id}','ProductsController@editAttributes');
+
+    //Route for Coupon
+    Route::match(['get','post'],'/admin/add-coupon','CouponsController@addCoupon');
 
 });
