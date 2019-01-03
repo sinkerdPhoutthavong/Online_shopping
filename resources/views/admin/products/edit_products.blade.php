@@ -93,7 +93,7 @@
                   <div class="control-group">
                       <label class="control-label">ການໃຊ້ງານ ສິນຄ້າ</label>
                       <div class="controls">
-                        <input type="checkbox" name="status" id="status"  @if ($productDetails->staus == 1) checked @endif value="1">
+                        <input type="checkbox" name="status" id="status"  @if ($productDetails->status == "1") checked @endif value="1">
                       </div>
                     </div>
                 <div class="form-actions">

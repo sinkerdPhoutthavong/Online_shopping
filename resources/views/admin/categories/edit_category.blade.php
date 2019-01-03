@@ -48,7 +48,7 @@
                     <div class="control-group">
                         <label class="control-label">ການໃຊ້ງານ Category</label>
                         <div class="controls">
-                          <input type="checkbox" name="status" id="status"  @if ($categoryDetails->staus == 1) checked @endif value="1">
+                          <input type="checkbox" name="status" id="status" value="1" @if ($categoryDetails->status == "1") checked @endif >
                         </div>
                       </div>
                     <div class="form-actions">
