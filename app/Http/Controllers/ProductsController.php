@@ -114,7 +114,10 @@ class ProductsController extends Controller
          if(empty($data['description'])){
              $data['description'] = '';
          }
-          // echo "<pre>";print_r($data);die;  test for show data
+         if(empty($data['care'])){
+            return redirect('/admin/edit-product/'.$id)->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
+        }
+          
           Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'status'=>$status]);
                  return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
         }

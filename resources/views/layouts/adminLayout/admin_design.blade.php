@@ -16,8 +16,8 @@
 <link href="font-awesome/{{asset('fonts/backend_fonts//font-awesome.css')}}" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('css/backend_css/jquery.gritter.css')}}" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+{{-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> --}}
 </head>
 <body>
     <font face="phetsarath OT">
@@ -28,7 +28,7 @@
 
     @include('layouts.adminLayout.admin_footer')
     </font>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
 <script src="{{asset('js/backend_js/jquery.min.js')}}"></script> 
 <script src="{{asset('js/backend_js/jquery.ui.custom.js')}}"></script> 
 <script src="{{asset('js/backend_js/bootstrap.min.js')}}"></script> 
@@ -40,7 +40,7 @@
 <script src="{{asset('js/backend_js/matrix.form_validation.js')}}"></script>
 <script src="{{asset('js/backend_js/matrix.tables.js')}}"></script>
 <script src="{{asset('js/matrix.popover.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
         $( function() {
@@ -49,7 +49,7 @@
               dateFormat: 'yy-mm-dd'
             });
         });
-        </script>
+        </script> --}}
 
 </body>
 </html>
