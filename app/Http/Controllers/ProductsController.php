@@ -13,6 +13,7 @@ use App\ProductsAttribute;
 use App\ProductImage;
 use DB;
 use App\cart;
+use App\Coupon;
 
 class ProductsController extends Controller
 {
@@ -417,4 +418,17 @@ class ProductsController extends Controller
         }
         return redirect('cart')->with('flash_message_error','ຈໍານວນສິນຄ້າທີ່ທ່ານຕ້ອງການບໍ່ສາມາດໃຊ້ງານໄດ້!!');
     }
+    public function applyCoupon(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+            $couponCount = Coupon::where('coupon_code',$data['coupon_code'])->count();
+            if($couponCount==0){
+                return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນບໍ່ຖືກຕ້ອງ!!');
+            }else{
+                echo "success";
+            }
+        }
+    }
+
 }

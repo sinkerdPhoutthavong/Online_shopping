@@ -47,6 +47,8 @@ Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCar
 // Route for get product arrtibutes prices for product details
 Route::get('get-product-price','ProductsController@getProductPrice');
 
+//Route for Apply Coupon
+Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){
