@@ -16,7 +16,7 @@ class CouponsController extends Controller
                $data['status']="0";
            }
            if($data['status']=='on'){
-            $data['status'] = "1";  
+                $data['status'] = "1";  
             }
              $coupon = new Coupon;
              $coupon->coupon_code = $data['coupon_code'];
@@ -51,9 +51,10 @@ class CouponsController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(empty($data['status'])){
-                $status = 0;
-             }else{
-                 $status = 1;
+                $data['status']="0";
+            }
+            if($data['status']=='on'){
+                $data['status'] = "1";  
              }
              $coupon = Coupon::find($id); 
              $coupon->coupon_code = $data['coupon_code'];

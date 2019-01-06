@@ -419,14 +419,52 @@ class ProductsController extends Controller
         return redirect('cart')->with('flash_message_error','ຈໍານວນສິນຄ້າທີ່ທ່ານຕ້ອງການບໍ່ສາມາດໃຊ້ງານໄດ້!!');
     }
     public function applyCoupon(Request $request){
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
         if($request->isMethod('post')){
             $data = $request->all();
             // echo "<pre>";print_r($data);die;
             $couponCount = Coupon::where('coupon_code',$data['coupon_code'])->count();
             if($couponCount==0){
-                return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນບໍ່ຖືກຕ້ອງ!!');
+                return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນບໍ່ມີຢູ່ໃນລະບົບ!!');
             }else{
-                echo "success";
+                //get coupon details
+                $couponDetails = Coupon::Where('coupon_code',$data['coupon_code'])->first();
+
+                // If coupon not actives
+                if($couponDetails->status==0){
+                    return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນໃຊ້ງານບໍ່ໄດ້!!');
+                }
+
+                //If coupon Expried
+                $expiry_date = $couponDetails->expiry_date;
+                $current_date = date('Y-m-d');
+                if($expiry_date < $current_date){
+                    return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນໝົດອາຍຸການໃຊ້ງານແລ້ວ!!');
+                }
+
+                //Coupon is Valid for discount
+
+                //Get Cart Total Amount
+                $session_id = Session::get('session_id');
+                $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
+                $total_amount=0;
+                //Loop for get total amount in cart
+                foreach ($userCart as $items) {
+                    $total_amount = $total_amount + ($items->price * $items->quantity);
+                }
+
+                //Check if amount type is Fixed or percentage
+                if($couponDetails->amount_type = "Fixed"){
+                    $couponAmount = $couponDetails->amount;
+                }else{
+                    $couponAmount = $total_amount * ($couponDetails->amount/100);
+                }
+                
+                //Add Coupon code and amount session
+                Session::put('CouponAmount',$couponAmount);
+                Session::put('CouponCode',$data['coupon_code']);
+                return redirect()->back()->with('flash_message_success','Coupon ທີ່ທ່ານປ້ອນສໍາເລັດແລ້ວ. ທ່ານໄດ້ຮັບສ່ວນຫຼຸດແລ້ວ!!');
             }
         }
     }

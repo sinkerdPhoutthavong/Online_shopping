@@ -109,10 +109,13 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							{{-- <li>Cart Sub Total <span>$59</span></li>
-							<li>Eco Tax <span>$2</span></li>
-							<li>Shipping Cost <span>Free</span></li> --}}
-							<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span><?php echo $total_amount;?> <font face="phetsarath OT"> ກິບ</font></span></li>
+							@if (!empty(Session::get('CouponAmount')))
+								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span><?php echo $total_amount;?> <font face="phetsarath OT"> ກິບ</font></span></li>
+								<li><font face="phetsarath OT">ຈໍານວນສ່ວນຫຼຸດຈາກ Coupon</font><span><?php echo Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
+								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ ທີ່ຕ້ອງຈ່າຍ</font><span><?php echo $total_amount - Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
+							@else
+								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span><?php echo $total_amount;?> <font face="phetsarath OT"> ກິບ</font></span></li>
+							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>
 							<a class="btn btn-default check_out" href="">Check Out</a>

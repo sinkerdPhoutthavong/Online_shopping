@@ -61,7 +61,7 @@
                                @endif
                             </td>
                            <td>{{$coupon->amount_type}}</td>
-                           <td>{{$coupon->expriry_date}}</td>
+                           <td>{{$coupon->expiry_date}}</td>
                            <td>{{$coupon->created_at}}</td>
                            <td>
                                @if ($coupon->status==1)
