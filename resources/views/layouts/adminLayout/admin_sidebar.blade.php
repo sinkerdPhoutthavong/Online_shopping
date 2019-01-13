@@ -8,7 +8,7 @@
           <li><a href="{{url('/admin/view-categories')}}">Category ທັງໝົດ</a></li>
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>ສິນຄ້າ</span> <span class="label label-important">1</span></a>
+      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>ສິນຄ້າ</span> <span class="label label-important">{{}}}</span></a>
         <ul>
         <li><a href="{{url('/admin/add-product')}}">ເພີ່ມສິນຄ້າ</a></li>
           <li><a href="{{url('/admin/view-products')}}">ສິນຄ້າທັງໝົດ</a></li>

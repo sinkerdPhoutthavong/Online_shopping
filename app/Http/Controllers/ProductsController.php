@@ -14,7 +14,7 @@ use App\ProductImage;
 use DB;
 use App\cart;
 use App\Coupon;
-
+q
 class ProductsController extends Controller
 {
     public function addProduct(Request $request){
@@ -82,8 +82,10 @@ class ProductsController extends Controller
             $category_name = Category::where(['id'=>$val->category_id])->first();
             $products[$key]->category_name = $category_name->name;
         }
+        $productCount = Product::orderBy('id')->count();
+        // echo "<pre>";print_r($productCount);die;
         //echo "<pre>";print_r($products);die;
-        return view('admin.products.view_products')->with(compact('products'));
+        return view('admin.products.view_products')->with(compact('products','productCount'));
     }
     public function editProduct(Request $request,$id= null){
         if($request->isMethod('post')){
@@ -352,6 +354,9 @@ class ProductsController extends Controller
 
     }
     public function addtoCart(Request $request){
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+        
         if($request->isMethod('post')){
             $data = $request->all();
             
@@ -400,12 +405,17 @@ class ProductsController extends Controller
         return view('products.cart')->with(compact('userCart',''));
     }
     public function deleteCartproduct($id=null){
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
         if(!empty($id)){
             Cart::where(['id'=>$id])->delete();
             return redirect('cart')->with('flash_message_success','ລຶບສິນຄ້າສຳເລັດແລ້ວ!!');
         }
     }
     public function updateCartQuantity($id=null,$quantity=null){
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+        
         $getCartDetails = Cart::where('id',$id)->first();
         $getAttributeStock = ProductsAttribute::where('sku',$getCartDetails->product_code)->first();
 
