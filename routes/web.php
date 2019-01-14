@@ -50,6 +50,9 @@ Route::get('get-product-price','ProductsController@getProductPrice');
 //Route for Apply Coupon
 Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 
+//Route FOR LOGIN /OR REGISTER
+Route::match(['get','post'],'/login-register','UsersController@register');
+
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');

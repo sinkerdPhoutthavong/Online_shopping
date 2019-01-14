@@ -28,15 +28,11 @@
 </head><!--/head-->
 
 <body>
-    
     <font face="phetsarath OT">
 	@include('layouts.frontLayout.front_header')
-    
     @yield('content')
-	
 	@include('layouts.frontLayout.front_footer')
     </font>
-
     <script src="{{asset('js/frontend_js/easyzoom.js')}}"></script>
 	<script src="{{asset('js/frontend_js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('js/frontend_js/jquery.scrollUp.min.js')}}"></script>
