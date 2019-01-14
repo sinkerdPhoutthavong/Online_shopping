@@ -44,7 +44,7 @@
                 <div class="control-group">
                   <label class="control-label">ຫົວຂໍ້</label>
                   <div class="controls">
-                    <input type="text" name="title" id="title">
+                    <input type="text" name="title" id="title" required>
                   </div>
                 </div>
                 <div class="control-group">
@@ -52,7 +52,13 @@
                     <div class="controls">
                       <input type="text" name="link" id="link">
                     </div>
-                  </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">ຄໍາອະທິບາຍ ແລະ ວັນໝົດອາຍຸ</label>
+                    <div class="controls">
+                      <textarea name="description" id="description"></textarea>
+                    </div>
+                </div>
                   <div class="control-group">
                       <label class="control-label">ໃຊ້ງານ</label>
                       <div class="controls">

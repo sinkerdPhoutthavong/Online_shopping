@@ -40,6 +40,7 @@
                         <th>ລະຫັດແບນເນີ່</th>
                         <th>ຫົວຂໍ້</th>
                         <th>Link</th>
+                        <th>ຄໍາອະທິບາຍ ແລະ ວັນໝົດອາຍຸ</th>
                         <th>ຮູບພາບ</th>
                         <th>ການຈັດການ</th>
                       </tr>
@@ -50,6 +51,7 @@
                            <td class="center">{{$banner->id}}</td>
                            <td class="center">{{$banner->title}}</td>
                            <td class="center">{{$banner->link}}</td>
+                           <td class="center">{{$banner->description}}</td>
                            <td class="center">
                                 @if(!empty($banner->image))
                                 <img src="{{asset('images/frontend_images/banners/'.$banner->image)}}" style="width:150px;">

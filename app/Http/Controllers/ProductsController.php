@@ -13,6 +13,7 @@ use App\ProductsAttribute;
 use App\ProductImage;
 use DB;
 use App\cart;
+use App\Banner;
 use App\Coupon;
 
 class ProductsController extends Controller
@@ -240,7 +241,8 @@ class ProductsController extends Controller
             // if url is sub category url
             $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->get();
         }
-        return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories'));
+        $banners = Banner::where('status','1')->get();
+        return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories','banners'));
     }
     public function product($id = null){
         //Show 404 page if product disable

@@ -57,7 +57,13 @@
                     <div class="controls">
                     <input type="text" name="link" id="link" value="{{$bannerDetails->link}}">
                     </div>
-                  </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">ຄໍາອະທິບາຍ ແລະ ວັນໝົດອາຍຸ</label>
+                    <div class="controls">
+                        <textarea name="description" id="description">{{$bannerDetails->description}}</textarea>
+                    </div>
+                </div>
                   <div class="control-group">
                       <label class="control-label">ການໃຊ້ງານ ແບນເນີ່</label>
                       <div class="controls">

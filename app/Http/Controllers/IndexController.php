@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Banner;
 use function GuzzleHttp\json_encode;
 
 class IndexController extends Controller
@@ -54,7 +55,7 @@ class IndexController extends Controller
             
         }*/
         //end
-
-        return view('index')->with(compact('productsAll','categories_menu','categories'));
+        $banners = Banner::where('status','1')->get();
+        return view('index')->with(compact('productsAll','categories_menu','categories','banners'));
     }
 }

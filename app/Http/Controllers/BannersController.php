@@ -24,6 +24,7 @@ class BannersController extends Controller
             $brand = New Banner;
             $brand->title = $data['title'];
             $brand->link = $data['link'];
+            $brand->description = $data['description'];
             // Upload Image
             if($request->hasFile('image')){
                $image_tmp = Input::file('image');
@@ -59,6 +60,7 @@ class BannersController extends Controller
             $brand = New Banner;
             $brand->title = $data['title'];
             $brand->link = $data['link'];
+            $brand->description = $data['description'];
             // Upload Image
             if($request->hasFile('image')){
                $image_tmp = Input::file('image');
@@ -72,7 +74,7 @@ class BannersController extends Controller
                     $filename = $data['current_image'];
                 }
                 //UPDATE TO DATABASES USE ID
-                 Banner::where(['id'=>$id])->update(['title'=>$data['title'],'link'=>$data['link'],'image'=>$filename,'status'=>$status]);
+                 Banner::where(['id'=>$id])->update(['title'=>$data['title'],'link'=>$data['link'],'description'=>$data['description'],'image'=>$filename,'status'=>$status]);
                  return redirect('/admin/view-banners')->with('flash_message_success','ອັບເດດແບນເນີ່ສຳເລັດແລ້ວ!!');
             }
          //GET DETIAL FOR SHOW IN EDIT PAGES
@@ -84,6 +86,19 @@ class BannersController extends Controller
             Banner::where(['id'=>$id])->delete();
             return redirect('/admin/view-banners')->with('flash_message_success','ລຶບແບນເນີ່ສຳເລັດແລ້ວ!!');
         }
+    }
+    public function deleteBannerImage($id =null){
+         // get Product Image name
+         $brandImage = Banner::where(['id'=>$id])->first();
+         // get Product Image Paths
+         $image_path = 'images/frontend_images/banners/';
+         //Delete Large Image id net exists in folder
+         if(file_exists($image_path.$brandImage->image)){
+             unlink($image_path.$brandImage->image);
+         }
+         // delete image from product table
+         Banner :: where(['id'=>$id])->update(['image'=>'']);
+         return redirect()->back()->with('flash_message_success','ຮູບພາບ ແບນເນີ່ ຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
     }
 }
  
