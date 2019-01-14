@@ -14,7 +14,7 @@ use App\ProductImage;
 use DB;
 use App\cart;
 use App\Coupon;
-q
+
 class ProductsController extends Controller
 {
     public function addProduct(Request $request){
@@ -147,7 +147,7 @@ class ProductsController extends Controller
                         $categories_dropdown .= "<option value='".$sub_cat->id."' ".$selected.">&nbsp;--&nbsp;".$sub_cat->name."</option>";
                     }
                 }
-        // Categories dropdown end
+             // Categories dropdown end
             return view('admin.products.edit_products')->with(compact('productDetails','categories_dropdown'));
             //return redirect('/admin/view-product')->with('flash_message_success','ອັບເດດ ສິນຄ້າ ສຳເລັດແລ້ວ!!');       
     }
