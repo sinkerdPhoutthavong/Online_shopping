@@ -98,3 +98,44 @@ $(document).ready(function(){
 			api2._init();
 		}
 	});
+
+$().ready(function(){
+	$("#registerForm").validate({
+		rules:{
+			name:{
+				required:true,
+				minlength:2,
+				accept:"[a-zA-z]+"
+			},
+			password:{
+				required:true,
+				minlength:6
+			},
+			email:{
+				required:true,
+				email:true,
+				remote:"/check-email"
+			}
+		},
+		messages:{
+			name:{
+				required:"ກະລຸນາປ້ອນຊື່ຂອງທ່ານ",
+				minlength:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງຫຼາຍກວ່າ 2 ຕົວອັກສອນ",
+				accept:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງເປັນຕົວອັກສອນເທົ່ານັ້ນ"
+			},
+			password:{
+				required:"ກະລຸນາໃສ່ລະຫັດຜ່ານຂອງທ່ານ",
+				minlength:"ລະຫັດຜ່ານຂອງທ່ານຕ້ອງມີ 6 ຕົວອັກສອນຂື້ນໄປ"
+			},
+			email:{
+				required:"ກະລຸນາປ້ອນອີເມວຂອງທ່ານ",
+				email:"ກາລຸນາໃສ່ອີເມວໃຫ້ຖືກຕ້ອງ",
+				remote:"ອີເມວມີຢູ່ແລ້ວ ກະລຸນາລອງອີເມວໃໝ່!!"
+				
+			}
+		}
+	});
+});
+
+
+

@@ -53,6 +53,9 @@ Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 //Route FOR LOGIN /OR REGISTER
 Route::match(['get','post'],'/login-register','UsersController@register');
 
+//CHECK ID USER ALREADY EXISTS
+Route::match(['get','post'],'/check-email','UsersController@checkEmail');
+
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');
