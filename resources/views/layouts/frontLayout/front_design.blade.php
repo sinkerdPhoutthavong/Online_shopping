@@ -14,6 +14,7 @@
 	<link href="{{asset('css/frontend_css/main.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/responsive.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/easyzoom.css')}}" rel="stylesheet">
+    <link href="{{asset('css/frontend_css/passtrength.css')}}" rel="stylesheet">
     <script src="{{asset('js/frontend_js/jquery.js')}}"></script>
     
     <!--[if lt IE 9]>
@@ -33,7 +34,7 @@
     @yield('content')
 	@include('layouts.frontLayout.front_footer')
     </font>
-    
+    <script src="{{asset('js/frontend_js/passtrength.js')}}"></script>
     <script src="{{asset('js/frontend_js/easyzoom.js')}}"></script>
 	<script src="{{asset('js/frontend_js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('js/frontend_js/jquery.scrollUp.min.js')}}"></script>

@@ -135,6 +135,13 @@ $().ready(function(){
 			}
 		}
 	});
+	// PASSWORD STRENGTH SCRIPT
+	$('#myPassword').passtrength({
+		minChars: 4,
+		passwordToggle: true,
+		tooltip: true,
+		eyeImg: "/images/frontend_images/eye.svg"
+	  });
 });
 
 
