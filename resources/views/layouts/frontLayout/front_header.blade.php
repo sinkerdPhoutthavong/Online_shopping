@@ -63,7 +63,6 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                
                             <li><a href="#"><i class="fa fa-star"></i><font face="phetsarath OT">ສີ່ງທີ່ທ່ານຕ້ອງການ</font></a></li>
                             <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT">ກະຕ່າສິນຄ້າ</font></a></li>
@@ -71,7 +70,7 @@
                                 <li><a href="{{url('/user-registerpage')}}"><i class="fa fa-user"></i><font face="phetsarath OT">ສະໝັກສະມາຊິກ</font></a></li>
                                 <li><a href="{{url('/user-Login')}}"><i class="fa fa-lock"></i><font face="phetsarath OT">ເຂົ້າສູ່ລະບົບ</font></a></li>
                             @else
-                                 <li><a href="#"><i class="fa fa-user"></i><font face="phetsarath OT">ບັນຊີ</font></a></li>
+                                 <li><a href="{{url('/account')}}"><i class="fa fa-user"></i><font face="phetsarath OT">ບັນຊີ</font></a></li>
                                  <li><a href="{{url('/user-logout')}}"><i class="fa fa-sign-out"></i><font face="phetsarath OT">ອອກຈາກລະບົບ</font></a></li>
                             @endif  
                            

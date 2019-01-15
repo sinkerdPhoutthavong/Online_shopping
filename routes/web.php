@@ -59,6 +59,8 @@ Route::get('/user-registerpage','UsersController@userRegister');
 //USER REGISTER FORM SUBMIT
 Route::post('/user-register','UsersController@register');
 
+
+
 //USER LOGOUT
 Route::get('/user-logout','UsersController@logout');
 
@@ -69,6 +71,13 @@ Route::post('/user-login','UsersController@login');
 
 //CHECK ID USER ALREADY EXISTS
 Route::match(['get','post'],'/check-email','UsersController@checkEmail');
+
+//ALL Route after User Login
+Route::group(['middleware'=>['frontlogin']],function(){
+    //USERS ACCOUNT PAGES
+    Route::match(['get','post'],'/account','UsersController@account');
+});
+
 
 // Route for admin
 Route::group(['middleware' => ['auth']],function(){

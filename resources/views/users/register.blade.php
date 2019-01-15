@@ -32,6 +32,11 @@
                         <input id="email" name="email" type="email" placeholder="Email Address" />
                         <input id="myPassword" name="password" type="password" placeholder="Password"/>
                         <button type="submit" class="btn btn-default"><font face="phetsarath OT">ລົງທະບຽນ</font></button>
+                        <div>
+                            <br>
+                            <a href="{{url('/user-Login')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ເຂົ້າສູ່ລະບົບ</font></a>
+                        </div>
+                        
                     </form>
                 </div><!--/sign up form-->
             </div>

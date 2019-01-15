@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Session;
 
 class UsersController extends Controller
 {
@@ -30,9 +31,10 @@ class UsersController extends Controller
                 $user->password = bcrypt($data['password']);
                 $user->admin = 0;
                 $user->save();
-                if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
-                    return redirect('/cart');
-                }
+                // if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+                //     Session::put('frontSession',$data['email']);
+                return redirect()->back()->with('flash_message_error','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
+                // }
                
             }
         }
@@ -46,14 +48,11 @@ class UsersController extends Controller
                 echo "true";die;
             }
     }
-    public function logout(){
-        Auth::logout();
-        return redirect('/');
-    }
     public function login(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
             if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'0'])){
+                Session::put('frontSession',$data['email']);
                 return redirect('/cart');
                 //Session::put('adminSession',$data['email']);
             }else{
@@ -61,6 +60,13 @@ class UsersController extends Controller
             }
         }
     }
-    
+    public function account(){
+        return view('users.account');
+    }
+    public function logout(){
+        Session::forget('frontSession');
+        Auth::logout();
+        return redirect('/');
+    }
 }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-   public function login(Request $request){
+    public function login(Request $request){
        if($request->isMethod('post')){
            $data = $request->input();
            if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'1'])){
@@ -20,8 +20,9 @@ class AdminController extends Controller
            }
        }
         return view('admin.admin_login');
+   
    }
-   public function dashboard(){
+    public function dashboard(){
        //protected the path access
     //    if (Session::has('adminSession')) {
            
@@ -29,11 +30,12 @@ class AdminController extends Controller
     //        return redirect('/admin')->with('flash_message_error','ກາລຸນາລ໋ອກອິນ ໃນນາມຂອງຜູ່ບໍລິຫານລະບົບ');
     //    }
        return view('admin.dashboard');
-   }
-   public function logout(){
+    }
+    public function logout(){
         Session::flush();
         return redirect('/admin')->with('flash_message_success','ທ່ານອອກຈາກລະບົບ ຮຽບຮ້ອຍແລ້ວ');
     }
+    
     public function settings(){
         return view('admin.settings');
     }
