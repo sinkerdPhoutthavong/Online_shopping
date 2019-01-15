@@ -51,7 +51,13 @@ Route::get('get-product-price','ProductsController@getProductPrice');
 Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 
 //Route FOR LOGIN /OR REGISTER
-Route::match(['get','post'],'/login-register','UsersController@register');
+Route::get('/login-register','UsersController@userLoginRegister');
+
+//USER REGISTER FORM SUBMIT
+Route::post('/user-register','UsersController@register');
+
+//USER LOGOUT
+Route::get('/user-logout','UsersController@logout');
 
 //CHECK ID USER ALREADY EXISTS
 Route::match(['get','post'],'/check-email','UsersController@checkEmail');

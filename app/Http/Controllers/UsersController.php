@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class UsersController extends Controller
 {
+    public function userLoginRegister(){
+        return view('users.login_register');
+    }
     public function register(Request $request){
         if($request->isMethod('post')){
            $data = $request->all();
@@ -16,10 +20,18 @@ class UsersController extends Controller
             if($userCount>0){
                 return redirect()->back()->with('flash_message_error','ສະໝັກສະມາຊິກບໍ່ສໍາເລັດ ເນື່ອງຈາກທ່ານເປັນສະມາຊິກໃນລະບົບແລ້ວ!!');
             }else{
-
+                $user = new User;
+                $user->name = $data['name'];
+                $user->email = $data['email'];
+                $user->password = bcrypt($data['password']);
+                $user->admin = 0;
+                $user->save();
+                if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+                    return redirect('/cart');
+                }
+               
             }
         }
-        return view('users.login_register');
     }
     public function checkEmail(Request $request){
             $data = $request->all();
@@ -29,5 +41,10 @@ class UsersController extends Controller
             }else{
                 echo "true";die;
             }
-        }
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
+    }
 }
+
