@@ -100,6 +100,7 @@ $(document).ready(function(){
 	});
 
 $().ready(function(){
+	//REGISTER FORM
 	$("#registerForm").validate({
 		rules:{
 			name:{
@@ -132,6 +133,27 @@ $().ready(function(){
 				email:"ກາລຸນາໃສ່ອີເມວໃຫ້ຖືກຕ້ອງ",
 				remote:"ອີເມວມີຢູ່ແລ້ວ ກະລຸນາລອງອີເມວໃໝ່!!"
 				
+			}
+		}
+	});
+	//LOGIN FORM
+	$("#loginForm").validate({
+		rules:{
+			email:{
+				required:true,
+				email:true,
+			},
+			password:{
+				required:true,
+			}
+		},
+		messages:{
+			email:{
+				required:"ກະລຸນາປ້ອນອີເມວຂອງທ່ານ",
+				email:"ກາລຸນາໃສ່ອີເມວໃຫ້ຖືກຕ້ອງ",	
+			},
+			password:{
+				required:"ກະລຸນາໃສ່ລະຫັດຜ່ານຂອງທ່ານ",
 			}
 		}
 	});

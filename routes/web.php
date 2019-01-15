@@ -50,14 +50,22 @@ Route::get('get-product-price','ProductsController@getProductPrice');
 //Route for Apply Coupon
 Route::post('/cart/apply-coupon','ProductsController@applyCoupon');
 
-//Route FOR LOGIN /OR REGISTER
-Route::get('/login-register','UsersController@userLoginRegister');
+//Route FOR LOGIN 
+Route::get('/user-Login','UsersController@userLogin');
+
+//Route FOR LOGIN 
+Route::get('/user-registerpage','UsersController@userRegister');
 
 //USER REGISTER FORM SUBMIT
 Route::post('/user-register','UsersController@register');
 
 //USER LOGOUT
 Route::get('/user-logout','UsersController@logout');
+
+// //USER LOGIN
+// Route::post('/user-login','UsersController@login');
+//USER LOGIN
+Route::post('/user-login','UsersController@login');
 
 //CHECK ID USER ALREADY EXISTS
 Route::match(['get','post'],'/check-email','UsersController@checkEmail');

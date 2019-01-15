@@ -8,8 +8,12 @@ use Auth;
 
 class UsersController extends Controller
 {
-    public function userLoginRegister(){
-        return view('users.login_register');
+    public function userLogin(){
+        // return view('users.login_register');
+        return view('users.login');
+    }
+    public function userRegister(){
+        return view('users.register');
     }
     public function register(Request $request){
         if($request->isMethod('post')){
@@ -46,5 +50,17 @@ class UsersController extends Controller
         Auth::logout();
         return redirect('/');
     }
+    public function login(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->input();
+            if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'0'])){
+                return redirect('/cart');
+                //Session::put('adminSession',$data['email']);
+            }else{
+                return redirect()->back()->with('flash_message_error','ອີເມວ ຫຼື ລະຫັດຜ່ານ ຂອງທ່ານບໍ່ຖືກຕ້ອງ');
+            }
+        }
+    }
+    
 }
 
