@@ -29,7 +29,7 @@
                         <form id="loginForm" name="login" action="{{url('/user-login')}}" method="POST">
                             {{ csrf_field() }}
                             <input name="email" type="email" placeholder="Email Address" />
-                            <input name="password" type="password" placeholder="Password"/>
+                            <input name="password" id="loginPassword" type="password" placeholder="Password"/>
                             {{-- <span>
                                 <input type="checkbox" class="checkbox"> 
                                 <font face="phetsarath OT">ໃຫ້ຢູ່ໃນລະບົບຕໍ່ໄປ</font>

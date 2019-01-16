@@ -211,7 +211,48 @@ $().ready(function(){
 		passwordToggle: true,
 		tooltip: true,
 		eyeImg: "/images/frontend_images/eye.svg"
-	  });
+	});
+	$('#new_pwd').passtrength({
+		minChars: 4,
+		passwordToggle: true,
+		tooltip: true,
+		eyeImg: "/images/frontend_images/eye.svg"
+	});
+	$('#confirm_pwd').passtrength({
+		minChars: 4,
+		passwordToggle: true,
+		tooltip: true,
+		eyeImg: "/images/frontend_images/eye.svg"
+	});
+	$('#loginPassword').passtrength({
+		minChars: 4,
+		passwordToggle: true,
+		tooltip: true,
+		eyeImg: "/images/frontend_images/eye.svg"
+	});
+
+	//Check Current User Password
+	$("#current_pwd").keyup(function(){
+		var current_pwd = $(this).val();
+		$.ajax({
+			headers:{
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type:'post',
+			url:'/check-user-pwd',
+			data:{current_pwd:current_pwd},
+			success:function(resp){
+				if(resp=="false"){
+					$("#chkPwd").html("<font face='phetsarath OT' color='red'>ລະຫັດຜ່ານປະຈຸບັນຂອງທ່ານບໍ່ຖືກຕ້ອງ</font>");
+				}else if(resp=="true"){
+					$("#chkPwd").html("<font face='phetsarath OT' color='green'>ລະຫັດຜ່ານປະຈຸບັນຂອງທ່ານຖືກຕ້ອງ</font>");
+				}
+			},error:function(){
+				alert("Error");
+			}
+		});
+	});
+
 });
 
 

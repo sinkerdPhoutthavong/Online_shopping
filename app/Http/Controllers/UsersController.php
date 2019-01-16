@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use Auth;
 use Session;
 use App\Country;
-use function GuzzleHttp\json_decode;
 
 class UsersController extends Controller
 {
@@ -105,6 +105,17 @@ class UsersController extends Controller
         Session::forget('frontSession');
         Auth::logout();
         return redirect('/');
+    }
+    public function chkUserPassword(Request $request){
+        $data = $request->all();
+        $current_password = $data['current_pwd'];
+        $user_id = Auth::User()->id;
+        $check_password = User::where('id',$user_id)->first();
+        if(Hash::check($current_password,$check_password->password)){
+            echo "true"; die;
+        }else{
+            echo "false"; die;
+        }
     }
 }
 

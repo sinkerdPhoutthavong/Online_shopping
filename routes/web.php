@@ -76,6 +76,8 @@ Route::match(['get','post'],'/check-email','UsersController@checkEmail');
 Route::group(['middleware'=>['frontlogin']],function(){
     //USERS ACCOUNT PAGES
     Route::match(['get','post'],'/account','UsersController@account');
+    //CHECK USER CUURENT PASSWORD
+    Route::post('/check-user-pwd','UsersController@chkUserPassword');
 });
 
 
