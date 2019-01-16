@@ -117,5 +117,19 @@ class UsersController extends Controller
             echo "false"; die;
         }
     }
+    public function updatePassword(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $old_pwd = User::where('id',Auth::User()->id)->first();
+            $current_pwd = $data['current_pwd'];
+            if(Hash::check($current_pwd,$old_pwd->password)){
+                //Update Password
+                $new_pwd = bcrypt($data['new_pwd']);
+                User::where('id',Auth::user()->id)->update(['password'=>$new_pwd]);
+                return redirect()->back()->with('flash_message_success','ອັບເດດລະຫັດຜ່ານສຳເລັດຮຽບຮ້ອຍແລ້ວ!!');
+            }
+                return redirect()->back()->with('flash_message_error','ລະຫັດຜ່ານປະຈຸບັນທີ່ທ່ານປ້ອນບໍ່ຖືກຕ້ອງ!!');
+        }
+    }
 }
 

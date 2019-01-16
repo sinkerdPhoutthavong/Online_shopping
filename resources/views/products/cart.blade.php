@@ -86,8 +86,7 @@
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>What would you like to do next?</h3>
-				<p><font face="phetsarath OT">#ເລືອກ ຖ້າທ່ານມີລະຫັດ Coupon ທີ່ທ່ານຕ້ອງການຈະໃຊ້.</font></p>
+				<h3><font face="phetsarath OT"># ກະລຸນາປ້ອນລະຫັດ Coupon ທີ່ທ່ານຕ້ອງການຈະໃຊ້</font></h3>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
@@ -118,7 +117,7 @@
 							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" href="{{url('/checkout')}}"><font face="phetsarath OT">ຊໍາລະຄ່າສິນຄ້າ</font></a>
 					</div>
 				</div>
 			</div>

@@ -15,6 +15,8 @@ use DB;
 use App\cart;
 use App\Banner;
 use App\Coupon;
+use App\User;
+use App\Country;
 
 class ProductsController extends Controller
 {
@@ -438,7 +440,7 @@ class ProductsController extends Controller
             // echo "<pre>";print_r($data);die;
             $couponCount = Coupon::where('coupon_code',$data['coupon_code'])->count();
             if($couponCount==0){
-                return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນບໍ່ມີຢູ່ໃນລະບົບ!!');
+                return redirect()->back()->with('flash_message_error','Coupon ທີ່ທ່ານປ້ອນໃຊ້ງານບໍ່ໄດ້!!');
             }else{
                 //get coupon details
                 $couponDetails = Coupon::Where('coupon_code',$data['coupon_code'])->first();
@@ -479,6 +481,12 @@ class ProductsController extends Controller
                 return redirect()->back()->with('flash_message_success','Coupon ທີ່ທ່ານປ້ອນສໍາເລັດແລ້ວ. ທ່ານໄດ້ຮັບສ່ວນຫຼຸດແລ້ວ!!');
             }
         }
+    }
+    public function checkout(){
+        $user_id = Auth::user()->id;
+        $userDetails = User::find($user_id);
+        $countries = Country::get();
+        return view('products.checkout')->with(compact("userDetails","countries"));
     }
 
 }

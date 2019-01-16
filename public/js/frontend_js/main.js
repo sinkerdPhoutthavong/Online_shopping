@@ -253,6 +253,61 @@ $().ready(function(){
 		});
 	});
 
+	$("#passwordForm").validate({
+		rules:{
+			current_pwd:{
+				required: true,
+				minlength:6,
+				maxlength:20
+			},
+			new_pwd:{
+				required: true,
+				minlength:6,
+				maxlength:20
+			},
+			confirm_pwd:{
+				required:true,
+				minlength:6,
+				maxlength:20,
+				equalTo:"#new_pwd"
+			}
+		},
+		
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+
+	//COPY Billing Address to Shipping Address Script
+
+	$("#copyAddress").click(function(){
+		if(this.checked){
+			$("#shipping_name").val($("#billing_name").val());
+			$("#shipping_address").val($("#billing_address").val());
+			$("#shipping_email").val($("#billing_email").val());
+			$("#shipping_city").val($("#billing_city").val());
+			$("#shipping_state").val($("#billing_state").val());
+			$("#shipping_country").val($("#billing_country").val());
+			$("#shipping_pincode").val($("#billing_pincode").val());
+			$("#shipping_mobile").val($("#billing_mobile").val());
+		}else{
+			$("#shipping_name").val('');
+			$("#shipping_address").val('');
+			$("#shipping_email").val('');
+			$("#shipping_city").val('');
+			$("#shipping_state").val('');
+			$("#shipping_country").val('');
+			$("#shipping_pincode").val('');
+			$("#shipping_mobile").val('');
+		}
+	});
+
 });
 
 
