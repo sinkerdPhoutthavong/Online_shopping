@@ -17,6 +17,7 @@ use App\Banner;
 use App\Coupon;
 use App\User;
 use App\Country;
+use App\DeliveryAddress;
 
 class ProductsController extends Controller
 {
@@ -482,11 +483,50 @@ class ProductsController extends Controller
             }
         }
     }
-    public function checkout(){
+    public function checkout(Request $request){
         $user_id = Auth::user()->id;
+        $user_email = Auth::user()->email;
         $userDetails = User::find($user_id);
         $countries = Country::get();
-        return view('products.checkout')->with(compact("userDetails","countries"));
+
+        //CHECK IF SHIPPING IS Address Exits
+        $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
+        if($shippingCount>0){
+            $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+        }
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(empty($data['shipping_name']) || empty($data['shipping_address']) || empty($data['shipping_email']) || empty($data['shipping_city'])
+            || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile'])
+            ){
+                return redirect()->back()->with('flash_message_error','ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ ເພື່ອດໍາເນີນການຕໍ່!!');
+            }else{
+
+                if($shippingCount>0){
+                    //UPDATE SHIPPING ADDRESS
+                    DeliveryAddress::where('user_id',$user_id)->update(['name'=>$data['shipping_name'],'address'=>$data['shipping_address'],
+                                    'user_email'=>$data['shipping_email'],'city'=>$data['shipping_city'],'state'=>$data['shipping_state'],'country'=>$data['shipping_pincode'],
+                                    'mobile'=>$data['shipping_mobile']]);
+                }else{
+                    //ADD NEW SHIPPING ADDRESS
+                    $shipping = new DeliveryAddress;
+                    $shipping->user_id = $user_id; 
+                    $shipping->name = $data['shipping_name'];
+                    $shipping->user_email = $user_email;
+                    $shipping->address = $data['shipping_address'];
+                    $shipping->city = $data['shipping_city'];
+                    $shipping->state = $data['shipping_state'];
+                    $shipping->country = $data['shipping_country'];
+                    $shipping->pincode = $data['shipping_pincode'];
+                    $shipping->mobile = $data['shipping_mobile'];
+                    $shipping->save();
+                    return redirect()->action('ProductsController@order_review');
+                }
+            }
+           
+        }
+
+        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails"));
     }
 
 }

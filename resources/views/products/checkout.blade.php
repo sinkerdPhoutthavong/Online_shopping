@@ -22,21 +22,15 @@
                         </font> 
                       </div>
                 @endif 
-			<div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="{{url('/')}}">Home</a></li>
-				  <li class="active"><font face="phetsarath OT">ຊໍາລະສິນຄ້າ</font></li>
-				</ol>
-			</div><!--/breadcrums-->
 			<div class="step-one">
-				<center><h1 class="heading"><font face="phetsarath OT">ຂັ້ນຕອນການຊໍາລະສິນຄ້າ</font></h1></center>
-			</div>
+                <center><h1 class="heading"><font face="phetsarath OT">ຂັ້ນຕອນການຊໍາລະສິນຄ້າ</font></h1></center>
+            </div>
 			<div class="shopper-informations">
 				<div class="row">
 					<div class="col-sm-4 col-sm-offset-2">
 						<div class="shopper-info">
                              <p><font face="phetsarath OT">ຂໍ້ມູນຜູ່ສັ່ງຊື້ສິນຄ້າ</font></p>
-							<form>
+                            <form>
                                 {{ csrf_field() }}
                                     <input id="billing_name" name="billing_name" type="text" placeholder="Name" value="{{$userDetails->name}}">
                                     <input id="billing_address" name="billing_address" type="text" placeholder="Address" value="{{$userDetails->address}}">
@@ -47,7 +41,7 @@
                                             <option value=""><font face="phetsarath OT">ເລືອກປະເທດ</font></option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->country_name}}" 
-                                                @if ($country->country_name== $userDetails->country) selected @endif
+                                                @if ($country->country_name == $userDetails->country) selected @endif
                                             ><font face="phetsarath OT">{{$country->country_name}}</font></option>
                                         @endforeach
                                     </select>
@@ -65,23 +59,26 @@
 					<div class="col-sm-4 col-sm-offset-0">
 						<div class="shopper-info">
 							<p><font face="phetsarath OT">ສະຖານທີ່ຈັດສົ່ງສິນຄ້າ</font></p>
-								<form>
-									<input id="shipping_name" name="shipping_name" type="text" placeholder="Name">
-                                    <input id="shipping_address" name="shipping_address" type="text" placeholder="Address">
-                                    <input id="shipping_email" name="shipping_email" type="email" placeholder="Email">
-                                    <input id="shipping_city" name="shipping_city" type="text" placeholder="City">
-                                    <input id="shipping_state" name="shipping_state"type="text" placeholder="Province">
+                                <form action="{{url('/checkout')}}" method="POST">
+                                    {{ csrf_field() }}
+                                <input id="shipping_name" name="shipping_name" type="text" placeholder="Name" value="{{$shippingDetails->name}}">
+                                    <input id="shipping_address" name="shipping_address" type="text" placeholder="Address" value="{{$shippingDetails->address}}">
+                                    <input id="shipping_email" name="shipping_email" type="email" placeholder="Email" value="{{$shippingDetails->user_email}}">
+                                    <input id="shipping_city" name="shipping_city" type="text" placeholder="City" value="{{$shippingDetails->city}}">
+                                    <input id="shipping_state" name="shipping_state"type="text" placeholder="Province" value="{{$shippingDetails->state}}">
                                     <select name="shipping_country" id="shipping_country">
                                             <option value=""><font face="phetsarath OT">ເລືອກປະເທດ</font></option>
                                         @foreach ($countries as $country)
                                             <option value="{{$country->country_name}}" 
+                                            @if ($country->country_name == $shippingDetails->country) selected @endif
                                             ><font face="phetsarath OT">{{$country->country_name}}</font></option>
                                         @endforeach
                                     </select>
-                                    <input style="margin-top:10px;" id="shipping_pincode" name="shipping_pincode" type="text" placeholder="Pincode">
-                                    <input id="shipping_mobile" name="shipping_mobile" type="text" placeholder="Mobile">
+                                    <input style="margin-top:10px;" id="shipping_pincode" name="shipping_pincode" type="text" placeholder="Pincode" value="{{$shippingDetails->pincode}}">
+                                    <input id="shipping_mobile" name="shipping_mobile" type="text" placeholder="Mobile" value="{{$shippingDetails->mobile}}">
+                                    <button type="submit" class="btn btn-primary"><font face="phetsarath OT">ດໍາເນີນການຕໍ່</font></button>
                                 </form>
-                                 <a type="submit" class="btn btn-primary" href=""><font face="phetsarath OT">ດໍາເນີນການຕໍ່</font></a>
+                               
 						</div>
 					</div>			
 				</div>
