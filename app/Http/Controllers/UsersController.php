@@ -67,29 +67,37 @@ class UsersController extends Controller
         $userDetails = User::find($user_id);
         $userDetails = json_decode(json_encode($userDetails));
         // echo "<pre>";print_r($userDetails);die;
-        // if($request->isMethod('post')){
-        //     $data = $request->all();
-        //     // echo "<pre>";print_r($data);die;
-        //     if(empty($data['state'])){
-        //         return redirect()->back()->with('flash_message_error','ກາລຸນາປ້ອນ State!!');
-        //     }else if(empty($data['address'])){
-        //         return redirect()->back()->with('flash_message_error','ກາລຸນາປ້ອນທີ່ຢູ່ຂອງທ່ານ!!');
-        //     }else{
-        //         $data['mobile'] = is_numeric ($score) ? true : false;
-        //         if(true){
-        //             $user = new User;
-        //             $user->name = $data['name'];
-        //             $user->address = $data['address'];
-        //             $user->city = $data['city'];
-        //             $user->state = $data['state'];
-        //             $user->country = $data['country'];
-        //             $user->pincode = $data['pincode'];
-        //             $user->mobile = $data['mobile'];
-        //             $user->save();
-        //             return redirect()->back()->with('flash_message_success','ທ່ານອັບເດດບັນຊີສໍາເລັດແລ້ວ!!');
-        //         }
-        //     }
-        // }
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(empty($data['state'])){
+                $data['address'] = '';
+            }
+            if(empty($data['address'])){
+                $data['address'] = '';
+            }
+            if(empty($data['city'])){
+                $data['city'] = '';
+            }
+            if(empty($data['name'])){
+                return redirect()->back()->with('flash_message_error','ກາລຸນາປ້ອນຊື່ຜູ່ໃຊ້!!');
+            }else{
+                $mobile = is_numeric ($data['mobile']) ? true : false;
+                if($mobile==true){
+                    $user = User::find($user_id);
+                    $user->name = $data['name'];
+                    $user->address = $data['address'];
+                    $user->city = $data['city'];
+                    $user->state = $data['state'];
+                    $user->country = $data['country'];
+                    $user->pincode = $data['pincode'];
+                    $user->mobile = $data['mobile'];
+                    $user->save();
+                    return redirect()->back()->with('flash_message_success','ທ່ານອັບເດດບັນຊີສໍາເລັດແລ້ວ!!');
+                }else{
+                    return redirect()->back()->with('flash_message_error','ກະລຸນາປ້ອນເບີໂທລະສັບໃຫ້ຖືກຕ້ອງ!!');
+                }
+            }
+        }
         $countries = Country::get();
         return view('users.account')->with(compact("countries","userDetails"));
     }

@@ -157,6 +157,54 @@ $().ready(function(){
 			}
 		}
 	});
+	//UPDATE ACCOUNT
+	$("#accountForm").validate({
+		rules:{
+			name:{
+				required:true,
+				minlength:2,
+				accept:"[a-zA-Z]+"
+			},
+			address:{
+				required:true,
+				minlength:6
+			},
+			city:{
+				required:true,
+				minlength:2
+			},
+			state:{
+				required:true,
+				minlength:2
+			},
+			country:{
+				required:true,
+			}
+
+		},
+		messages:{
+			name:{
+				required:"ກະລຸນາປ້ອນຊື່ຂອງທ່ານ",
+				minlength:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງຫຼາຍກວ່າ 2 ຕົວອັກສອນ",
+				accept:"ຊຶ່ຜູ່ໃຊ້ຕ້ອງເປັນຕົວອັກສອນເທົ່ານັ້ນ"
+			},
+			address:{
+				required:"ກະລຸນາປ້ອນທີ່ຢູ່ຂອງທ່ານ",
+				minlength:"ທີ່ຢູ່ຂອງຜູ່ໃຊ້ລະບົບຕ້ອງຫຼາຍກ່ວາ 6 ຕົວອັກສອນ",
+			},
+			city:{
+				required:"ກະລຸນາປ້ອນເມືອງຂອງທ່ານ",
+				minlength:"ເມືອງຂອງຜູ່ໃຊ້ລະບົບຕ້ອງຫຼາຍກ່ວາ 2 ຕົວອັກສອນ",
+			},
+			state:{
+				required:"ກະລຸນາປ້ອນແຂວງຂອງທ່ານ",
+				minlength:"ແຂວງຂອງຜູ່ໃຊ້ລະບົບຕ້ອງຫຼາຍກ່ວາ 2 ຕົວອັກສອນ",
+			},
+			country:{
+				required:"ກະລຸນາເລືອກປະເທດຂອງທ່ານ",
+			}
+		}
+	});
 	// PASSWORD STRENGTH SCRIPT
 	$('#myPassword').passtrength({
 		minChars: 4,
