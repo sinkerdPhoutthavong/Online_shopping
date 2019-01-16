@@ -26,7 +26,7 @@
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="signup-form"><!--sign up form-->
                     <h2><font face="phetsarath OT"><center>ສະໝັກສະມາຊິກໃໝ່!!</center></font></h2>
-                <form id="registerForm" name="registerForm" action="{{url('/user-register')}}" method="POST">
+                    <form id="registerForm" name="registerForm" action="{{url('/user-register')}}" method="POST">
                     {{ csrf_field() }}
                         <input id="name" name="name" type="text" placeholder="Name" />
                         <input id="email" name="email" type="email" placeholder="Email Address" />

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Session;
+use App\Country;
+use function GuzzleHttp\json_decode;
 
 class UsersController extends Controller
 {
@@ -60,8 +62,36 @@ class UsersController extends Controller
             }
         }
     }
-    public function account(){
-        return view('users.account');
+    public function account(Request $request){
+        $user_id = Auth::user()->id;
+        $userDetails = User::find($user_id);
+        $userDetails = json_decode(json_encode($userDetails));
+        // echo "<pre>";print_r($userDetails);die;
+        // if($request->isMethod('post')){
+        //     $data = $request->all();
+        //     // echo "<pre>";print_r($data);die;
+        //     if(empty($data['state'])){
+        //         return redirect()->back()->with('flash_message_error','ກາລຸນາປ້ອນ State!!');
+        //     }else if(empty($data['address'])){
+        //         return redirect()->back()->with('flash_message_error','ກາລຸນາປ້ອນທີ່ຢູ່ຂອງທ່ານ!!');
+        //     }else{
+        //         $data['mobile'] = is_numeric ($score) ? true : false;
+        //         if(true){
+        //             $user = new User;
+        //             $user->name = $data['name'];
+        //             $user->address = $data['address'];
+        //             $user->city = $data['city'];
+        //             $user->state = $data['state'];
+        //             $user->country = $data['country'];
+        //             $user->pincode = $data['pincode'];
+        //             $user->mobile = $data['mobile'];
+        //             $user->save();
+        //             return redirect()->back()->with('flash_message_success','ທ່ານອັບເດດບັນຊີສໍາເລັດແລ້ວ!!');
+        //         }
+        //     }
+        // }
+        $countries = Country::get();
+        return view('users.account')->with(compact("countries","userDetails"));
     }
     public function logout(){
         Session::forget('frontSession');

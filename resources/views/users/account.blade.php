@@ -25,7 +25,23 @@
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
-                        <h2><font face="phetsarath OT">ອັບເດດບັນຊີຂອງທ່ານ</font></h2>
+                        <h2><font face="phetsarath OT"><center>ອັບເດດບັນຊີຂອງທ່ານ</center></font></h2>
+                        <form id="accountForm" name="registerForm" action="{{url('/account')}}" method="POST">
+                            {{ csrf_field() }}
+                                <input value="{{$userDetails->name}}" id="name" name="name" type="text" placeholder="Name" />
+                                <input id="address" name="address" type="text" placeholder="Address" />
+                                <input id="city" name="city" type="text" placeholder="City" />
+                                <input id="state" name="state" type="text" placeholder="State" />
+                                <select name="country" id="country">
+                                        <option value=""><font face="phetsarath OT">ເລືອກປະເທດ</font></option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{$country->country_name}}"><font face="phetsarath OT">{{$country->country_name}}</font></option>
+                                    @endforeach
+                                </select>
+                                <input style="margin-top:10px;" type="pincode" name="pincode" type="text" placeholder="Pincode">
+                                <input type="mobile" name="mobile" type="text" placeholder="Mobile">
+                                <button type="submit" class="btn btn-default"><font face="phetsarath OT">ອັບເດດບັນຊີ</font></button>
+                        </form>
                     </div>
                 </div>
                     <div class="col-sm-1">
