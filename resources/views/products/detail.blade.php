@@ -73,7 +73,32 @@
 						 <input type="hidden" name="product_name" value="{{$productDetails->product_name}}">
 						 <input type="hidden" name="product_code" value="{{$productDetails->product_code}}">
 						 <input type="hidden" name="product_color" value="{{$productDetails->product_color}}">
-						 <input type="hidden" name="price" id="price" value="{{$productDetails->price}}">
+						 <input type="hidden" name="price" id="price" 
+						 value=" 
+						 			<?php
+                                                    $price_amount = $productDetails->price;
+                                                    //use for split yaek array
+                                                    $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                        // print_r($totals);
+                                                                        //count index in array
+                                                                        $countArray = count($totals) ;
+                                                                        // echo $countArray;
+                                                                        if($countArray==8){
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                        }
+                                                                        elseif ($countArray==7) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                        }
+                                                                        elseif ($countArray==6) {
+                                                                            echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                        }
+                                                                        elseif ($countArray==5) {
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                        }elseif ($countArray==4) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3];
+                                                                        } 
+                                                                                    
+                                    ?>">
 								<div class="product-information"><!--/product-information-->
 									<img src="" class="newarrival" alt="" />
 										<h2><font face="phetsarath OT">{{$productDetails->product_name}}</font></h2>

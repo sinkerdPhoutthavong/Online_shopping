@@ -10,7 +10,7 @@ class CouponsController extends Controller
 {
     public function addCoupon(Request $request){
         if($request->isMethod('post')){
-             $data = $request->all();
+            $data = $request->all();
            //  echo "<pre>";print_r($data);die;
            if(empty($data['status'])){
                $data['status']="0";

@@ -23,7 +23,7 @@ class AdminController extends Controller
    
    }
     public function dashboard(){
-       //protected the path access
+    //protected the path access
     //    if (Session::has('adminSession')) {
            
     //    }else {

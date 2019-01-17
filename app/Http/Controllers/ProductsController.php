@@ -486,8 +486,14 @@ class ProductsController extends Controller
     public function checkout(Request $request){
         $user_id = Auth::user()->id;
         $user_email = Auth::user()->email;
-        $userDetails = User::find($user_id);
+        $userDetails = User::where(['email'=>$user_email,'admin'=>'0'])->find($user_id);
         $countries = Country::get();
+        //data to page
+        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+        foreach ($userCart as $key => $product) {
+            $productDetails = Product::where('id',$product->product_id)->first();
+            $userCart[$key]->image = $productDetails->image;
+        }
 
         //CHECK IF SHIPPING IS Address Exits
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
@@ -530,10 +536,8 @@ class ProductsController extends Controller
                     return redirect()->action('ProductsController@orderReview');
                 }
             }
-           
         }
-
-        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount"));
+        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount","userCart"));
     }
     public function orderReview(Request $request){
         $user_id = Auth::user()->id;
@@ -541,7 +545,13 @@ class ProductsController extends Controller
         $userDetails = User::where('id',$user_id)->first();
         $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         $shippingDetails = json_decode(json_encode($shippingDetails));
-        return view('products.order_review')->with(compact('userDetails','shippingDetails'));
+        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+        foreach ($userCart as $key => $product) {
+            $productDetails = Product::where('id',$product->product_id)->first();
+            $userCart[$key]->image = $productDetails->image;
+        }
+        //echo "<pre>";print_r($userCart);die;
+        return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart'));
     }
 
 }

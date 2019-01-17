@@ -24,6 +24,7 @@ class BannersController extends Controller
             $brand = New Banner;
             $brand->title = $data['title'];
             $brand->link = $data['link'];
+            $brand->image = '';
             $brand->description = $data['description'];
             // Upload Image
             if($request->hasFile('image')){

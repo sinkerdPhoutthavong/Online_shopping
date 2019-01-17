@@ -50,7 +50,31 @@
                             <div class="single-products">
                                     <div class="productinfo text-center">
                                         <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:200px;">
-                                        <h2>{{$product->price}}<font face="phetsarath OT"> ກີບ</font></h2>
+                                        <h2>
+                                                <?php
+                                                $price_amount = $product->price;
+                                                //use for split yaek array
+                                                $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                    // print_r($totals);
+                                                                    //count index in array
+                                                                    $countArray = count($totals) ;
+                                                                    // echo $countArray;
+                                                                    if($countArray==8){
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                    }
+                                                                    elseif ($countArray==7) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                    }
+                                                                    elseif ($countArray==6) {
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                    }
+                                                                    elseif ($countArray==5) {
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                    }elseif ($countArray==4) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3];
+                                                                    }                               
+                                        ?>
+                                            <font face="phetsarath OT"> ກີບ</font></h2>
                                         <p><font face="phetsarath OT"> {{$product->product_name}}</font></p>
                                         <a href="{{url('product/'.$product->id)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT">ເພີ່ມລົງກະຕ່າ</font></a>
                                     </div>

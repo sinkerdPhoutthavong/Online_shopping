@@ -53,7 +53,30 @@
                                     <p><font face="phetsarath OT">{{$cart->product_code}} || {{$cart->size}}</font></p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>{{$cart->price}}</p>
+                                    <p>
+										<?php
+											$price_amount = $cart->price;
+											//use for split yaek array
+											$totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+														// print_r($totals);
+														//count index in array
+														$countArray = count($totals) ;
+														// echo $countArray;
+														if($countArray==8){
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+														}
+														elseif ($countArray==7) {
+															echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+														}
+														elseif ($countArray==6) {
+															echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+														}
+														elseif ($countArray==5) {
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+														}           
+										?>
+										<font face="phetsarath OT"> ກີບ</font></p>
+									</p>
                                 </td>
                                 <td class="cart_color">
                                         <p>{{$cart->product_color}}</p>
@@ -69,7 +92,29 @@
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                <p class="cart_total_price">{{$cart->price * $cart->quantity}}<font face="phetsarath OT"> ກີບ</font></p>
+                                <p class="cart_total_price">
+									<?php
+									$price_amount = $cart->price * $cart->quantity;
+									//use for split yaek array
+									$totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+														// print_r($totals);
+														//count index in array
+														$countArray = count($totals) ;
+														// echo $countArray;
+														if($countArray==8){
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+														}
+														elseif ($countArray==7) {
+															echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+														}
+														elseif ($countArray==6) {
+															echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+														}
+														elseif ($countArray==5) {
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+														}            
+										?>
+									<font face="phetsarath OT"> ກີບ</font></p>
                                 </td>
                                 <td class="cart_delete">
                                 <a class="cart_quantity_delete" href="{{url('/cart/delete-product/'.$cart->id)}}"><i class="fa fa-times"></i></a>
@@ -113,7 +158,29 @@
 								<li><font face="phetsarath OT">ຈໍານວນສ່ວນຫຼຸດຈາກ Coupon</font><span><?php echo Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
 								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ ທີ່ຕ້ອງຈ່າຍ</font><span><?php echo $total_amount - Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
 							@else
-								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span><?php echo $total_amount;?> <font face="phetsarath OT"> ກິບ</font></span></li>
+								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span>
+										<?php 
+										//use for split yaek array
+										$totals = preg_split('//', $total_amount, -1, PREG_SPLIT_NO_EMPTY);
+										// print_r($totals);
+										//count index in array
+										$countArray = count($totals) ;
+										// echo $countArray;
+										if($countArray==8){
+											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+										}
+										elseif ($countArray==7) {
+											echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+										}
+										elseif ($countArray==6) {
+											echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+										}
+										elseif ($countArray==5) {
+											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+										}
+										
+								?>
+									<font face="phetsarath OT"> ກິບ</font></span></li>
 							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>
