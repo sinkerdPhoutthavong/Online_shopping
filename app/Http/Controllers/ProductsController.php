@@ -494,6 +494,11 @@ class ProductsController extends Controller
         if($shippingCount>0){
             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         }
+
+        //Update cart Table with user email
+        $session_id = Session::get('session_id');
+        DB::table('carts')->where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
+
         if($request->isMethod('post')){
             $data = $request->all();
             if(empty($data['shipping_name']) || empty($data['shipping_address']) || empty($data['shipping_email']) || empty($data['shipping_city'])
@@ -505,9 +510,11 @@ class ProductsController extends Controller
                 if($shippingCount>0){
                     //UPDATE SHIPPING ADDRESS
                     DeliveryAddress::where('user_id',$user_id)->update(['name'=>$data['shipping_name'],'address'=>$data['shipping_address'],
-                                    'user_email'=>$data['shipping_email'],'city'=>$data['shipping_city'],'state'=>$data['shipping_state'],'country'=>$data['shipping_pincode'],
-                                    'mobile'=>$data['shipping_mobile']]);
+                                    'user_email'=>$data['shipping_email'],'city'=>$data['shipping_city'],'state'=>$data['shipping_state'],'country'=>$data['shipping_country'],
+                                    'pincode'=>$data['shipping_pincode'],'mobile'=>$data['shipping_mobile']]);
+                                    return redirect()->action('ProductsController@orderReview');
                 }else{
+                    // echo "<pre>";print_r($data);die;
                     //ADD NEW SHIPPING ADDRESS
                     $shipping = new DeliveryAddress;
                     $shipping->user_id = $user_id; 
@@ -520,13 +527,21 @@ class ProductsController extends Controller
                     $shipping->pincode = $data['shipping_pincode'];
                     $shipping->mobile = $data['shipping_mobile'];
                     $shipping->save();
-                    return redirect()->action('ProductsController@order_review');
+                    return redirect()->action('ProductsController@orderReview');
                 }
             }
            
         }
 
-        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails"));
+        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount"));
+    }
+    public function orderReview(Request $request){
+        $user_id = Auth::user()->id;
+        $user_email = Auth::user()->email;
+        $userDetails = User::where('id',$user_id)->first();
+        $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+        $shippingDetails = json_decode(json_encode($shippingDetails));
+        return view('products.order_review')->with(compact('userDetails','shippingDetails'));
     }
 
 }

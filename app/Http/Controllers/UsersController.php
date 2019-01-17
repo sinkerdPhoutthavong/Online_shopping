@@ -31,11 +31,19 @@ class UsersController extends Controller
                 $user->name = $data['name'];
                 $user->email = $data['email'];
                 $user->password = bcrypt($data['password']);
+                if(empty($user->address) || empty($user->city) || empty($user->state) || empty($user->country) || empty($user->pincode) || empty($user->mobile)){
+                    $user->address = '';
+                    $user->city = '';
+                    $user->state = '';
+                    $user->country = '';
+                    $user->pincode = '';
+                    $user->mobile = '';
+               }
                 $user->admin = 0;
                 $user->save();
                 // if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 //     Session::put('frontSession',$data['email']);
-                return redirect()->back()->with('flash_message_error','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
+                return redirect()->back()->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
                 // }
                
             }

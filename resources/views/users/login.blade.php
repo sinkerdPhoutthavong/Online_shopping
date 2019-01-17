@@ -37,7 +37,7 @@
                             <button type="submit" class="btn btn-default"><font face="phetsarath OT">ເຂົ້າສູ່ລະບົບ</font></button>
                             <div>
                                     <br>
-                                    <a class="btn btn-primary" href="{{url('/user-registerpage')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a>
+                                    <a href="{{url('/user-registerpage')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a>
                             </div>
                         </form>
                     </div><!--/login form-->
