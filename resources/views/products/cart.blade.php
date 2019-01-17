@@ -143,8 +143,9 @@
 									<label><font face="phetsarath OT">ລະຫັດຄູປອງ: </font></label>
 								<form action="{{url('/cart/apply-coupon')}}" method="POST">
 									{{ csrf_field() }}
-									<input type="text" name="coupon_code">
-									<input type="submit" value="Apply" class="btn btn-default">
+										<input  type="text" name="coupon_code">
+										<input type="submit" value="Apply" class="btn btn-success">
+									
 								</form>
 							</li>		
 						</ul>		
@@ -154,20 +155,49 @@
 					<div class="total_area">
 						<ul>
 							@if (!empty(Session::get('CouponAmount')))
-								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span><?php echo $total_amount;?> <font face="phetsarath OT"> ກິບ</font></span></li>
-								<li><font face="phetsarath OT">ຈໍານວນສ່ວນຫຼຸດຈາກ Coupon</font><span><?php echo Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
-								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ ທີ່ຕ້ອງຈ່າຍ</font><span><?php echo $total_amount - Session::get('CouponAmount');?> <font face="phetsarath OT"> ກິບ</font></span></li>
-							@else
-								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span>
+										<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span>
+												<?php 
+												//use for split yaek array
+												$totals = preg_split('//', $total_amount, -1, PREG_SPLIT_NO_EMPTY);
+												// print_r($totals);
+												//count index in array
+												$countArray = count($totals) ;
+												// echo $countArray;
+
+												if($countArray==8){
+													echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+												}
+												elseif($countArray==9){
+													echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+												}
+												elseif ($countArray==7) {
+													echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+												}
+												elseif ($countArray==6) {
+													echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+												}
+												elseif ($countArray==5) {
+													
+													echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+												}
+										?>
+								<font face="phetsarath OT"> ກິບ</font></span></li>
+								<li>
+									<font face="phetsarath OT">ຈໍານວນສ່ວນຫຼຸດຈາກ Coupon</font><span>
 										<?php 
+										$total_amount_coupong = Session::get('CouponAmount');
 										//use for split yaek array
-										$totals = preg_split('//', $total_amount, -1, PREG_SPLIT_NO_EMPTY);
+										$totals = preg_split('//', $total_amount_coupong, -1, PREG_SPLIT_NO_EMPTY);
 										// print_r($totals);
 										//count index in array
 										$countArray = count($totals) ;
 										// echo $countArray;
+
 										if($countArray==8){
 											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+										}
+										elseif($countArray==9){
+											echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
 										}
 										elseif ($countArray==7) {
 											echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
@@ -176,11 +206,43 @@
 											echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
 										}
 										elseif ($countArray==5) {
+											
 											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
 										}
-										
-								?>
-									<font face="phetsarath OT"> ກິບ</font></span></li>
+								?><font face="phetsarath OT"> ກີບ</font>
+								</span></li>
+								<li>
+									<font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ ທີ່ຕ້ອງຈ່າຍ</font>
+									<span>
+										<?php 
+										$Grand_total = $total_amount-$total_amount_coupong;
+										//use for split yaek array
+										$totals = preg_split('//', $Grand_total, -1, PREG_SPLIT_NO_EMPTY);
+										// print_r($totals);
+										//count index in array
+										$countArray = count($totals) ;
+										// echo $countArray;
+
+										if($countArray==8){
+											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+										}
+										elseif($countArray==9){
+											echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+										}
+										elseif ($countArray==7) {
+											echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+										}
+										elseif ($countArray==6) {
+											echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+										}
+										elseif ($countArray==5) {
+											
+											echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+										}
+								?><font face="phetsarath OT"> ກິບ</font></span></li>
+							@else
+								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span>
+										<?php echo $total_amount?></span></li>
 							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>

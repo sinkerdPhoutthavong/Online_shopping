@@ -310,5 +310,14 @@ $().ready(function(){
 
 });
 
+function selectPaymentMethod(){
+	if($('#Paypal').is(':checked') || $('#bank').is(':checked') || $('#COD').is(':checked') || $('#pay_in_offices').is(':checked')){
+		// alert("checked");
+	}else{
+		alert("ກະລຸນາເລືອກຊ່ອງທາງໃນການຊໍາລະສິນຄ້າ");
+		return false;
+	}
+}
+
 
 

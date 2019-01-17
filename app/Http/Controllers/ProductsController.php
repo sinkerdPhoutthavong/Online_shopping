@@ -553,5 +553,11 @@ class ProductsController extends Controller
         //echo "<pre>";print_r($userCart);die;
         return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart'));
     }
+    public function placeOrder(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo"<pre>";print_r($data);die;
+        }
+    }
 
 }

@@ -69,7 +69,7 @@
                             @if (empty(Auth::check()))
                                 <li><a href="{{url('/user-registerpage')}}"><i class="fa fa-user"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a></li>
                                 <li><a href="{{url('/user-Login')}}"><i class="fa fa-lock"></i><font face="phetsarath OT"> ເຂົ້າສູ່ລະບົບ</font></a></li>
-                            @else
+                            @else  
                                  <li><a href="{{url('/account')}}"><i class="fa fa-user"></i><font face="phetsarath OT"> ບັນຊີ</font></a></li>
                                  <li><a href="{{url('/user-logout')}}"><i class="fa fa-sign-out"></i><font face="phetsarath OT"> ອອກຈາກລະບົບ</font></a></li>
                             @endif  

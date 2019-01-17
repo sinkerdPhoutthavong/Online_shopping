@@ -95,12 +95,12 @@
 				</div>
 			</div>
 			<div class="review-payment">
-				<h2><font face="Times new roman">ii </font><b><font face="phetsarath OT">ການກວດສອບຄືນ ແລະ ການຊໍາລະສິນຄ້າ</b></font></h2>
+				<h2><font face="Times new roman">I </font><b><font face="phetsarath OT">ກວດສອບ ແລະ ການຊໍາລະສິນຄ້າ</b></font></h2>
 			</div>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
                         <thead>
-                                <tr class="cart_menu">
+                             <tr class="cart_menu">
                                     <td class="image"><font face="phetsarath OT">ຮູບພາບຂອງສິນຄ້າ</font></td>
                                     <td class="description"><font face="phetsarath OT">ຊື່ສິນຄ້າ</font></td>
                                     <td class="price"><font face="phetsarath OT">ລາຄາສິນຄ້າ</font></td>
@@ -151,12 +151,9 @@
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href="{{url('/cart/update-quantity/'.$cart->id.'/1')}}"> + </a>
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="{{$cart->quantity}}" autocomplete="off" size="2">
-                                            @if ($cart->quantity>1)
-                                                
+                                            @if ($cart->quantity>=1)
+                                            <h4>{{$cart->quantity}} </h4>
                                             @endif
-                                            <a class="cart_quantity_down" href="{{url('/cart/update-quantity/'.$cart->id.'/-1')}}"> - </a>
                                         </div>
                                     </td>
                                     <td class="cart_total">
@@ -205,15 +202,19 @@
                                                                 $countArray = count($totals) ;
                                                                 // echo $countArray;
                                                                 if($countArray==8){
+                                                                   
                                                                     echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
                                                                 }
                                                                 elseif ($countArray==7) {
+                                                                   
                                                                     echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
                                                                 }
                                                                 elseif ($countArray==6) {
+                                                                    
                                                                     echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
                                                                 }
                                                                 elseif ($countArray==5) {
+                                                                    
                                                                     echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
                                                                 }
                                                                 
@@ -221,16 +222,74 @@
                                                     <font face="phetsarath OT"> ກີບ</font></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Exo Tax</td>
-                                                    <td>$2</td>
+                                                    <td><font face="phetsarath OT"> ຄ່າຂົນສົ່ງ (+)</font></td>
+                                                    <td><font face="phetsarath OT"> ຟຣີ</font></td>
                                                 </tr>
                                                 <tr class="shipping-cost">
-                                                    <td>Shipping Cost</td>
-                                                    <td>Free</td>										
+                                                    <td><font face="phetsarath OT"> ສ່ວນຫຼຸດທີ່ໄດ້ຮັບ (-)</font></td>
+                                                    <td>
+                                                        @if (!empty(Session::get('CouponAmount')))
+                                                        <?php 
+                                                        $total_amount_coupong = Session::get('CouponAmount');
+                                                        //use for split yaek array
+                                                        $totals = preg_split('//', $total_amount_coupong, -1, PREG_SPLIT_NO_EMPTY);
+                                                        // print_r($totals);
+                                                        //count index in array
+                                                        $countArray = count($totals) ;
+                                                        // echo $countArray;
+
+                                                        if($countArray==8){
+                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                        }
+                                                        elseif($countArray==9){
+                                                            echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+                                                        }
+                                                        elseif ($countArray==7) {
+                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                        }
+                                                        elseif ($countArray==6) {
+                                                            echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                        }
+                                                        elseif ($countArray==5) {
+                                                            
+                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                        }
+                                                ?><font face="phetsarath OT"> ກີບ</font>
+                                                        @else   
+                                                            0<font face="phetsarath OT"> ກີບ</font>
+                                                        @endif
+                                                    </td>									
                                                 </tr>
                                                 <tr>
-                                                    <td>Total</td>
-                                                    <td><span>$61</span></td>
+                                                    <td><font face="phetsarath OT"> ລວມລາຄາສິນຄ້າທັງໝົດທີ່ຕ້ອງຈ່າຍ</font></td></td>
+                                                <td><span>
+                                                        <?php 
+                                                            $Grand_total = $total_amount - Session::get('CouponAmount');
+                                                            //use for split yaek array
+                                                            $totals = preg_split('//', $Grand_total, -1, PREG_SPLIT_NO_EMPTY);
+                                                            // print_r($totals);
+                                                            //count index in array
+                                                            $countArray = count($totals) ;
+                                                            // echo $countArray;
+
+                                                            if($countArray==8){
+                                                                echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                            }
+                                                            elseif($countArray==9){
+                                                                echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+                                                            }
+                                                            elseif ($countArray==7) {
+                                                                echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                            }
+                                                            elseif ($countArray==6) {
+                                                                echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                            }
+                                                            elseif ($countArray==5) {
+                                                                
+                                                                echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                            }
+                                                    ?><font face="phetsarath OT"> ກິບ</font>
+                                                </span></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -239,18 +298,34 @@
                            
 					</tbody>
 				</table>
-			</div>
-			<div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+            </div>
+        <form name="paymentForm" id="paymentForm" action="{{url('/place-order')}}" method="POST">
+            {{ csrf_field() }}
+                <input type="hidden" name="grand_total" value="{{$Grand_total}}">
+                <div class="payment-options">
+                        <div class="signup-form">
+                        <h4><font face="Times new roman">II </font><b><font face="phetsarath OT"> ທາງເລືອກສຳລັບການຊໍາລະສິນຄ້າ</b></font></h4>
+                        <span>
+                            <label for=""><strong><font face="phetsarath OT"> ການຊໍາລະສິນຄ້າ: </b></font></strong></label>
+                        </span>
+                        <span>
+                            <label><input type="radio" name="payment_method" id="bank"><strong><font face="phetsarath OT"> ໂອນຜ່ານບັນຊີທະນາຄານ</b></font></strong></label>
+                        </span>
+                        <span>
+                                <label><input type="radio" name="payment_method" id="COD"><strong><font face="phetsarath OT"> ຈ່າຍເງິນປາຍທາງ</b></font></strong></label>
+                            </span>
+                        <span>
+                            <label><input type="radio" name="payment_method" id="pay_in_offices"><strong><font face="phetsarath OT"> ຈ່າຍເງິນສົດທີ່ຫ້ອງການ</b></font></strong></label>
+                        </span>
+                        <span>
+                            <label><input type="radio" name="payment_method" id="Paypal"><strong><font face="phetsarath OT"> Paypal</font></strong></label>
+                        </span>
+                        <span style="float:right;">
+                        <button type="submit" class="btn btn-success" onclick="return selectPaymentMethod();"><font face="phetsarath OT">ຢືນຢັນ ການຊໍາລະສິນຄ້າ</font></button>
+                        </span>
+                </div>
+            </div>
+        </form>
 		</div>
 </section> <!--/#cart_items-->
 
