@@ -361,14 +361,12 @@ class ProductsController extends Controller
     public function addtoCart(Request $request){
         Session::forget('CouponAmount');
         Session::forget('CouponCode');
-        
         if($request->isMethod('post')){
             $data = $request->all();
             
             //echo "<pre>";print_r($data);die;
-            if(empty($data['user_email'])){
-                $data['user_email'] = " ";
-            }
+            $user_email = Auth::user()->email;
+            $countEmails = DB::table('carts')->where(['email'=>$user_email]);
             if(empty($data['session_id'])){
                 $data['session_id'] = " ";
             }
@@ -385,13 +383,13 @@ class ProductsController extends Controller
 
             $countProducts =  DB::table('carts')->where(['product_id'=>$data['product_id'],'product_color'=>$data['product_color'],
             'size'=>$sizeArr[1],'session_id'=>$session_id])->count();
-            if($countProducts>0){
+            if($countProducts>0 && $countEmails==$user_email ){
                 return redirect()->back()->with('flash_message_error','ສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
             }else{
                 $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$sizeArr[1]])->first();
 
                 DB::table('carts')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$getSKU->sku,
-                'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$data['user_email'],
+                'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$user_email,
                 'session_id'=>$session_id]);
             }
         }
@@ -399,7 +397,9 @@ class ProductsController extends Controller
     }
     public function cart(){
         $session_id = Session::get('session_id');
-        $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
+        $user_email = Auth::user()->email;
+        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
+        // echo "<pre>";print_r($userCart);die;
          //Get Product Alternate Images
         // $productAltImage = ProductImage::where('product_id',$id)->get();
         //echo "<pre>";print_r($userCart);die;
@@ -407,7 +407,7 @@ class ProductsController extends Controller
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
-        return view('products.cart')->with(compact('userCart',''));
+        return view('products.cart')->with(compact('userCart'));
     }
     public function deleteCartproduct($id=null){
         Session::forget('CouponAmount');
@@ -490,6 +490,7 @@ class ProductsController extends Controller
         $countries = Country::get();
         //data to page
         $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+          //$userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get(); //problem
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
@@ -501,9 +502,9 @@ class ProductsController extends Controller
             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         }
 
-        //Update cart Table with user email
-        $session_id = Session::get('session_id');
-        DB::table('carts')->where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
+        // //Update cart Table with user email
+        // $session_id = Session::get('session_id');
+        // DB::table('carts')->where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
 
         if($request->isMethod('post')){
             $data = $request->all();
@@ -540,12 +541,14 @@ class ProductsController extends Controller
         return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount","userCart"));
     }
     public function orderReview(Request $request){
+        $session_id = Session::get('session_id');
         $user_id = Auth::user()->id;
         $user_email = Auth::user()->email;
         $userDetails = User::where('id',$user_id)->first();
         $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         $shippingDetails = json_decode(json_encode($shippingDetails));
-        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
+        //$userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get(); //problem
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;

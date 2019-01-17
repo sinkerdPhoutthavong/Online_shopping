@@ -43,7 +43,7 @@ class UsersController extends Controller
                 $user->save();
                 // if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 //     Session::put('frontSession',$data['email']);
-                return redirect()->back()->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
+                return redirect(url('/user-Login'))->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
                 // }
                
             }
@@ -61,7 +61,7 @@ class UsersController extends Controller
     public function login(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
-            if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>'0'])){
+            if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 Session::put('frontSession',$data['email']);
                 return redirect('/cart');
                 //Session::put('adminSession',$data['email']);
@@ -110,8 +110,8 @@ class UsersController extends Controller
         return view('users.account')->with(compact("countries","userDetails"));
     }
     public function logout(){
-        Session::forget('frontSession');
         Auth::logout();
+        Session::forget('frontSession');
         return redirect('/');
     }
     public function chkUserPassword(Request $request){

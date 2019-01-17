@@ -242,7 +242,27 @@
 								?><font face="phetsarath OT"> ກິບ</font></span></li>
 							@else
 								<li><font face="phetsarath OT">ລາຄາລວມສິນຄ້າທັງໝົດ</font><span>
-										<?php echo $total_amount?></span></li>
+										<?php
+														//use for split yaek array
+														$totals = preg_split('//', $total_amount, -1, PREG_SPLIT_NO_EMPTY);
+														// print_r($totals);
+														//count index in array
+														$countArray = count($totals) ;
+														// echo $countArray;
+														if($countArray==8){
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+														}
+														elseif ($countArray==7) {
+															echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+														}
+														elseif ($countArray==6) {
+															echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+														}
+														elseif ($countArray==5) {
+															echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+														}            
+										?>
+									<font face="phetsarath OT"> ກີບ</font></p></span></li>
 							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>
