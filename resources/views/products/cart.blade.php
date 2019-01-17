@@ -266,7 +266,7 @@
 							@endif
 						</ul>
 							<a class="btn btn-default update" href=""><font face="phetsarath OT">ອັບເດດ</font></a>
-							<a class="btn btn-default check_out" href="{{url('/checkout')}}"><font face="phetsarath OT">ຊໍາລະຄ່າສິນຄ້າ</font></a>
+							<a class="btn btn-default check_out" href="{{url('/checkout')}}"><font face="phetsarath OT">ດຳເນີນການສັ່ງຊື້ສິນຄ້າ</font></a>
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 				<div class="breadcrumbs">
 						<ol class="breadcrumb">
 						  <li><a href="{{url('/')}}">Home</a></li>
-						  <li class="active"> <font face="phetsarath OT">ຂັ້ນຕອນການຊໍາລະສິນຄ້າ</font></li>
+						  <li class="active"> <font face="phetsarath OT">ຂັ້ນຕອນການສັ່ງຊື້ສິນຄ້າ</font></li>
 						</ol>
 					</div><!--/breadcrums-->
                 @if (Session::has('flash_message_error'))
@@ -29,7 +29,7 @@
                       </div>
                 @endif 
 			<div class="step-one">
-                <center><h1 class="heading"><font face="phetsarath OT">ຂັ້ນຕອນການຊໍາລະສິນຄ້າ</font></h1></center>
+                <center><h1 class="heading"><font face="phetsarath OT">ຂັ້ນຕອນການສັ່ງຊື້ສິນຄ້າ</font></h1></center>
             </div>
 			<div class="shopper-informations">
 				<div class="row">

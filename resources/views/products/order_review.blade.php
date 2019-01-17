@@ -309,19 +309,19 @@
                             <label for=""><strong><font face="phetsarath OT"> ການຊໍາລະສິນຄ້າ: </b></font></strong></label>
                         </span>
                         <span>
-                            <label><input type="radio" name="payment_method" id="bank"><strong><font face="phetsarath OT"> ໂອນຜ່ານບັນຊີທະນາຄານ</b></font></strong></label>
+                            <label><input type="radio" name="payment_method" id="bank" value="bank"><strong><font face="phetsarath OT"> ໂອນຜ່ານບັນຊີທະນາຄານ</b></font></strong></label>
                         </span>
                         <span>
-                                <label><input type="radio" name="payment_method" id="COD"><strong><font face="phetsarath OT"> ຈ່າຍເງິນປາຍທາງ</b></font></strong></label>
+                                <label><input type="radio" name="payment_method" id="COD"value="COD"><strong><font face="phetsarath OT"> ຈ່າຍເງິນປາຍທາງ</b></font></strong></label>
                             </span>
                         <span>
-                            <label><input type="radio" name="payment_method" id="pay_in_offices"><strong><font face="phetsarath OT"> ຈ່າຍເງິນສົດທີ່ຫ້ອງການ</b></font></strong></label>
+                            <label><input type="radio" name="payment_method" id="pay_in_offices" value="pay_in_offices"><strong><font face="phetsarath OT"> ຈ່າຍເງິນສົດທີ່ຫ້ອງການ</b></font></strong></label>
                         </span>
                         <span>
-                            <label><input type="radio" name="payment_method" id="Paypal"><strong><font face="phetsarath OT"> Paypal</font></strong></label>
+                            <label><input type="radio" name="payment_method" id="Paypal" value="Paypal"><strong><font face="Times new roman"> Paypal</font></strong></label>
                         </span>
                         <span style="float:right;">
-                        <button type="submit" class="btn btn-success" onclick="return selectPaymentMethod();"><font face="phetsarath OT">ຢືນຢັນ ການຊໍາລະສິນຄ້າ</font></button>
+                        <button type="submit" class="btn btn-success" onclick="return selectPaymentMethod();"><font face="phetsarath OT">ຢືນຢັນການສັ່ງຊື້ ແລະ ຊໍາລະສິນຄ້າ</font></button>
                         </span>
                 </div>
             </div>
