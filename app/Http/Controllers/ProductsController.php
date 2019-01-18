@@ -366,6 +366,12 @@ class ProductsController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             
+            //ADD TO CART FUNCITON
+            // if(empty(Auth::user()->email)){
+            //     $data['user_email'] = " ";
+            // }else{
+            //     $data['user_email'] = Auth::user()->email;
+            // }
             //echo "<pre>";print_r($data);die;
             $user_email = Auth::user()->email;
             $countEmails = DB::table('carts')->where(['email'=>$user_email]);
@@ -508,7 +514,8 @@ class ProductsController extends Controller
         $userDetails = User::where(['email'=>$user_email,'admin'=>'0'])->find($user_id);
         $countries = Country::get();
         //data to page
-        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+        $session_id = Session::get('session_id');
+        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
           //$userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get(); //problem
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
@@ -634,7 +641,14 @@ class ProductsController extends Controller
                 $cartPro->product_qty = $pro->quantity;
                 $cartPro->save();
             }
+            Session::put('order_id',$order_id);
+            Session::put('grand_total',$data['grand_total']);
+            //Redirect user thanks page after saving order
+            return redirect('/thanks');
         }
+    }
+    public function thanks(Request $request){
+        return view('products.thanks');
     }
 
 }
