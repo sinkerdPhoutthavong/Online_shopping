@@ -315,9 +315,6 @@
                         <span>
                             <label><input type="radio" name="payment_method" id="pay_in_offices" value="pay_in_offices"><strong><font face="phetsarath OT"> ຈ່າຍເງິນສົດທີ່ຫ້ອງການ</b></font></strong></label>
                         </span>
-                        <span>
-                            <label><input type="radio" name="payment_method" id="Paypal" value="Paypal"><strong><font face="Times new roman"> Paypal</font></strong></label>
-                        </span>
                         <span style="float:right;">
                         <button type="submit" class="btn btn-success" onclick="return selectPaymentMethod();"><font face="phetsarath OT">ຢືນຢັນການສັ່ງຊື້ ແລະ ຊໍາລະສິນຄ້າ</font></button>
                         </span>

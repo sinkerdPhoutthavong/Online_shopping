@@ -307,7 +307,8 @@ $().ready(function(){
 			$("#shipping_mobile").val('');
 		}
 	});
-
+	
+	$('#Order_product').DataTable();
 });
 
 function selectPaymentMethod(){

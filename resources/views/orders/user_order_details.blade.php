@@ -16,7 +16,7 @@
 			<div class="heading" align="center">
                 {{-- <h2><font face="phetsarath OT">ທ່ານດໍາເນີນການສັ່ງຊື້ສິີນຄ້າສໍາເລັດແລ້ວ</font></h2> --}}
             <h2><font face="phetsarath OT" color="teal">ລາຍລະອຽດຂອງການສັ່ງຊື້ສີນຄ້າ ເລກທີ {{$orderDetails->id}}</font></h2>
-                <table id="example" class="table table-striped table-bordered" style="margin-top:20px;width:100%">
+                <table id="Order_product" class="table table-bordered data-table" style="margin-top:20px;width:100%">       
                         <thead>
                             <tr>
                                 <th><center><font face="phetsarath OT" color="teal">ໝາຍເລກສິນຄ້າ</center></font></th>

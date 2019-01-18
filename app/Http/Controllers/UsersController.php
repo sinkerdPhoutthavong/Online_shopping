@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Auth;
 use Session;
+use App\Cart;
 use App\Country;
 
 class UsersController extends Controller
@@ -63,6 +64,12 @@ class UsersController extends Controller
             $data = $request->input();
             if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 Session::put('frontSession',$data['email']);
+   
+                //ADD TO CART FUNCITON IF NOT LOGIN BUT ADD TO CART SO IF YOU LOGIN PRODUCT INCART WILL COME
+                if(!empty(Session::get('session_id'))){
+                    $session_id = Session::get('session_id');
+                    Cart::where('session_id',$session_id)->update(['user_email' => $data['email']]);
+                }
                 return redirect('/cart');
                 //Session::put('adminSession',$data['email']);
             }else{

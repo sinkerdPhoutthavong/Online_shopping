@@ -620,8 +620,10 @@ class ProductsController extends Controller
             //CHNAGE DATA PAYMENT METHOD
             if($data['payment_method']=="pay_in_offices"){
                 $data['payment_method']="ຊໍາລະທີ່ຫ້ອງການ";
+
             }elseif($data['payment_method']=="COD"){
-                $data['payment_method']="ຊໍາລະເງິນທີ່ປາຍ";
+                $data['payment_method']="ຊໍາລະເງິນທີ່ປາຍທາງ";
+
             }elseif($data['payment_method']=="bank"){
                 $data['payment_method']="ໂອນຜ່ານບັນຊີທະນາຄານ";
             }
@@ -665,6 +667,13 @@ class ProductsController extends Controller
             }
             Session::put('order_id',$order_id);
             Session::put('grand_total',$data['grand_total']);
+            if($data['payment_method']="ໂອນຜ່ານບັນຊີທະນາຄານ"){
+                return redirect('/bank');
+            }elseif( $data['payment_method']="ຊໍາລະເງິນທີ່ປາຍທາງ"){
+                return redirect('/bank');
+            }elseif($data['payment_method']="ຊໍາລະທີ່ຫ້ອງການ"){
+                return redirect('/offices');
+            }
             //Redirect user thanks page after saving order
             return redirect('/thanks');
         }
@@ -673,6 +682,9 @@ class ProductsController extends Controller
         $user_email = Auth::user()->email;
         $carts = Cart::where('user_email',$user_email)->delete();
         return view('products.thanks');
+    }
+    public function bank(Request $request){
+        return view('orders.bank');
     }
     public function userOrders(){
         $user_id = Auth::user()->id;

@@ -88,10 +88,16 @@ Route::group(['middleware'=>['frontlogin']],function(){
     Route::match(['get','post'],'/place-order','ProductsController@placeOrder');
     //THANK PAGES
     Route::get('/thanks','ProductsController@thanks');
-     //USER ORDER PAGES
+    //BANK PAGES
+    Route::get('/bank','ProductsController@bank');
+    //OFFICES PAGES
+    Route::get('/offices','ProductsController@office');
+    //THANK PAGES
+    Route::get('/cod','ProductsController@COD');
+    //USER ORDER PAGES
     Route::get('/orders','ProductsController@userOrders');
-     //USER ORDERed PAGES
-     Route::get('/orders/{id}','ProductsController@userOrderDetails');
+    //USER ORDERed PAGES
+    Route::get('/orders/{id}','ProductsController@userOrderDetails');
 });
 
 

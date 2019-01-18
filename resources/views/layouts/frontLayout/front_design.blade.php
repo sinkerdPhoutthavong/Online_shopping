@@ -42,7 +42,12 @@
 	<script src="{{asset('js/frontend_js/price-range.js')}}"></script>
     <script src="{{asset('js/frontend_js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('js/frontend_js/main.js')}}"></script>
-    <script src="{{asset('js/frontend_js/jquery.validate.js')}}"></script> 
+    <script src="{{asset('js/frontend_js/jquery.validate.js')}}"></script>
+    
+    {{-- https://code.jquery.com/jquery-3.3.1.js
+    https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js
+    https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js --}}
+ 
     {{-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> --}}
 	
 </body>
