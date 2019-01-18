@@ -367,14 +367,21 @@ class ProductsController extends Controller
             $data = $request->all();
             
             //ADD TO CART FUNCITON
-            // if(empty(Auth::user()->email)){
-            //     $data['user_email'] = " ";
-            // }else{
-            //     $data['user_email'] = Auth::user()->email;
-            // }
+            if(empty(Auth::user()->email)){
+                $user_email = "";
+            }else{
+                $user_email = Auth::user()->email;
+            }
             //echo "<pre>";print_r($data);die;
-            $user_email = Auth::user()->email;
-            $countEmails = DB::table('carts')->where(['email'=>$user_email]);
+           // $user_email = Auth::user()->email;
+
+        //    //ADD CHECK IF DONOT LOGIIN CANN NOT USER THE SAME PRODUCT TO WEBDITE
+        //    if(empty(Auth::user()->email)){
+        //         $countEmails=0;
+        //     }else{
+                
+        //     }
+            // echo "<pre>";print_r($user_email);die;
             if(empty($data['session_id'])){
                 $data['session_id'] = " ";
             }
@@ -388,10 +395,11 @@ class ProductsController extends Controller
                 Session::put('session_id',$session_id);
             }
             $sizeArr = explode("-",$data['size']);
-
+            $countEmails = DB::table('carts')->where(['user_email'=>$user_email])->count();
+            // echo "<pre>";print_r($countEmails);die;
             $countProducts =  DB::table('carts')->where(['product_id'=>$data['product_id'],'product_color'=>$data['product_color'],
             'size'=>$sizeArr[1],'session_id'=>$session_id])->count();
-            if($countProducts>0 && $countEmails==$user_email ){
+            if($countProducts>0 && $countEmails>0 ){
                 return redirect()->back()->with('flash_message_error','ສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
             }else{
                 $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$sizeArr[1]])->first();
@@ -405,22 +413,28 @@ class ProductsController extends Controller
     }
     public function cart(){
         //THIS IS FIRST WAYS FOR FIX WHEN USER LOGGED IN TO SYSTEM IT WILL SHOW ALL PRODUCT SAME SESSION 
-        // if(Auth::check()){
-        //     $user_email = Auth::user()->email;
-        //     $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
-        // }else{
-        //     $session_id = Session::get('session_id');
-        //     $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
-        // }
+        if(Auth::check()){
+            $user_email = Auth::user()->email;
+            $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
+        }else{
+            $session_id = Session::get('session_id');
+            $userCart = DB::table('carts')->where(['session_id'=>$session_id])->get();
+        }
 
         //THIS IS SECOND WAYS FOR FIX WHEN USER LOGGED IN TO SYSTEM IT WILL SHOW ALL PRODUCT SAME SESSION 
-        $session_id = Session::get('session_id');
-        $user_email = Auth::user()->email;
-        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
-        // echo "<pre>";print_r($userCart);die;
+        // $session_id = Session::get('session_id');
+        // // $user_email = Auth::user()->email;
+        // $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
+
+
          //Get Product Alternate Images
         // $productAltImage = ProductImage::where('product_id',$id)->get();
         //echo "<pre>";print_r($userCart);die;
+        // $countCart = Cart::where(['session_id'=>$session_id,'user_email'=>$user_email])->count();
+        // if($countCart<=0){
+        //     return redirect('/cart')->with('flash_massage_error','ກະລຸນາເພີ່ມສິນຄ້າເຂົ້າກະຕ່າເພື່ອດໍາເນີນການສັ່ງຊື້!!');
+        // }
+        // echo "<pre>";print_r( $countCart);die;
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
@@ -515,7 +529,7 @@ class ProductsController extends Controller
         $countries = Country::get();
         //data to page
         $session_id = Session::get('session_id');
-        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
+        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
           //$userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get(); //problem
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
@@ -573,7 +587,7 @@ class ProductsController extends Controller
         $userDetails = User::where('id',$user_id)->first();
         $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         $shippingDetails = json_decode(json_encode($shippingDetails));
-        $userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get();
+        $userCart = DB::table('carts')->where(['user_email'=>$user_email])->get();
         //$userCart = DB::table('carts')->where(['session_id'=>$session_id,'user_email'=>$user_email])->get(); //problem
         foreach ($userCart as $key => $product) {
             $productDetails = Product::where('id',$product->product_id)->first();
@@ -602,6 +616,14 @@ class ProductsController extends Controller
                 $coupon_amount = 0;
             }else{
                 $coupon_amount = Session::get('CouponAmount');
+            }
+            //CHNAGE DATA PAYMENT METHOD
+            if($data['payment_method']=="pay_in_offices"){
+                $data['payment_method']="ຊໍາລະທີ່ຫ້ອງການ";
+            }elseif($data['payment_method']=="COD"){
+                $data['payment_method']="ຊໍາລະເງິນທີ່ປາຍ";
+            }elseif($data['payment_method']=="bank"){
+                $data['payment_method']="ໂອນຜ່ານບັນຊີທະນາຄານ";
             }
             
             //Insert to Order
@@ -648,7 +670,23 @@ class ProductsController extends Controller
         }
     }
     public function thanks(Request $request){
+        $user_email = Auth::user()->email;
+        $carts = Cart::where('user_email',$user_email)->delete();
         return view('products.thanks');
+    }
+    public function userOrders(){
+        $user_id = Auth::user()->id;
+        $orders = Order::with('orders')->where('user_id',$user_id)->orderBy('id','DESC')->get();
+        // $orders = json_decode(json_encode($orders));
+        // echo "<pre>";print_r($orders);die;
+        return view('orders.users_orders')->with(compact('orders'));
+    }
+    public function userOrderDetails($order_id){
+        $user_id = Auth::user()->id;
+        $orderDetails = Order::with('orders')->where('id',$order_id)->first();
+        $orderDetails = json_decode(json_encode($orderDetails));
+        // echo "<pre>";print_r($orderDetails);die;
+        return view('orders.user_order_details')->with(compact('orderDetails'));
     }
 
 }

@@ -88,6 +88,10 @@ Route::group(['middleware'=>['frontlogin']],function(){
     Route::match(['get','post'],'/place-order','ProductsController@placeOrder');
     //THANK PAGES
     Route::get('/thanks','ProductsController@thanks');
+     //USER ORDER PAGES
+    Route::get('/orders','ProductsController@userOrders');
+     //USER ORDERed PAGES
+     Route::get('/orders/{id}','ProductsController@userOrderDetails');
 });
 
 
