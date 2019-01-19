@@ -140,4 +140,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::match(['get','post'],'/admin/edit-banner/{id}','BannersController@editBanner');
     Route::get('/admin/delete-banner/{id}','BannersController@deleteBanner');
     Route::get('/admin/delete-banner-image/{id}','BannersController@deleteBannerImage');
+
+    //Admin order Route
+    Route::get('/admin/view-orders','ProductsController@viewOrders');
 });

@@ -64,7 +64,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-star"></i><font face="phetsarath OT"> ສີ່ງທີ່ທ່ານຕ້ອງການ</font></a></li>
-                            <li><a href="{{url('/orders')}}"><i class="fa fa-crosshairs"></i><font face="phetsarath OT"> ການສັ່ງຊື້ສີນຄ້າ</font></a></li>
+                            <li><a href="{{url('/orders')}}"><i class="fa fa-crosshairs"></i><font face="phetsarath OT"> ປະຫັວດການສັ່ງຊື້ສີນຄ້າ</font></a></li>
                             <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT"> ກະຕ່າສິນຄ້າ</font></a></li>
                             @if (empty(Auth::check()))
                                 <li><a href="{{url('/user-registerpage')}}"><i class="fa fa-user"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a></li>

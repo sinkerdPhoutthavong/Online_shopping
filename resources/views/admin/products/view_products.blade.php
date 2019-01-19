@@ -2,8 +2,8 @@
 @section('content')
 <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="{{url('/admin/dashboard')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">ສິນຄ້າ</a> <a href="#" class="current">ສິນຄ້າທັງໝົດ</a> </div>
-          <h1>ສິນຄ້າທັງໝົດ</h1>
+            <div id="breadcrumb"> <a href="{{url('/admin/dashboard')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">ສິນຄ້າ</a> <a href="#" class="current">ການສັ່ງຊື້ທັງໝົດ</a> </div>
+          <h1>ການສັ່ງຊື້ທັງໝົດ</h1>
           @if (Session::has('flash_message_error'))
           <div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">x</button>
@@ -31,13 +31,13 @@
             <div class="span12">
               <div class="widget-box">
                 <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                  <h5>ສິນຄ້າທັງໝົດ</h5>
+                  <h5>ການສັ່ງຊື້ສິນຄ້າທັງໝົດ</h5>
                 </div>
                 <div class="widget-content nopadding">
                   <table class="table table-bordered data-table">
                     <thead>
                       <tr>
-                        <th>ລະຫັດສິນຄ້າ</th>
+                        <th>ເລກທີສັ່ງຊື້ສິນຄ້າ</th>
                         <th>ລະຫັດ Category</th>
                         <th>ຊື່ Category</th>
                         <th>ຊື່ສິນຄ້າ</th>

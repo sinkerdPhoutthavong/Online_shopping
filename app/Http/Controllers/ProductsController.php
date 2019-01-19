@@ -684,6 +684,8 @@ class ProductsController extends Controller
         return view('products.thanks');
     }
     public function bank(Request $request){
+        $user_email = Auth::user()->email;
+        $carts = Cart::where('user_email',$user_email)->delete();
         return view('orders.bank');
     }
     public function userOrders(){
@@ -700,5 +702,10 @@ class ProductsController extends Controller
         // echo "<pre>";print_r($orderDetails);die;
         return view('orders.user_order_details')->with(compact('orderDetails'));
     }
-
+    public function viewOrders(){
+        $orders = Order::with('orders')->orderBy('id','DESC')->get();
+        $orders = json_decode(json_encode($orders));
+        // echo "<pre>";print_r($orders);die;
+        return view('admin.orders.view_orders')->with(compact('orders'));
+    }
 }
