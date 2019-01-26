@@ -106,7 +106,6 @@ $().ready(function(){
 			name:{
 				required:true,
 				minlength:2,
-				accept:"[a-zA-z]+"
 			},
 			password:{
 				required:true,
@@ -122,7 +121,6 @@ $().ready(function(){
 			name:{
 				required:"ກະລຸນາປ້ອນຊື່ຂອງທ່ານ",
 				minlength:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງຫຼາຍກວ່າ 2 ຕົວອັກສອນ",
-				accept:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງເປັນຕົວອັກສອນເທົ່ານັ້ນ"
 			},
 			password:{
 				required:"ກະລຸນາໃສ່ລະຫັດຜ່ານຂອງທ່ານ",

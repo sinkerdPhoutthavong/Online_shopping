@@ -46,7 +46,7 @@ class UsersController extends Controller
 
                 //send Register Email
                 $email = $data['email'];
-                $messageData = ['email'=>data['email'],'name'=>$data['name']];
+                $messageData = ['email'=>$data['email'],'name'=>$data['name']];
                 Mail::send('emails.registerMail',$messageData,function($message)use($email){
                     $message->to($email)->subject('Registration with E-com Website');
                 });
