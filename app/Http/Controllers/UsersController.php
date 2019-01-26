@@ -9,6 +9,7 @@ use Auth;
 use Session;
 use App\Cart;
 use App\Country;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -42,6 +43,14 @@ class UsersController extends Controller
                }
                 $user->admin = 0;
                 $user->save();
+
+                //send Register Email
+                $email = $data['email'];
+                $messageData = ['email'=>data['email'],'name'=>$data['name']];
+                Mail::send('emails.registerMail',$messageData,function($message)use($email){
+                    $message->to($email)->subject('Registration with E-com Website');
+                });
+
                 // if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                 //     Session::put('frontSession',$data['email']);
                 return redirect(url('/user-Login'))->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');

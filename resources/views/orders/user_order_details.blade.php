@@ -62,7 +62,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                </table>
 			</div>
 		</div>
 	</section><!--/#do_action-->

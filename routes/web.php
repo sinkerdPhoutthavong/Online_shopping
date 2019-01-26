@@ -102,7 +102,7 @@ Route::group(['middleware'=>['frontlogin']],function(){
 
 
 // Route for admin
-Route::group(['middleware' => ['auth']],function(){
+Route::group(['middleware' => ['adminlogin']],function(){
     Route::get('/admin/dashboard','AdminController@dashboard');
     Route::get('/admin/settings','AdminController@settings');
     Route::get('/admin/check-pwd','AdminController@chkPassword');
@@ -143,4 +143,10 @@ Route::group(['middleware' => ['auth']],function(){
 
     //Admin order Route
     Route::get('/admin/view-orders','ProductsController@viewOrders');
+
+     //Admin order Route
+     Route::get('/admin/view-orders/{id}','ProductsController@viewOrderDetails');
+
+      //Admin Update Order Status Route
+      Route::post('/admin/update-order-status','ProductsController@updateOrderStatus');
 });

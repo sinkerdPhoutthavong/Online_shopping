@@ -38,24 +38,30 @@
                   <form class="form-horizontal" method="post" action="{{url('/admin/update-pwd')}}" name="password_validate" id="password_validate" novalidate="novalidate">
                         {{csrf_field()}}
                     <div class="control-group">
+                        <label class="control-label">ຊື່ີຜູ່ບໍລິຫານລະບົບ</label>
+                            <div class="controls">
+                              <input type="text" value="{{$adminDetails->username}}" readonly/>
+                            </div>
+                    </div>
+                    <div class="control-group">
                             <label class="control-label">ລະຫັດຜ່ານເກົ່າ</label>
                             <div class="controls">
                               <input type="password" name="current_pwd" id="current_pwd" />
                               <span id="chkPwd"></span>
                             </div>
-                          </div>
-                      <div class="control-group">
+                    </div>
+                    <div class="control-group">
                         <label class="control-label">ລະຫັດຜ່ານໃໝ່</label>
                         <div class="controls">
                           <input type="password" name="new_pwd" id="new_pwd" />
                         </div>
-                      </div>
-                      <div class="control-group">
+                    </div>
+                    <div class="control-group">
                         <label class="control-label">ຢືນຢັນລະຫັດຜ່ານ</label>
                         <div class="controls">
                           <input type="password" name="confirm_pwd" id="confirm_pwd" />
                         </div>
-                      </div>
+                    </div>
                       <div class="form-actions">
                         <input type="submit" value="Update Password" class="btn btn-success">
                       </div>

@@ -92,7 +92,7 @@
                            <td><center>{{$order->order_status}}</center></td>
                            <td><center>{{$order->payment_method}}</center></td>
                            <td class="center">
-                                <a href="#" class="btn btn-warning btn-mini" title="ລາຍລະອຽດຂອງການສັ່ງຊື້">ລາຍລະອຽດ</a>
+                                <a href="{{url('/admin/view-orders/'.$order->id)}}" class="btn btn-success btn-mini" title="ລາຍລະອຽດຂອງການສັ່ງຊື້">ລາຍລະອຽດ</a>
                             </td>  
                            </tr> 
                         @endforeach
