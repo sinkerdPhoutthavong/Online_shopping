@@ -112,11 +112,36 @@
 											</select>
 										</p>
 										<span>
-										<span id="getPrice"><font face="phetsarath OT">ລາຄາ: {{$productDetails->price}} ກີບ</font></span>
+										<span id="getPrice"><font face="phetsarath OT">ລາຄາ:
+											<?php
+                                                    $price_amount = $productDetails->price;
+                                                    //use for split yaek array
+                                                    $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                        // print_r($totals);
+                                                                        //count index in array
+                                                                        $countArray = count($totals) ;
+                                                                        // echo $countArray;
+                                                                        if($countArray==8){
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                        }
+                                                                        elseif ($countArray==7) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                        }
+                                                                        elseif ($countArray==6) {
+                                                                            echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                        }
+                                                                        elseif ($countArray==5) {
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                        }elseif ($countArray==4) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3];
+                                                                        } 
+                                                                                    
+                                            ?>
+                                            <font face="phetsarath OT">ກີບ</font></span>
 										</span>
 										<span>
 											<label><font face="phetsarath OT">ຈໍານວນ:</font></label>
-											<input type="text" name="quantity" value="1" />
+											<input type="text" name="quantity" value="1" readonly />
 											@if ($total_stock>0)
 												<button type="submit" class="btn btn-fefault cart" id="cartButton">
 													<i class="fa fa-shopping-cart"></i>

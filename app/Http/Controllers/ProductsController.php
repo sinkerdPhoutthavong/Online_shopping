@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Auth;
 use Session;
 use Image;
@@ -266,7 +267,7 @@ class ProductsController extends Controller
         $productAltImage = ProductImage::where('product_id',$id)->get();
 
         //cal culate for product instock and show in detail page
-         $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
+        $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
 
         // for reacommend prosuct with the same category
         $ralatedProducts = Product::where('id','!=',$id)->where(['category_id'=>$productDetails->category_id])->get(); 
@@ -667,11 +668,38 @@ class ProductsController extends Controller
             }
             Session::put('order_id',$order_id);
             Session::put('grand_total',$data['grand_total']);
-            if($data['payment_method']="ໂອນຜ່ານບັນຊີທະນາຄານ"){
+            $data =$data['payment_method'];
+            if($data=="ໂອນຜ່ານບັນຊີທະນາຄານ"){
                 return redirect('/bank');
-            }elseif( $data['payment_method']="ຊໍາລະເງິນທີ່ປາຍທາງ"){
+            }elseif($data=="ຊໍາລະເງິນທີ່ປາຍທາງ"){
+
+                /*ລາຍລະອຽດການການສິນຄ້າ*/
+                $productDetails = Order::with('orders')->where('id',$order_id)->first();
+                $productDetails = json_decode(json_encode($productDetails),true);
+                // echo "<pre>";print_r($productDetails );die;
+               
+                /* ລາຍລະອຽດຜູ່ຊື້*/ 
+                $userDetails = User::where('id',$user_id)->first();
+                $userDetails = json_decode(json_encode($userDetails),true);
+                //  echo "<pre>";print_r($userDetails);die;
+
+
+                /* ຂໍ້ຄວາມສໍາລັບອີເມວ*/
+                $email = $user_email;
+                $messageData = [
+                    'email' => $email,
+                    'name' => $shippingDetails->name,
+                    'order_id' => $order_id,
+                    'productDetails'=>$productDetails,
+                    'userDetails' => $userDetails
+                ];
+                Mail::send('emails.order',$messageData,function($message)use($email){
+                    $message->to($email)->subject('ສິນຄ້າທີ່ສັ່ງຊື້ຈາກເວັບໄຊ E-com SMSHOPPER');
+                });
+               /* ຈົບຂໍ້ຄວາມສໍາລັບອີເມວ*/
+
                 return redirect('/bank');
-            }elseif($data['payment_method']="ຊໍາລະທີ່ຫ້ອງການ"){
+            }elseif($data=="ຊໍາລະທີ່ຫ້ອງການ"){
                 return redirect('/offices');
             }
             //Redirect user thanks page after saving order
