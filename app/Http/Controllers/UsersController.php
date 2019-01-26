@@ -44,16 +44,25 @@ class UsersController extends Controller
                 $user->admin = 0;
                 $user->save();
 
-                //send Register Email
-                $email = $data['email'];
+                //ສົ່ງຂໍ້ຄວາມຫາອີເມວຈາກ sinkerd99@gmail.com -> to register email
+                /*$email = $data['email'];
                 $messageData = ['email'=>$data['email'],'name'=>$data['name']];
                 Mail::send('emails.registerMail',$messageData,function($message)use($email){
                     $message->to($email)->subject('Registration with E-com Website');
+                });*/
+
+                //ຢືຶນຢັນອີເມວ
+                $email = $data['email'];
+                $messageData = ['email'=>$data['email'],'name'=>$data['name'],'code'=>base64_encode($data['email'])];
+                Mail::send('emails.confirmation',$messageData,function($message)use($email){
+                    $message->to($email)->subject('ກະລຸນາຢືນຢັນບັນຊີຂອງທ່ານ');
                 });
 
+                return redirect(url('/user-Login'))->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!! ກະລຸນາຢືນຢັນບັນຊີຂອງທ່ານທາງອີເມວ ເພື່ອເຂົ້າສູ່ລະບົບ');
+
                 // if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
-                //     Session::put('frontSession',$data['email']);
-                return redirect(url('/user-Login'))->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
+                // //     Session::put('frontSession',$data['email']);
+                // return redirect(url('/user-Login'))->with('flash_message_success','ສະໝັກສະມາຊິກສໍາເລັດແລ້ວ!!');
                 // }
                
             }
@@ -72,8 +81,12 @@ class UsersController extends Controller
         if($request->isMethod('post')){
             $data = $request->input();
             if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+                $userStatus =User::where('email',$data['email'])->first();
+                if($userStatus->status==0){
+                    return redirect()->back()->with('flash_message_error','ບັນຊີຂອງທ່ານຍັງບໍ່ໄດ້ຢຶນຢັນ ເພື່ອເຂົ້າສູ່ລະບົບ!! ກະລຸນາຢືນຢັນຜ່ານລີ້ງທີ່ເວັບໄຊສົ່ງໄປຍັງອີເມວທີ່ໃຊ້ສະໝັກ');
+                    // return redirect()->back()->with('flash_message_error','ບັນຊີຂອງທ່ານຖືກລະງັບການໃຊ້ງານເພື່ອຄວາມປອດໄພ ກະລຸນາຕິດຕໍ່ທາງເວັບໄຊເພື່ອນໍາໃຊ້ບັນຊີ');
+                }
                 Session::put('frontSession',$data['email']);
-   
                 //ADD TO CART FUNCITON IF NOT LOGIN BUT ADD TO CART SO IF YOU LOGIN PRODUCT INCART WILL COME
                 if(!empty(Session::get('session_id'))){
                     $session_id = Session::get('session_id');
@@ -81,7 +94,8 @@ class UsersController extends Controller
                 }
                 return redirect('/cart');
                 //Session::put('adminSession',$data['email']);
-            }else{
+            }
+            else{
                 return redirect()->back()->with('flash_message_error','ອີເມວ ຫຼື ລະຫັດຜ່ານ ຂອງທ່ານບໍ່ຖືກຕ້ອງ');
             }
         }
