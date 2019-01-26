@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register Email</title>
+    <title>Comfirmation Account</title>
 </head>
 <body>
         <table>

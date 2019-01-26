@@ -59,7 +59,8 @@ Route::get('/user-registerpage','UsersController@userRegister');
 //USER REGISTER FORM SUBMIT
 Route::post('/user-register','UsersController@register');
 
-
+//ສໍາລັບການຢືຶນຢັນບັນຊີ
+Route::get('/confirm/{code}','UsersController@confirmAccount');
 
 //USER LOGOUT
 Route::get('/user-logout','UsersController@logout');

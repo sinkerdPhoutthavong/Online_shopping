@@ -77,6 +77,28 @@ class UsersController extends Controller
                 echo "true";die;
             }
     }
+    public function confirmAccount($email){
+        $email = base64_decode($email);
+        $userCount = User::where('email',$email)->count();
+        if($userCount > 0){
+            $userDetails = User::where('email',$email)->first();
+            if($userDetails->status == 1){
+                return redirect('/user-Login')->with('flash_message_success','ບັນຊີຂອງທ່ານຢຶນຢັນຮຽບຮ້ອຍແລ້ວ!! ຕອນນີ້ທ່ານສາມາດເຂົ້າສຸ່ລະບົບໄດ້ແລ້ວ');
+            }else{
+                User::where('email',$email)->update(['status'=>'1']);
+
+                //ສົ່ງຂໍ້ຄວາມຍິນດີຕ້ອນຮັບ
+                $messageData = ['email'=>$email,'name'=>$userDetails->name];
+                Mail::send('emails.welcome',$messageData,function($message)use($email){
+                    $message->to($email)->subject('ຍິນດີຕ້ອນຮັບສູ່ເວັບໄຊ SMSHOPPING');
+                });
+
+                return redirect('/user-Login')->with('flash_message_success','ບັນຊີຂອງທ່ານຍັງຢຶນຢັນຮຽບຮ້ອຍແລ້ວ!! ຕອນນີ້ທ່ານສາມາດເຂົ້າສຸ່ລະບົບໄດ້ແລ້ວ');
+            }
+        }else{
+            abort(404);
+        }
+    }
     public function login(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();

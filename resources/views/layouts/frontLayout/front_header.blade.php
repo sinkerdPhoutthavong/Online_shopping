@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img style="width:239px;" src="{{asset('images/frontend_images/home/logo1.png')}}" alt="" /></a>
+                        <a href="{{url('.')}}"><img style="width:239px;" src="{{asset('images/frontend_images/home/logo1.png')}}" alt="" /></a>
                     </div>
                     {{-- <div class="btn-group pull-right">
                         <div class="btn-group">
