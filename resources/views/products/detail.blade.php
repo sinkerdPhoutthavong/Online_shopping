@@ -141,7 +141,7 @@
 										</span>
 										<span>
 											<label><font face="phetsarath OT">ຈໍານວນ:</font></label>
-											<input type="text" name="quantity" value="1" readonly />
+											<input type="text" name="quantity" value="1" />
 											@if ($total_stock>0)
 												<button type="submit" class="btn btn-fefault cart" id="cartButton">
 													<i class="fa fa-shopping-cart"></i>

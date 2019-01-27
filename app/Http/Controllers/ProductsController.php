@@ -373,21 +373,21 @@ class ProductsController extends Controller
             }else{
                 $user_email = Auth::user()->email;
             }
-            //echo "<pre>";print_r($data);die;
-           // $user_email = Auth::user()->email;
 
-        //    //ADD CHECK IF DONOT LOGIIN CANN NOT USER THE SAME PRODUCT TO WEBDITE
-        //    if(empty(Auth::user()->email)){
-        //         $countEmails=0;
-        //     }else{
-                
-        //     }
-            // echo "<pre>";print_r($user_email);die;
             if(empty($data['session_id'])){
                 $data['session_id'] = " ";
             }
             if(empty($data['size'])){
                 return redirect()->back()->with('flash_message_error','ກາລຸນາເລືອກຂະໜາດຂອງສີນຄ້າ');
+            }
+            //   echo "<pre>";print_r($data);die;
+            //ກວດສອບເບີ່ງສິນຄ້າໃນສາງ ວ່າມີ ຫຼື ໝົດແລ້ວ
+            $product_size = explode("-",$data['size']);
+            // echo $product_size[1];die;
+            $getProductStock = ProductsAttribute::where(['product_id'=>$data['product_id'],'size'=>$product_size[1]])->first();
+            // echo $getProductStock->stock;die;
+            if($data['quantity']>$getProductStock->stock){
+                return redirect()->back()->with('flash_message_error','ຈໍານວນສີນຄ້າທີ່ທ່ານເລືອກບໍ່ສາມາດໃຊ້ງານໄດ້!!');
             }
 
             $session_id = Session::get('session_id');
@@ -396,19 +396,28 @@ class ProductsController extends Controller
                 Session::put('session_id',$session_id);
             }
             $sizeArr = explode("-",$data['size']);
-            $countEmails = DB::table('carts')->where(['user_email'=>$user_email])->count();
-            // echo "<pre>";print_r($countEmails);die;
-            $countProducts =  DB::table('carts')->where(['product_id'=>$data['product_id'],'product_color'=>$data['product_color'],
-            'size'=>$sizeArr[1],'session_id'=>$session_id])->count();
-            if($countProducts>0 && $countEmails>0 ){
-                return redirect()->back()->with('flash_message_error','ສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
-            }else{
-                $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$sizeArr[1]])->first();
+            $product_size = $sizeArr[1];
 
+            if(empty(Auth::check())){
+                $countEmails = DB::table('carts')->where(['user_email'=>$user_email])->count();
+                $countProducts =  DB::table('carts')->where(['product_id'=>$data['product_id'],'product_color'=>$data['product_color'],
+                'size'=>$product_size,'session_id'=>$session_id])->count();
+                if($countProducts>0 && $countEmails>0 ){
+                    return redirect()->back()->with('flash_message_error','ຂະໜາດສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
+                }
+            }else{
+                $countEmails = DB::table('carts')->where(['user_email'=>$user_email])->count();
+                $countProducts =  DB::table('carts')->where(['product_id'=>$data['product_id'],'product_color'=>$data['product_color'],
+                'size'=>$product_size,'session_id'=>$session_id])->count();
+                if($countProducts>0 && $countEmails>0 ){
+                    return redirect()->back()->with('flash_message_error','ຂະໜາດສິນຄ້າທີ່ທ່ານເພີ່ມມີຢູ່ໃນກະຕ່າຂອງທ່ານແລ້ວ!!');
+                }
+            }
+                $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$sizeArr[1]])->first();
                 DB::table('carts')->insert(['product_id'=>$data['product_id'],'product_name'=>$data['product_name'],'product_code'=>$getSKU->sku,
                 'product_color'=>$data['product_color'],'price'=>$data['price'],'size'=>$sizeArr[1],'quantity'=>$data['quantity'],'user_email'=>$user_email,
                 'session_id'=>$session_id]);
-            }
+            
         }
         return redirect('/cart')->with('flash_message_success','ເພີ່ມສິນຄ້າລົງກະຕ່າສໍາເລັດແລ້ວ');
     }
@@ -752,6 +761,20 @@ class ProductsController extends Controller
             // echo "<pre>";print_r($data);die;
             Order::where('id',$data['order_id'])->update(['order_status'=>$data['order_status']]);
             return redirect()->back()->with('flash_message_success','ອັບເດດສະຖານະການສັ່ງຊື້ສິນຄ້າສໍາເລັດແລ້ວ !!');
+        }
+    }
+    public function searchProducts(Request $request){
+        if($request->ismethod('post')){
+            $data = $request->all();
+            $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+
+            $search_Products = $data['product'];
+            $productsAll = Product::where('product_name','like','%'.$search_Products.'%')
+            ->orwhere('product_code',$search_Products)->where('status',1)->get();
+           
+            $banners = Banner::where('status','1')->get();
+
+             return view('products.listing')->with(compact('categories','productsAll','search_Products','banners'));
         }
     }
 }

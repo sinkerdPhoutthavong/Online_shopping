@@ -65,13 +65,14 @@ Route::get('/confirm/{code}','UsersController@confirmAccount');
 //USER LOGOUT
 Route::get('/user-logout','UsersController@logout');
 
-// //USER LOGIN
-// Route::post('/user-login','UsersController@login');
 //USER LOGIN
 Route::post('/user-login','UsersController@login');
 
 //CHECK ID USER ALREADY EXISTS
 Route::match(['get','post'],'/check-email','UsersController@checkEmail');
+
+//ສໍາລັບການຄົ້ນຫາສິນຄ້າ
+Route::post('/search-products','ProductsController@searchProducts');
 
 //ALL Route after User Login
 Route::group(['middleware'=>['frontlogin']],function(){
@@ -100,7 +101,6 @@ Route::group(['middleware'=>['frontlogin']],function(){
     //USER ORDERed PAGES
     Route::get('/orders/{id}','ProductsController@userOrderDetails');
 });
-
 
 // Route for admin
 Route::group(['middleware' => ['adminlogin']],function(){

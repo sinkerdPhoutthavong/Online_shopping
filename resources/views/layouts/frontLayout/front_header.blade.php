@@ -118,7 +118,11 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <form action="{{url('/search-products')}}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="text" placeholder="Search" name="product"/>
+                            <button type="submit" class="btn btn-success"><font face="phetsarath OT">ຄົ້ນຫາ</font></button>
+                        </form>
                     </div>
                 </div>
             </div>
