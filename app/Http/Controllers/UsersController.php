@@ -18,7 +18,8 @@ class UsersController extends Controller
         return view('users.login');
     }
     public function userRegister(){
-        return view('users.register');
+        $countries = Country::get();
+        return view('users.register')->with(compact('countries'));
     }
     public function register(Request $request){
         if($request->isMethod('post')){
@@ -33,6 +34,12 @@ class UsersController extends Controller
                 $user->name = $data['name'];
                 $user->email = $data['email'];
                 $user->password = bcrypt($data['password']);
+                $user->address = $data['user_address'];
+                $user->city = $data['user_city'];
+                $user->state = $data['user_state'];
+                $user->country = $data['user_country'];
+                $user->pincode = $data['user_pincode'];
+                $user->mobile = $data['user_mobile'];                
                 if(empty($user->address) || empty($user->city) || empty($user->state) || empty($user->country) || empty($user->pincode) || empty($user->mobile)){
                     $user->address = '';
                     $user->city = '';
@@ -40,7 +47,7 @@ class UsersController extends Controller
                     $user->country = '';
                     $user->pincode = '';
                     $user->mobile = '';
-               }
+                }
                 $user->admin = 0;
                 $user->save();
 
@@ -191,6 +198,12 @@ class UsersController extends Controller
             }
                 return redirect()->back()->with('flash_message_error','ລະຫັດຜ່ານປະຈຸບັນທີ່ທ່ານປ້ອນບໍ່ຖືກຕ້ອງ!!');
         }
+    }
+    public function viewUsers(){
+        $users = User::get();
+        $users = json_decode(json_encode($users));
+        // echo "<pre>";print_r($users);die;
+        return view('admin.users.view_users')->with(compact('users'));
     }
 }
 

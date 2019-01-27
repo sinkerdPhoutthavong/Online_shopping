@@ -161,7 +161,7 @@ $().ready(function(){
 			name:{
 				required:true,
 				minlength:2,
-				accept:"[a-zA-Z]+"
+				// accept:"[a-zA-Z]+"
 			},
 			address:{
 				required:true,
@@ -184,7 +184,7 @@ $().ready(function(){
 			name:{
 				required:"ກະລຸນາປ້ອນຊື່ຂອງທ່ານ",
 				minlength:"ຊື່ຂອງຜູ່ໃຊ້ຕ້ອງຫຼາຍກວ່າ 2 ຕົວອັກສອນ",
-				accept:"ຊຶ່ຜູ່ໃຊ້ຕ້ອງເປັນຕົວອັກສອນເທົ່ານັ້ນ"
+				// accept:"ຊຶ່ຜູ່ໃຊ້ຕ້ອງເປັນຕົວອັກສອນເທົ່ານັ້ນ"
 			},
 			address:{
 				required:"ກະລຸນາປ້ອນທີ່ຢູ່ຂອງທ່ານ",

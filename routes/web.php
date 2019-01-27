@@ -145,9 +145,14 @@ Route::group(['middleware' => ['adminlogin']],function(){
     //Admin order Route
     Route::get('/admin/view-orders','ProductsController@viewOrders');
 
-     //Admin order Route
-     Route::get('/admin/view-orders/{id}','ProductsController@viewOrderDetails');
+    //Admin order Route
+    Route::get('/admin/view-orders/{id}','ProductsController@viewOrderDetails');
 
-      //Admin Update Order Status Route
-      Route::post('/admin/update-order-status','ProductsController@updateOrderStatus');
+    //Admin Update Order Status Route
+    Route::post('/admin/update-order-status','ProductsController@updateOrderStatus');
+
+    //ສໍາລັບການສະແດງ User ທີ່ໃຊ້ສະໝັກສະມາຊິກ
+    Route::get('/admin/view-users','Userscontroller@viewUsers');
+
+    
 });

@@ -63,7 +63,7 @@
                                     </td>
                                     <td>{{$order->created_at}}</td>
                                     <td><font face="phetsarath OT" color="red">ບໍ່ສໍາເລັດ</font></td>
-                                    <td><font face="phetsarath OT" color="teal">ເບີ່ງລາຍລະອຽດ</font></td>
+                                    <td><font face="phetsarath OT" color="teal"><a href="{{url('/orders/'.$order->id)}}">ເບີ່ງລາຍລະອຽດ</a></font></td>
                                 </tr>
                             @endforeach
                         </tbody>

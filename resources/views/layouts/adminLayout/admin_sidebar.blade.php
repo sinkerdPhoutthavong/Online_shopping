@@ -33,6 +33,11 @@
         <li <?php if (preg_match("/view-banners/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-banners')}}">Banners ທັງໝົດ</a></li>
       </ul>
     </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>ສະມາຊິກພາຍໃນລະບົບ</span> <span class="label label-important"></span></a>
+      <ul <?php if (preg_match("/users/i", $url)){?> style="display:block;"<?php }?>>
+        <li <?php if (preg_match("/view-uers/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-users')}}">ຜູ່ໃຊ້ລະບົບທັງໝົດ</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 <!--sidebar-menu-->

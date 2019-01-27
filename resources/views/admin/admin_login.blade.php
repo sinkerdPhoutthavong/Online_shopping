@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Matrix Admin</title><meta charset="UTF-8" />
+        <title>E-Com Admin</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="{{asset('css/backend_css/bootstrap.min.css') }} " />
 		<link rel="stylesheet" href="{{asset('css/backend_css/bootstrap-responsive.min.css') }}" />
@@ -34,8 +34,10 @@
             @endif                
         <form id="loginform" class="form-vertical" method ="post" action="{{url('admin')}}">
            {{csrf_field()}}
-				 <div class="control-group normal_text"> <h3><img src="{{asset('images/backend_images/logo.png') }}" alt="Logo" /></h3></div>
-                <div class="control-group">
+                 <div class="control-group normal_text"> <h2><font face="phetsarath OT" color="#009688">ລະບົບບໍລິຫານຂອງເວັບໄຊ</font><br></h2>
+                   <h3> <font color="#757575" face="times new roman"> E-Com SMSHOPPER</font></h3>
+                </div>
+                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
                             {{-- <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="email" name="email" placeholder="Username" /> --}}

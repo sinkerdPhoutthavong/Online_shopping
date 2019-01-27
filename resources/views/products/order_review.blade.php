@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="col-sm-4 col-sm-offset-3">
 						<div class="shopper-info">
-                            <p><font face="phetsarath OT">ຂໍ້ມູນຜູ່ສັ່ງຊື້ສິນຄ້າ</font></p>
+                            <p><font face="phetsarath OT"><b>ຂໍ້ມູນຜູ່ສັ່ງຊື້ສິນຄ້າ</b></font></p>
                             <div class="form-group">
                                 <h5><font face="phetsarath OT">ຊື່: {{$userDetails->name}}</font></h5>
                             </div>
@@ -64,7 +64,7 @@
 					</div>
 					<div class="col-sm-5 col-sm-offset-0">
 						<div class="shopper-info">
-                            <p><font face="phetsarath OT">ສະຖານທີ່ຈັດສົ່ງສິນຄ້າ</font></p>
+                            <p><b><font face="phetsarath OT">ສະຖານທີ່ຈັດສົ່ງສິນຄ້າ</b></font></p>
                             <div class="form-group">
                                 <h5><font face="phetsarath OT">ຊື່: {{$shippingDetails->name}}</font></h5>
                             </div>
