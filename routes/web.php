@@ -149,10 +149,13 @@ Route::group(['middleware' => ['adminlogin']],function(){
     Route::get('/admin/view-orders/{id}','ProductsController@viewOrderDetails');
 
     //Admin Update Order Status Route
-    Route::post('/admin/update-order-status','ProductsController@updateOrderStatus');
+    Route::get('/admin/update-order-status','ProductsController@updateOrderStatus');
 
     //ສໍາລັບການສະແດງ User ທີ່ໃຊ້ສະໝັກສະມາຊິກ
     Route::get('/admin/view-users','Userscontroller@viewUsers');
+
+    //ສໍາລັບການສະແດງອອກໃບບິນ
+    Route::get('/admin/view-order-invoice/{id}','Productscontroller@viewOrdersInvoice');
 
     
 });

@@ -777,4 +777,17 @@ class ProductsController extends Controller
              return view('products.listing')->with(compact('categories','productsAll','search_Products','banners'));
         }
     }
+    public function viewOrdersInvoice($order_id){
+        $orderDetails = Order::with('orders')->where('id',$order_id)->first();
+        
+        $user_id = $orderDetails->user_id;
+        $orderDetails = json_decode(json_encode($orderDetails),true);
+        $userDetails = User::where('id',$user_id)->first();
+        // echo "<pre>";print_r($orderDetails);die;
+        // $userDetails = json_decode(json_encode($userDetails));
+        // echo "<pre>";print_r($userDetails);die;
+        $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
+        $shippingDetails = json_decode(json_encode($shippingDetails));
+        return view('admin.orders.order_invoice')->with(compact("orderDetails","userDetails","shippingDetails"));
+    }
 }
