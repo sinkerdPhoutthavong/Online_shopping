@@ -8,7 +8,7 @@
         <div class="col-xs-12">
     		<div class="invoice-title">
                 <h2><font face="phetsarath OT" color="#26A69A">ເວັບໄຊ</font><font face="times new roman" color="#616161"> E-SMSHOPPER.COM</font></h2><hr>
-            <center><h3><font face="phetsarath OT">ໃບບິນການສັ່ງຊື້ສິນຄ້າ</h3></center><h3 class="pull-right">ເລກທີສັ່ງຊື້: </h3>
+            <center><h3><font face="phetsarath OT">ໃບບິນການສັ່ງຊື້ສິນຄ້າ ເລກທີສັ່ງຊື້: {{$orderDetails->id}} </h3></center>
     		</div>
     		<hr>
     		<div class="row">
@@ -61,26 +61,18 @@
                                 </div>
     				</address>
     			</div>
-    		</div>
-    		<div class="row">
-    			{{-- <div class="col-xs-6">
-    				<address>
-    					<strong><font face="phetsarath OT">ຮູບແບບການຊໍາລະສິນຄ້າ:</font></strong><br>
-    					Visa ending **** 4242<br>
-    					jsmith@email.com
-    				</address>
-    			</div> --}}
-    			<div class="col-xs-6 text-right">
-    				<address>
-    					<strong><font face="phetsarath OT">ວັນທີສັ່ງຊື້ສິນຄ້າ:</font></strong><br>
-                        <?php
-                            // $date = explode(" ",$orderDetails->created_at);
-                            // $date = explode("-",$date[0]);
-                            // echo "ວັນທີ ".$date[2]." ເດືອນ ".$date[1]." ປີ ".$date[0];
+            </div>
+            <div class="row">
+                    <div class="col-xs-12 text-right">
+                    <?php
+                            $date_times = explode(" ",$orderDetails->created_at);
+                            $date = explode("-",$date_times[0]);
+                            echo " <h4>ເວລາ: ".$date_times[1]."</h4>";
+                            $date = "<h4>ວັນທີ ".$date[2]." ເດືອນ ".$date[1]." ປີ ".$date[0]."</h4>";
+                            echo $date;
                         ?>
-    				</address>
-    			</div>
-    		</div>
+                    </div>
+                </div>
     	</div>
     </div>
     
@@ -95,64 +87,27 @@
     					<table class="table table-condensed">
     						<thead>
                                     <tr>
-                                            <th><center><font face="phetsarath OT" color="teal">ເລກທີການສັ່ງຊື້</center></font></th>
-                                            <th><center><font face="phetsarath OT" color="teal">ສິນຄ້າທີ່ສັ່ງຊື້</center></font></th>
-                                            <th><center><font face="phetsarath OT" color="teal">ຊ່ອງທາງການຊໍາລະສິນຄ້າ</center></font></th>
-                                            <th><center><font face="phetsarath OT" color="teal">ລາຄາສິນຄ້າ</center></font></th>
-                                            <th><center><font face="phetsarath OT" color="teal">ວັນທີການສັ່ງຊື້ສິນຄ້າ</center></font></th>
-                                            <th><center><font face="phetsarath OT" color="teal">ສະຖານະການສັ່ງຊື້</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ລະຫັດສິນຄ້າ</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ຊື່</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ຂະໜາດ</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ສີ</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ລາຄາ</center></font></th>
+                                            <th class="text-center"><center><font face="phetsarath OT" color="teal">ຈໍານວນສິນຄ້າ</center></font></th>
+                                            <th class="text-right"><center><font face="phetsarath OT" color="teal">ລາຄາລວມສິນຄ້າ</center></font></th>
                                         </tr>
     						</thead>
     						<tbody>
-                                <?php $total_amount=0;?>
-                                @foreach ($orderDetails['orders'] as $order)
-                            <tr>
-                                    <td class="cart_product">
-                                   
-                                    </td>
-                                    <td class="cart_description">
-                                        <h4><a href=""><font face="phetsarath OT">{{$order->product_name}}</font></a></h4>
-                                        <p><font face="phetsarath OT">{{$order->product_code}} || {{$order->size}}</font></p>
-                                    </td>
-                                    <td class="cart_price">
-                                        <p><?php
-                                                $price_amount = $order->price;
-                                                                //use for split yaek array
-                                                                $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
-                                                                // print_r($totals);
-                                                                //count index in array
-                                                                $countArray = count($totals) ;
-                                                                // echo $countArray;
-                                                                if($countArray==8){
-                                                                    echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
-                                                                }
-                                                                elseif ($countArray==7) {
-                                                                    echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
-                                                                }
-                                                                elseif ($countArray==6) {
-                                                                    echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
-                                                                }
-                                                                elseif ($countArray==5) {
-                                                                    echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
-                                                                }                     
-                                            ?>
-                                            <font face="phetsarath OT"> ກີບ</font></p>
-                                        </p>
-                                    </td>
-                                    <td class="cart_color">
-                                            <p>{{$order->product_color}}</p>
-                                    </td>
-                                    <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            @if ($order->quantity>=1)
-                                            <h4>{{$order->quantity}} </h4>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td class="cart_total">
-                                    <p class="cart_total_price">
+                                <?php $total_amount = 0;
+                                    $Subtotal=0;?>
+                                @foreach ($orderDetails->orders as $pro)
+                                <tr>
+                                    <td class="text-center">{{$pro->product_code}}</td>
+                                    <td class="text-center">{{$pro->product_name}}</td>
+                                    <td class="text-center">{{$pro->product_size}}</td>
+                                    <td class="text-center">{{$pro->product_color}}</td>
+                                    <td class="text-center">
                                         <?php
-                                            $price_amount = $order->price * $order->quantity;
+                                            $price_amount = $pro->product_price;
                                             //use for split yaek array
                                             $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
                                                                 // print_r($totals);
@@ -174,20 +129,44 @@
                                         ?>
                                         <font face="phetsarath OT"> ກີບ</font></p>
                                     </td>
-                                    <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href="{{url('/cart/delete-product/'.$order->id)}}"><i class="fa fa-times"></i></a>
+                                    <td class="text-center">{{$pro->product_qty}}</td>
+                                    <td class="text-right">
+                                            <?php
+                                            $price_amount = $pro->product_price * $pro->product_qty;
+                                            //use for split yaek array
+                                            $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                // print_r($totals);
+                                                                //count index in array
+                                                                $countArray = count($totals) ;
+                                                                // echo $countArray;
+                                                                if($countArray==8){
+                                                                    echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                }
+                                                                elseif ($countArray==7) {
+                                                                    echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                }
+                                                                elseif ($countArray==6) {
+                                                                    echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                }
+                                                                elseif ($countArray==5) {
+                                                                    echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                }            
+                                        ?>
+                                        <font face="phetsarath OT"> ກີບ</font></p>
                                     </td>
-                            </tr>
-                            <?php $total_amount = $total_amount + ( $order->price * $order->quantity);?>
-                        @endforeach
-                                <tr>
-                                        <td colspan="4">&nbsp;</td>
-                                        <td colspan="2">
+                                </tr>
+
+                                <?php 
+                                    $Subtotal = $Subtotal + ($pro->product_price * $pro->product_qty);
+                                 ?>
+                            @endforeach
+                           
                                             <table class="table table-condensed total-result">
                                                 <tr>
-                                                    <td><font face="phetsarath OT">ລາຄາລວມສິນຄ້າ</font></td>
-                                                    <td>
+                                                    <td class="col-xs-10 text-right"><font face="phetsarath OT">ລາຄາລວມສິນຄ້າ</font></td>
+                                                    <td class="text-right">
                                                         <?php 
+                                                                $total_amount = $Subtotal;
                                                                 //use for split yaek array
                                                                 $totals = preg_split('//', $total_amount, -1, PREG_SPLIT_NO_EMPTY);
                                                                 // print_r($totals);
@@ -212,18 +191,19 @@
                                                                 }
                                                                 
                                                         ?>
-                                                    <font face="phetsarath OT"> ກີບ</font></td>
+                                                        <font face="phetsarath OT"> ກີບ</font>
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><font face="phetsarath OT"> ຄ່າຂົນສົ່ງ (+)</font></td>
-                                                    <td><font face="phetsarath OT"> ຟຣີ</font></td>
+                                                        <td class="col-xs-10 text-right"><font face="phetsarath OT"> ຄ່າຂົນສົ່ງ (+)</font></td>
+                                                        <td class="text-right"><font face="phetsarath OT"> ຟຣີ</font></td>
                                                 </tr>
                                                 <tr class="shipping-cost">
-                                                    <td><font face="phetsarath OT"> ສ່ວນຫຼຸດທີ່ໄດ້ຮັບ (-)</font></td>
-                                                    <td>
-                                                        @if (!empty(Session::get('CouponAmount')))
+                                                    <td class="col-xs-10 text-right"><font face="phetsarath OT"> ສ່ວນຫຼຸດທີ່ໄດ້ຮັບ (-)</font></td>
+                                                    <td class="text-right">  <font color="red">
+                                                        @if ($orderDetails->coupon_amount>0)
                                                         <?php 
-                                                        $total_amount_coupong = Session::get('CouponAmount');
+                                                        $total_amount_coupong = $orderDetails->coupon_amount;
                                                         //use for split yaek array
                                                         $totals = preg_split('//', $total_amount_coupong, -1, PREG_SPLIT_NO_EMPTY);
                                                         // print_r($totals);
@@ -248,48 +228,81 @@
                                                             echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
                                                         }
                                                         ?>
-                                                <font face="phetsarath OT"> ກີບ</font>
-                                                        @else   
-                                                            0<font face="phetsarath OT"> ກີບ</font>
+                                                    </font><font face="phetsarath OT"> ກີບ</font>
+                                                        @else  
+                                                            <?php 
+                                                            $total_amount_coupong =0 ?>
+                                                            0 </font><font face="phetsarath OT"> ກີບ</font>
                                                         @endif
                                                     </td>									
                                                 </tr>
                                                 <tr>
-                                                    <td><font face="phetsarath OT"> ລວມລາຄາສິນຄ້າທັງໝົດທີ່ຕ້ອງຈ່າຍ</font></td></td>
-                                                <td>
+                                                    <td class="col-xs-10 text-right"><font face="phetsarath OT"> ລວມລາຄາສິນຄ້າທັງໝົດທີ່ຕ້ອງຈ່າຍ</font></td>
+                                                    <td class="text-right"> <font color="green">
                                                     <span>
                                                         <?php 
-                                                            $Grand_total = $total_amount - Session::get('CouponAmount');
-                                                            //use for split yaek array
-                                                            $totals = preg_split('//', $Grand_total, -1, PREG_SPLIT_NO_EMPTY);
-                                                            // print_r($totals);
-                                                            //count index in array
-                                                            $countArray = count($totals) ;
-                                                            // echo $countArray;
+                                                            if ($total_amount_coupong>0) {
+                                                                    $Grand_total = $Subtotal - $total_amount_coupong;
+                                                                    //use for split yaek array
+                                                                    $totals = preg_split('//', $Grand_total, -1, PREG_SPLIT_NO_EMPTY);
+                                                                    // print_r($totals);
+                                                                    //count index in array
+                                                                    $countArray = count($totals) ;
+                                                                    // echo $countArray;
 
-                                                            if($countArray==8){
-                                                                echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                    if($countArray==8){
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                    }
+                                                                    elseif($countArray==9){
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+                                                                    }
+                                                                    elseif ($countArray==7) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                    }
+                                                                    elseif ($countArray==6) {
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                    }
+                                                                    elseif ($countArray==5) {
+                                                                        
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                    }
+                                                            }else{
+                                                                    $Grand_total = $Subtotal;
+                                                                    //use for split yaek array
+                                                                    $totals = preg_split('//', $Grand_total, -1, PREG_SPLIT_NO_EMPTY);
+                                                                    // print_r($totals);
+                                                                    //count index in array
+                                                                    $countArray = count($totals) ;
+                                                                    // echo $countArray;
+
+                                                                    if($countArray==8){
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                    }
+                                                                    elseif($countArray==9){
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
+                                                                    }
+                                                                    elseif ($countArray==7) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                    }
+                                                                    elseif ($countArray==6) {
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                    }
+                                                                    elseif ($countArray==5) {
+                                                                        
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                    }
                                                             }
-                                                            elseif($countArray==9){
-                                                                echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5].".".$totals[6].$totals[7].$totals[8];
-                                                            }
-                                                            elseif ($countArray==7) {
-                                                                echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
-                                                            }
-                                                            elseif ($countArray==6) {
-                                                                echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
-                                                            }
-                                                            elseif ($countArray==5) {
-                                                                
-                                                                echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
-                                                            }
-                                                    ?><font face="phetsarath OT"> ກິບ</font>
-                                                </span></td>
+                                                            
+                                                    ?></font><font face="phetsarath OT"> ກິບ</font>
+                                                    </span>
+                                                    </td>
                                                 </tr>
                                             </table>
+                                        </div>
                                         </td>
+                                    </td>
                                     </tr>
-                                </tbody>
+                            </tbody>
     					</table>
     				</div>
     			</div>

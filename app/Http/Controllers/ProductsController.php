@@ -781,7 +781,7 @@ class ProductsController extends Controller
         $orderDetails = Order::with('orders')->where('id',$order_id)->first();
         
         $user_id = $orderDetails->user_id;
-        $orderDetails = json_decode(json_encode($orderDetails),true);
+        $orderDetails = json_decode(json_encode($orderDetails));
         $userDetails = User::where('id',$user_id)->first();
         // echo "<pre>";print_r($orderDetails);die;
         // $userDetails = json_decode(json_encode($userDetails));
