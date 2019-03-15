@@ -36,7 +36,7 @@
               <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('admin/edit-product/'.$productDetails->id)}}" name="edit_product" id="edit_product" novalidate="novalidate">
                 {{csrf_field()}}
                 <div class="control-group">
-                    <label class="control-label">Category ຮອງ</label>
+                    <label class="control-label">ປະເພດຂອງສິນຄ້າ</label>
                     <div class="controls">
                         <select name="category_id" id="category_id" style="width:220px;">
                           <?php echo $categories_dropdown; ?>
@@ -91,6 +91,12 @@
                         </div>
                   </div>
                   <div class="control-group">
+                      <label class="control-label">ເປີດໃຊ້ງານລາຍການສິນຄ້າ</label>
+                      <div class="controls">
+                        <input type="checkbox" name="feature_item" id="feature_item"  @if ($productDetails->feature_items == "1") checked @endif value="1">
+                      </div>
+                    </div>
+                    <div class="control-group">
                       <label class="control-label">ການໃຊ້ງານ ສິນຄ້າ</label>
                       <div class="controls">
                         <input type="checkbox" name="status" id="status"  @if ($productDetails->status == "1") checked @endif value="1">

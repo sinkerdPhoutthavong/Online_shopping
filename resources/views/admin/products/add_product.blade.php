@@ -36,7 +36,7 @@
               <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{url('admin/add-product')}}" name="add_product" id="add_product" novalidate="novalidate">
                 {{csrf_field()}}
                 <div class="control-group">
-                    <label class="control-label">Category ຮອງ</label>
+                    <label class="control-label">ເລືອກປະເພດສິນຄ້າ</label>
                     <div class="controls">
                         <select name="category_id" id="category_id" style="width:220px;">
                           <?php echo $categories_dropdown; ?>
@@ -84,6 +84,12 @@
                         <div class="controls">
                           <input type="file" name="image" id="image"/>
                         </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">ເປີດໃຊ້ງານລາຍການສິນຄ້າ</label>
+                    <div class="controls">
+                      <input type="checkbox" name="feature_item" id="feature_item">
+                    </div>
                   </div>
                   <div class="control-group">
                       <label class="control-label">ໃຊ້ງານ</label>

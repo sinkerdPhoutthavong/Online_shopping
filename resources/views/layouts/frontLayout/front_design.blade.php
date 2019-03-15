@@ -16,6 +16,7 @@
     <link href="{{asset('css/frontend_css/responsive.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/easyzoom.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/passtrength.css')}}" rel="stylesheet">
+    
     <script src="{{asset('js/frontend_js/jquery.js')}}"></script>
     
     <!--[if lt IE 9]>

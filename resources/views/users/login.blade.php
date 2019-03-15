@@ -30,15 +30,11 @@
                             {{ csrf_field() }}
                             <input name="email" type="email" placeholder="Email Address" />
                             <input name="password" id="loginPassword" type="password" placeholder="Password"/>
-                            {{-- <span>
-                                <input type="checkbox" class="checkbox"> 
-                                <font face="phetsarath OT">ໃຫ້ຢູ່ໃນລະບົບຕໍ່ໄປ</font>
-                            </span> --}}
-                            <button type="submit" class="btn btn-default"><font face="phetsarath OT">ເຂົ້າສູ່ລະບົບ</font></button>
-                            <div>
-                                    <br>
-                                    <a href="{{url('/user-registerpage')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a>
-                            </div>
+                            <a  href="{{url('forgot-password')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ລືມລະຫັດຜ່ານ ?</font></a>
+                            
+                            <center><button type="submit" class="btn btn-default"><font face="phetsarath OT">ເຂົ້າສູ່ລະບົບ</font></button></center>
+                            <div><br>
+                                <center><a href="{{url('/user-registerpage')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a></center></div>
                         </form>
                     </div><!--/login form-->
                 </div>

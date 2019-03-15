@@ -44,6 +44,7 @@
                         <th>ໝາຍເລກສິນຄ້າ</th>
                         <th>ສີ</th>
                         <th>ລາຄາ</th>
+                        <th>ລາຍການສິນຄ້າ</th>
                         <th>ຮູບພາບ</th>
                         <th>ການຈັດການ</th>
                       </tr>
@@ -58,6 +59,19 @@
                            <td>{{$product->product_code}}</td>
                            <td>{{$product->product_color}}</td>
                            <td>{{$product->price}}</td>
+                           <td><?php
+                              $use="";
+                              $use = $product->feature_items;
+                            if($use==0){
+                              $show ="ປິດການໃຊ້ງານ";
+                              ?><center><font color="Red">{{$show}}</font></center><?php
+                            }else{
+                              $show ="ເປີດໃຊ້ງານ";
+                              ?><center><font color="Green">{{$show}}</font></center><?php
+                            }?>
+                            </td>
+
+
                            <td>
                                 @if(!empty($product->image))
                                 <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:70px;">

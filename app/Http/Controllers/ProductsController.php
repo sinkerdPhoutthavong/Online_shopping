@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -32,6 +32,11 @@ class ProductsController extends Controller
                 $status = 0;
             }else{
                 $status = 1;
+            }
+            if(empty($data['feature_item'])){
+                $feature_item = 0;
+            }else{
+                $feature_item = 1;
             }
             $product = new Product;
             if(empty($data['category_id'])){
@@ -65,6 +70,7 @@ class ProductsController extends Controller
                     $product->image = $filename;
                 }
             }
+            $product->feature_items= $feature_item;
             $product->status = $status;
             $product->save();
             return redirect('/admin/view-products')->with('flash_message_success','ເພີ່ມສິນຄ້າຮຽບຮ້ອຍແລ້ວ!!');
@@ -102,6 +108,11 @@ class ProductsController extends Controller
             }else{
                 $status = 1;
             }
+            if(empty($data['feature_item'])){
+                    $feature_item = 0;
+                }else{
+                    $feature_item = 1;
+                }
            // Upload Image
            if($request->hasFile('image')){
             $image_tmp = Input::file('image');
@@ -128,7 +139,7 @@ class ProductsController extends Controller
             return redirect('/admin/edit-product/'.$id)->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
         }
           
-          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'status'=>$status]);
+          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'feature_items'=>$feature_item,'status'=>$status]);
                  return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
         }
         // show product in form
