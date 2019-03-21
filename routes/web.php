@@ -56,6 +56,9 @@ Route::get('/user-Login','UsersController@userLogin');
 //Route FOR LOGIN 
 Route::get('/user-registerpage','UsersController@userRegister');
 
+//Route for forgot password
+Route::match(['get','post'],'forgot-password','UsersController@forgotPassword');
+
 //USER REGISTER FORM SUBMIT
 Route::post('/user-register','UsersController@register');
 
@@ -156,6 +159,13 @@ Route::group(['middleware' => ['adminlogin']],function(){
 
     //ສໍາລັບການສະແດງອອກໃບບິນ
     Route::get('/admin/view-order-invoice/{id}','Productscontroller@viewOrdersInvoice');
+
+    //ສໍາລັບ CMS Pages
+    //ສໍາລັບເພີ່ມ CMS Pages
+    Route::match(['get','post'],'/admin/add-cms-page','CmsController@addCmsPage');
+    Route::get('/admin/view-cms-pages','CmsController@viewCmsPages');
+    Route::match(['get','post'],'/admin/edit-cms-page/{id}','CmsController@editCmsPage');
+    Route::get('/admin/delete-cms-page/{id}','CmsController@deleteCmsPage');
 
     
 });

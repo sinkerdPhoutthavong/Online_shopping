@@ -205,5 +205,42 @@ class UsersController extends Controller
         // echo "<pre>";print_r($users);die;
         return view('admin.users.view_users')->with(compact('users'));
     }
+    public function forgotPassword(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+
+            // For check Email Access or not
+            $userCount = User::where('email',$data['email'])->count();
+            if($userCount==0){
+                return redirect()->back()->with('flash_message_error','ອີເມວຂອງທ່ານບໍ່ມີໃນລະບົບ !! ກະລຸນາລົງທະບຽນ ແລ້ວລອງໃໝ່ອີກຄັ້ງ');
+            }
+            //Get user Details
+            $userDetails = User::where('email',$data['email'])->first();
+
+            //ສ້າງລະຫັດຜ່ານແບບແລນດ່ອມ
+            $random_password = str_random(8); 
+
+            //ສ້າງລະັດຜ່ານໃໝ່
+            $new_password = bcrypt($random_password);
+
+            //ອັບເດດລະຫັດຜ່ານ
+            User::where('email',$data['email'])->update(['password'=>$new_password]);
+
+            //ສົ່ງລະຫັດຜ່ານໃຫ້ທາງອິີເມວ
+            $email = $data['email'];
+            $name = $userDetails->name;
+            $messageData = [
+                'email'=>$email,
+                'name'=>$name,
+                'password'=>$random_password
+            ];
+            Mail::send('emails.forgotpassword',$messageData,function($message) use ($email){
+                $message->to($email)->subject('ລະຫັດຜ່ານໃໝ່ຂອງທ່ານ ເວັບໄຊ-SMShopping');
+            });
+             return redirect()->back()->with('flash_message_success','ລະຫັດຜ່ານຂອງທ່ານຖືກອັບເດດຮຽບຮ້ອຍແລ້ວ !! ກະລຸນາ ກວດສອບລະຫັດຜ່ານໃໝ່ຂອງທ່ານທາງອີເມວ');
+        }
+        return view('users.forgot_password');
+    }
 }
 

@@ -136,7 +136,7 @@ class ProductsController extends Controller
              $data['description'] = '';
          }
          if(empty($data['care'])){
-            return redirect('/admin/edit-product/'.$id)->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
+            return redirect()->back()->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
         }
           
           Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'feature_items'=>$feature_item,'status'=>$status]);
@@ -253,10 +253,10 @@ class ProductsController extends Controller
             foreach ($subCategories as $subcat) {
                 $cat_ids[] = $subcat->id;
             }
-            $productsAll = Product::whereIn('category_id',$cat_ids)->where('status',1)->get();
+            $productsAll = Product::whereIn('category_id',$cat_ids)->where('status',1)->Paginate(6);
         }else{
             // if url is sub category url
-            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->get();
+            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->Paginate(6);
         }
         $banners = Banner::where('status','1')->get();
         return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories','banners'));

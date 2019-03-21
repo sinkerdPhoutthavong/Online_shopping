@@ -64,10 +64,10 @@
                               $use = $product->feature_items;
                             if($use==0){
                               $show ="ປິດການໃຊ້ງານ";
-                              ?><center><font color="Red">{{$show}}</font></center><?php
+                              ?><center><font color="Red"><b>{{$show}}</b></font></center><?php
                             }else{
                               $show ="ເປີດໃຊ້ງານ";
-                              ?><center><font color="Green">{{$show}}</font></center><?php
+                              ?><center><font color="Green"><b>{{$show}}</b></font></center><?php
                             }?>
                             </td>
 
@@ -91,12 +91,12 @@
                                   <h3>{{$product->product_name}} ລາຍລະອຽດທັງໝົດ</h3>
                                 </div>
                                 <div class="modal-body">
-                                  <p>ລະຫັດສິນຄ້າ:  {{$product->id}}</p>
-                                  <p>ລະຫັດ Category:  {{$product->category_id}}</p>
-                                  <p>ໝາຍເລກສິນຄ້າ:  {{$product->product_code}}</p>
-                                  <p>ສີ:  {{$product->product_color}}</p>
-                                  <p>ລາຄາ:  {{$product->price}}</p>
-                                  <p>ຄໍາອະທິບາຍ:  {{$product->description}}</p>
+                                  <p><strong>ລະຫັດສິນຄ້າ:</strong>  {{$product->id}}</p>
+                                  <p><strong>ລະຫັດ Category:</strong>  {{$product->category_id}}</p>
+                                  <p><strong>ໝາຍເລກສິນຄ້າ:</strong>  {{$product->product_code}}</p>
+                                  <p><strong>ສີ:</strong>  {{$product->product_color}}</p>
+                                  <p><strong>ລາຄາ:</strong>  {{$product->price}}</p>
+                                  <p><strong>ຄໍາອະທິບາຍ:</strong>  {{$product->description}}</p>
                                 </div>
                               </div>
                         @endforeach

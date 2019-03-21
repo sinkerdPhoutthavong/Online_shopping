@@ -5,8 +5,8 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="companyinfo">
-							<h2><span>e</span>-shopper</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+							<h2><span>e</span>-smshopping</h2>
+							<p><font face="phetsarath OT">ເສື້ອຜ້າຍິງ-ຊາຍ, ເຄື່ອງກິລາ ແລະ ເຄື່ອງສໍາອາງ ລາຄາຖືກ</font></p>
 						</div>
 					</div>
 					<div class="col-sm-7">
@@ -83,9 +83,9 @@
 		<div class="footer-widget">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
-							<h2>Service</h2>
+							<h2><font face="phetsarath OT">ການບໍລິການ</font></h2>
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">Online Help</a></li>
 								<li><a href="#">Contact Us</a></li>
@@ -95,9 +95,9 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
-							<h2>Quock Shop</h2>
+							<h2><font face="phetsarath OT">ປະເພດສິນຄ້າ</font></h2>
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">T-Shirt</a></li>
 								<li><a href="#">Mens</a></li>
@@ -109,19 +109,7 @@
 					</div>
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Policies</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privecy Policy</a></li>
-								<li><a href="#">Refund Policy</a></li>
-								<li><a href="#">Billing System</a></li>
-								<li><a href="#">Ticket System</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>About Shopper</h2>
+							<h2><font face="phetsarath OT">ກ່ຽວກັບເວັບໄຊ</font></h2>
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">Company Information</a></li>
 								<li><a href="#">Careers</a></li>

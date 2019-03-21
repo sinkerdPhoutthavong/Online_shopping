@@ -25,16 +25,11 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="login-form"><!--login form-->
-                        <h2><font face="phetsarath OT"><center>ເຂົ້າສູ່ລະບົບບັນຊີຂອງທ່ານ</center></font></h2>
-                        <form id="loginForm" name="login" action="{{url('/user-login')}}" method="POST">
+                        <h2><font face="phetsarath OT">ລືມລະຫັດຜ່ານ ?</font></h2>
+                        <form id="forgotPasswordForm" name="forgotPasswordForm" action="{{url('/forgot-password')}}" method="POST">
                             {{ csrf_field() }}
                             <input name="email" type="email" placeholder="Email Address" required />
-                            <input name="password" id="loginPassword" type="password" placeholder="Password" required/>
-                            <a  href="{{url('forgot-password')}}"><font face="phetsarath OT"> ລືມລະຫັດຜ່ານ ?</font></a>
-                            
-                            <center><button type="submit" class="btn btn-default"><font face="phetsarath OT">ເຂົ້າສູ່ລະບົບ</font></button></center>
-                            <div><br>
-                                <center><a href="{{url('/user-registerpage')}}"><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a></center></div>
+                            <button type="submit" class="btn btn-default"><font face="phetsarath OT">ຢືນຢັນ</font></button>
                         </form>
                     </div><!--/login form-->
                 </div>

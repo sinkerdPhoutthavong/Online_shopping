@@ -38,6 +38,12 @@
         <li <?php if (preg_match("/view-uers/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-users')}}">ຜູ່ໃຊ້ລະບົບທັງໝົດ</a></li>
       </ul>
     </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>CMS Pages</span> <span class="label label-important">2</span></a>
+      <ul <?php if (preg_match("/cms-page/i", $url)){?> style="display:block;"<?php }?>>
+        <li <?php if (preg_match("/add-cms-page/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/add-cms-page')}}">ເພີ່ມ CMS Page</a></li>
+        <li <?php if (preg_match("/view-cms-pages/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-cms-pages')}}">CMS Pages ທັງໝົດ</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 <!--sidebar-menu-->
