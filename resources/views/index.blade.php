@@ -1,48 +1,17 @@
 @extends('layouts.frontLayout.front_design')
 @section('content')
-
+        
 @include('.products.section');
-
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                {{-- <div class="left-sidebar">
-                    <h2>Category</h2>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                       
-                        <div class="panel panel-default">
-                                @foreach ($categories as $cat)
-                                @if ($cat->status == 1)
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#{{$cat->id}}">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											{{$cat->name}}
-										</a>
-									</h4>
-								</div>
-								<div id="{{$cat->id}}" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-                                            @foreach ($cat->categories as $subcat)
-                                                @if ($subcat->status == 1)
-                                                    <li><a href="{{ asset('/products/'.$subcat->url)}}">{{$subcat->name}}</a></li>
-                                                @endif 
-                                            @endforeach	  
-										</ul>
-									</div>
-                                </div>
-                                @endif
-                                @endforeach
-							</div>
-                    </div><!--/category-products-->
-                </div> --}}
                 @include('Layouts.frontLayout.front_sidebar')
             </div>
-            
+                      
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
+                     
                     <h2 class="title text-center"><font face="phetsarath OT">ສິນຄ້າທັງໝົດ</font></h2>
                     @foreach ($productsAll as $product)   
                     <div class="col-sm-4">

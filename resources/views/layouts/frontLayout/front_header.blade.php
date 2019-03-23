@@ -112,7 +112,7 @@
                                 </ul>
                             </li> 
                             <li><a href="404.html">404</a></li>
-                            <li><a href="contact-us.html"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></a></li>
+                            <li><a href="{{url('/page/contact')}}"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></a></li>
                         </ul>
                     </div>
                 </div>

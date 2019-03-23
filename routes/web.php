@@ -19,6 +19,13 @@
 //endfront Page
 Route::match(['get','post'],'/admin','AdminController@login'); 
 
+
+//ສໍາລັບໜ້າ Contact-us
+Route::match(['get','post'],'/page/contact','CmsController@contact');
+
+//ສະແດງແຜນອອກທາງ Font End
+Route::match(['get','post'],'/page/{url}','CmsController@cmsPage');
+
 Auth::routes();
 //Category Listen Page
 Route::get('/products/{url}','ProductsController@products');

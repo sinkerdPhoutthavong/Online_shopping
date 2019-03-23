@@ -130,7 +130,7 @@
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3><font face="phetsarath OT"># ກະລຸນາປ້ອນລະຫັດ Coupon ທີ່ທ່ານຕ້ອງການຈະໃຊ້</font></h3>
+				<h3><font face="phetsarath OT"># ກະລຸນາປ້ອນລະຫັດ</font><font face="Times New Roman">Coupon</font><font face="phetsarath OT">ທີ່ທ່ານຕ້ອງການຈະໃຊ້</font></h3>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">

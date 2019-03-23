@@ -73,7 +73,6 @@
 					<div class="col-sm-3">
 						<div class="address">
 							<img src="{{asset('images/frontend_images/home/map.png')}}" alt="" />
-							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
 						</div>
 					</div>
 				</div>
@@ -87,11 +86,10 @@
 						<div class="single-widget">
 							<h2><font face="phetsarath OT">ການບໍລິການ</font></h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Online Help</a></li>
-								<li><a href="#">Contact Us</a></li>
+								<li><a href="{{url('page/terms-conditions')}}"><font face="phetsarath OT">ເງື່ອນໄຂ ແລະ ນະໂຍບາຍ</font></a></li>
+								<li><a href="{{url('page/contact')}}"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></a></li>
 								<li><a href="#">Order Status</a></li>
 								<li><a href="#">Change Location</a></li>
-								<li><a href="#">FAQ’s</a></li>
 							</ul>
 						</div>
 					</div>
@@ -99,27 +97,25 @@
 						<div class="single-widget">
 							<h2><font face="phetsarath OT">ປະເພດສິນຄ້າ</font></h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">T-Shirt</a></li>
-								<li><a href="#">Mens</a></li>
-								<li><a href="#">Womens</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Shoes</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2><font face="phetsarath OT">ກ່ຽວກັບເວັບໄຊ</font></h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Company Information</a></li>
+								<li><a href="{{url('page/about-us')}}"><font face="phetsarath OT">ກ່ຽວກັບພວກເຮົາ</font></a></li>
 								<li><a href="#">Careers</a></li>
 								<li><a href="#">Store Location</a></li>
-								<li><a href="#">Affillate Program</a></li>
-								<li><a href="#">Copyright</a></li>
+								<li><a href="#">Copyright</a></li>​ 
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3 col-sm-offset-1">
+					<div class="col-sm-3">
+						<div class="single-widget">
+							<h2><font face="phetsarath OT">ເວັບໄຊ E-SMShopping</font></h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="{{url('page/about-us')}}"><font face="phetsarath OT">ກ່ຽວກັບພວກເຮົາ</font></a></li>
+								<li><a href="#">Careers</a></li>
+								<li><a href="#">Store Location</a></li>
+								<li><a href="#">Copyright</a></li>​ 
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2 col-sm-offset-1">
 						<div class="single-widget">
 							<h2>About Shopper</h2>
 							<form action="#" class="searchform">

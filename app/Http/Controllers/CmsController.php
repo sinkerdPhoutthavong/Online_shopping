@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CmsPage;
+use App\Category;
+use Illuminate\Support\Facades\Mail;
 
 class CmsController extends Controller
 {
@@ -22,7 +24,7 @@ class CmsController extends Controller
             }
             $cmsPage->status = $status;
             $cmsPage->save();
-            return redirect()->back()->with('flash_message_success','ທ່ານເພີ່ມ CMS Page ຮຽບຮ້ອຍແລ້ວ!!');
+            return redirect(url('/admin/view-cms-pages'))->with('flash_message_success','ທ່ານເພີ່ມ CMS Page ຮຽບຮ້ອຍແລ້ວ!!');
         }
         return view('admin.pages.add_cms_Page');
     }
@@ -56,5 +58,50 @@ class CmsController extends Controller
             CmsPage::where(['id'=>$id])->delete();
             return redirect('/admin/view-cms-pages')->with('flash_message_success','ລຶບ Cms Page ສຳເລັດແລ້ວ!!');
         }
+    }
+    public function cmsPage($url){
+
+        //ກວດສອບວ່າໜ້ານັ້ນໃຫ້ໃຊ້ງານບໍ ຫຼື ມີຢູຸ່ບໍ
+         $cmsPageCount = CmsPage::where(['url'=>$url,'status'=>1])->count();
+         if($cmsPageCount>0){
+            $cmsPageDetails = CmsPage::where('url',$url)->first();
+            $cmsPageDetails = json_decode(json_encode($cmsPageDetails));
+         }else{
+            return redirect(url('.'))->with('flash_message_error','ຂໍອະໄພໜ້າທີ່ທ່ານຄົ້ົນຫາບໍ່ມີໃນເວັບໄຊ');
+         }
+         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+         $categories = json_decode(json_encode($categories));
+        //  echo "<pre>";print_r($categories);die;
+         
+        //  echo "<pre>";print_r($cmsPageDetails);die;
+         return view('pages.cms_page')->with(compact('categories','cmsPageDetails'));
+    }
+    public function contact(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+
+            //ກຳນົດການປ້ອນ
+            $validatedData = $request->validate([
+                'name' => 'required|unique:posts|max:255',
+                'email' => 'required',
+            ]);
+
+            //ສົ່ງອີເມວໃຫ້ຜູ່ບໍລິຫານເວັບ
+            $email = "smshopping.info@gmail.com";
+            $messageData = [
+                'name'=>$data['name'],
+                'email'=>$data['email'],
+                'subject'=>$data['subject'],
+                'comment'=>$data['message']
+                ];
+                Mail::send('emails.enquiry',$messageData,function($message)use($email){
+                    $message->to($email)->subject('ການສອບຖາມຈາກ E-SMShopping Website');
+                });
+                return redirect()->back()->with('flash_message_success','ຂອບຂອບໃຈ ສໍາລັບຄວາມຄິດເຫັນຂອງທ່ານ!! ພວກເຮົາຈະຕິດຕໍ່ກັບໃນໄວໆນີ້');
+        }
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+         $categories = json_decode(json_encode($categories));
+        return view('pages.contact')->with(compact('categories'));
     }
 }
