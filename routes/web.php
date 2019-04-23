@@ -23,6 +23,9 @@ Route::match(['get','post'],'/admin','AdminController@login');
 //ສໍາລັບໜ້າ Contact-us
 Route::match(['get','post'],'/page/contact','CmsController@contact');
 
+//ສໍາລັບໜ້າ post page for vue
+Route::match(['get','post'],'/page/post','CmsController@addPost');
+
 //ສະແດງແຜນອອກທາງ Font End
 Route::match(['get','post'],'/page/{url}','CmsController@cmsPage');
 
@@ -154,12 +157,13 @@ Route::group(['middleware' => ['adminlogin']],function(){
 
     //Admin order Route
     Route::get('/admin/view-orders','ProductsController@viewOrders');
+    Route::get('/admin/delete-user-order/{id}','ProductsController@DelOrders');
 
     //Admin order Route
     Route::get('/admin/view-orders/{id}','ProductsController@viewOrderDetails');
 
     //Admin Update Order Status Route
-    Route::get('/admin/update-order-status','ProductsController@updateOrderStatus');
+    Route::match(['get','post'],'/admin/update-order-status','ProductsController@updateOrderStatus');
 
     //ສໍາລັບການສະແດງ User ທີ່ໃຊ້ສະໝັກສະມາຊິກ
     Route::get('/admin/view-users','Userscontroller@viewUsers');

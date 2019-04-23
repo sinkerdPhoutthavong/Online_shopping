@@ -94,7 +94,8 @@
                            <td class="center">
                                 <a href="{{url('/admin/view-orders/'.$order->id)}}" class="btn btn-success btn-mini" title="ລາຍລະອຽດຂອງການສັ່ງຊື້">ລາຍລະອຽດ</a>
                                 <a href="{{url('/admin/view-order-invoice/'.$order->id)}}" class="btn btn-danger btn-mini" title="ລາຍລະອຽດຂອງການສັ່ງຊື້">ອອກໃບບິນ</a>
-                            </td>  
+                                <a  herf="javascript:" rel="{{$order->id}}" rel1="delete-user-order" class="btn btn-danger btn-mini deleteRecord" title="ລຶບລາຍການສັ່ງຊື້">ລືບ</a></td>
+                              </td>  
                            </tr> 
                         @endforeach
                     </tbody>

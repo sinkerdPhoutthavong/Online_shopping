@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Collection;
 use Auth;
 use Session;
 use Image;
@@ -259,7 +260,10 @@ class ProductsController extends Controller
             $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->Paginate(6);
         }
         $banners = Banner::where('status','1')->get();
-        return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories','banners'));
+        $meta_title = $cateogoryDetails->meta_title;
+        $meta_description = $cateogoryDetails->meta_description;
+        $meta_keywords= $cateogoryDetails->meta_keywords;
+        return view('products.listing')->with(compact('cateogoryDetails','productsAll','categories','banners','meta_title','meta_description','meta_keywords'));
     }
     public function product($id = null){
         //Show 404 page if product disable
@@ -290,7 +294,10 @@ class ProductsController extends Controller
         //     die;
            
         // }  
-        return view('products.detail')->with(compact('productDetails','categories','productAltImage','total_stock','ralatedProducts'));
+        $meta_title = $productDetails->product_name;
+        $meta_description = $productDetails->description;
+        $meta_keywords= $productDetails->product_name;
+        return view('products.detail')->with(compact('productDetails','categories','productAltImage','total_stock','ralatedProducts','meta_title','meta_description','meta_keywords'));
     }
     public function getProductPrice(Request $request){
         $data = $request->all();
@@ -460,7 +467,11 @@ class ProductsController extends Controller
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
-        return view('products.cart')->with(compact('userCart'));
+        $meta_title = "Shopping Cart - E-SMShopping";
+        $meta_description = "View Shopping Cart of E-SMShopping";
+        $meta_keywords = "shopping cart, e-smshopping";
+
+        return view('products.cart')->with(compact('userCart','meta_title','meta_description','meta_keywords'));
     }
     public function deleteCartproduct($id=null){
         Session::forget('CouponAmount');
@@ -599,7 +610,8 @@ class ProductsController extends Controller
                 }
             }
         }
-        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount","userCart"));
+        $meta_title = "Checkout E-SMShopping Website";
+        return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount","userCart","meta_title"));
     }
     public function orderReview(Request $request){
         $session_id = Session::get('session_id');
@@ -615,7 +627,8 @@ class ProductsController extends Controller
             $userCart[$key]->image = $productDetails->image;
         }
         //echo "<pre>";print_r($userCart);die;
-        return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart'));
+        $meta_title = "Order Review E-SMShopping Website";
+        return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart','meta_title'));
     }
     public function placeOrder(Request $request){
         if($request->isMethod('post')){
@@ -761,10 +774,16 @@ class ProductsController extends Controller
         $orderDetails = json_decode(json_encode($orderDetails));
         // echo "<pre>";print_r($orderDetails);die;
         $user_id = $orderDetails->user_id;
-        $userDetails = User::where('id',$user_id)->first();
-        // $userDetails = json_decode(json_encode($userDetails));
+        $userDetails = User::where(['id'=>$user_id])->first();
+        $userDetails = json_decode(json_encode($userDetails));
         // echo "<pre>";print_r($userDetails);die;
         return view('admin.orders.order_details')->with(compact("orderDetails","userDetails"));
+    }
+    public function DelOrders($order_id=null){
+        if(!empty($order_id)){
+            Order::where('id',$order_id)->delete();
+            return redirect('/admin/view-orders')->with('flash_message_success','ລຶບສິນຄ້າສຳເລັດແລ້ວ!!');
+        }
     }
     public function updateOrderStatus(Request $request){
         if($request->isMethod('post')){
@@ -782,10 +801,16 @@ class ProductsController extends Controller
             $search_Products = $data['product'];
             $productsAll = Product::where('product_name','like','%'.$search_Products.'%')
             ->orwhere('product_code',$search_Products)->where('status',1)->get();
+            
+            $productCount = Product::where('product_name','like','%'.$search_Products.'%')
+            ->orwhere('product_code',$search_Products)->where('status',1)->count();
+            if($productCount>6){
+                $productCount = 7;
+            }
            
             $banners = Banner::where('status','1')->get();
 
-             return view('products.listing')->with(compact('categories','productsAll','search_Products','banners'));
+             return view('products.listing')->with(compact('categories','productsAll','search_Products','banners','productCount'));
         }
     }
     public function viewOrdersInvoice($order_id){

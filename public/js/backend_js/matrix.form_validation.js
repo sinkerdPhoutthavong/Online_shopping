@@ -238,7 +238,7 @@ $(document).ready(function(){
 		var id = $(this).attr('rel');
 		var deleteFunction = $(this).attr('rel1');
 		swal({
-			title : "Are you sure?",
+			title : "ທ່ານແນ່ໃຈ ຫຼື ບໍ?",
 			text : "!! You will can't Recover this inforamtion !!",
 			type : "warning",
 			showCancelButton : true,

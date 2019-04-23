@@ -15,11 +15,13 @@ class UsersController extends Controller
 {
     public function userLogin(){
         // return view('users.login_register');
-        return view('users.login');
+        $meta_title = "User Login-E-SMShopping Website";
+        return view('users.login')->with(compact('meta_title'));
     }
     public function userRegister(){
         $countries = Country::get();
-        return view('users.register')->with(compact('countries'));
+        $meta_title = "User Register-E-SMShopping Website";
+        return view('users.register')->with(compact('countries','meta_title'));
     }
     public function register(Request $request){
         if($request->isMethod('post')){

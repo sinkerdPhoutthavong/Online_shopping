@@ -1,10 +1,9 @@
 @extends('layouts.frontLayout.front_design')
 @section('content')
 <section>
+<div id="app">   
     <div class="container">
-        <div id="app">
-            @{{test}}
-        </div>
+        
         <div class="row">
                 @if (Session::has('flash_message_error'))
                 <div class="alert alert-danger">
@@ -42,29 +41,29 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <br>
-                    <h2 class="title text-center"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></h2>
+                <h2 class="title text-center"><font face="phetsarath OT">@{{test}}</font></h2>
                     <div id="contact-page" class="container">
                         <div class="bg">   	
                             <div class="row">  	
                                 <div class="col-sm-9">
                                     <div class="contact-form"> 
                                         <div class="status alert alert-success" style="display: none"></div>
-                                        <form action="{{url('/page/contact')}}" id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+                                        <form  id="main-contact-form" class="contact-form row" name="contact-form" method="post" v-on:submit.prevent="addPost">
                                             {{ csrf_field() }}
                                             <div class="form-group col-md-6">
-                                                <input type="text" name="name" class="form-control"  placeholder="ຊື່">
+                                                <input type="text" v-model="name" class="form-control"  placeholder="ຊື່">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="email" name="email" class="form-control"  placeholder="ອີເມວ">
+                                                <input type="email" v-model="email" class="form-control"  placeholder="ອີເມວ">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <input type="text" name="subject" class="form-control"  placeholder="ເລື່ອງ">
+                                                <input type="text" v-model="subject" class="form-control"  placeholder="ເລື່ອງ">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <textarea name="message" id="message" class="form-control" rows="8" placeholder="ຂໍ້ຄວາມລາຍລະອຽດ"></textarea>
+                                                <textarea v-model="message" id="message" class="form-control" rows="8" placeholder="ຂໍ້ຄວາມລາຍລະອຽດ"></textarea>
                                             </div>                        
                                             <div class="form-group col-md-12">
-                                                <input type="submit" name="submit" class="btn btn-primary pull-right" value="ຢືນຢັນ">
+                                                <button type="submit"  class="btn btn-primary pull-right">ຢືນຢັນ ສົ່ງຂໍ້ມູນ</button>
                                             </div>
                                         </form>
                                     </div>
@@ -116,6 +115,7 @@
             </div>
         </div>
     </div>
+</div>
 </section>
 
 @endsection

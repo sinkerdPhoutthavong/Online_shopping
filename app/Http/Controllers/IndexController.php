@@ -55,7 +55,12 @@ class IndexController extends Controller
             
         }*/
         //end
+        //ແທັກ Meta
+
+        $meta_title = "E-SMShopping Wesite";
+        $meta_description = "Online Shopping site for Men, Women and kids Clothing";
+        $meta_keyword = "E-SMShopping Website, Online Shopping";
         $banners = Banner::where('status','1')->get();
-        return view('index')->with(compact('productsAll','categories_menu','categories','banners'));
+        return view('index')->with(compact('productsAll','categories_menu','categories','banners','meta_title','meta_description','meta_keyword'));
     }
 }

@@ -47,6 +47,24 @@
                   </div>
                 </div>
                 <div class="control-group">
+                  <label class="control-label">ຫົວຂໍ້ Meta</label>
+                  <div class="controls">
+                    <input type="text" name="meta_title" id="meta_title" required>
+                  </div>
+              </div>
+              <div class="control-group">
+                    <label class="control-label">ຄຳອະທິບາຍ Meta</label>
+                    <div class="controls">
+                      <input type="text" name="meta_description" id="description">
+                    </div>
+              </div>
+              <div class="control-group">
+                      <label class="control-label">keyword Meta</label>
+                      <div class="controls">
+                        <input type="text" name="meta_keywords" id="meta_keywords">
+                      </div>
+              </div>
+                <div class="control-group">
                     <label class="control-label">ໃຊ້ງານ</label>
                     <div class="controls">
                       <input type="checkbox" name="status" id="status">

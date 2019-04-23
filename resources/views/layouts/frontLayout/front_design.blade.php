@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+    <title>@if(!empty($meta_title)){{$meta_title}}@else  Home | E-Shopper  @endif</title>
+        @if(!empty($meta_description))<meta name="description" content="{{$meta_description}}"> @endif
+        @if(!empty($meta_keyword))<meta name="keyword" content="{{$meta_keyword}}"> @endif
     <link href="{{asset('css/frontend_css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/prettyPhoto.css')}}" rel="stylesheet">
@@ -17,7 +17,7 @@
     <link href="{{asset('css/frontend_css/easyzoom.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend_css/passtrength.css')}}" rel="stylesheet">
     
-    <script src="{{asset('js/frontend_js/jquery.js')}}"></script>
+ 
     
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -36,6 +36,7 @@
     @yield('content')
 	@include('layouts.frontLayout.front_footer')
     </font>
+    <script src="{{asset('js/frontend_js/jquery.js')}}"></script>
     <script src="{{asset('js/frontend_js/passtrength.js')}}"></script>
     <script src="{{asset('js/frontend_js/easyzoom.js')}}"></script>
 	<script src="{{asset('js/frontend_js/bootstrap.min.js')}}"></script>
@@ -44,6 +45,8 @@
     <script src="{{asset('js/frontend_js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('js/frontend_js/main.js')}}"></script>
     <script src="{{asset('js/frontend_js/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     
     {{-- https://code.jquery.com/jquery-3.3.1.js
     https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js

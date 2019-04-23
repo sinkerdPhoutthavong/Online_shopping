@@ -54,6 +54,24 @@
                     </div>
                   </div>
                   <div class="control-group">
+                      <label class="control-label">ຫົວຂໍ້ Meta</label>
+                      <div class="controls">
+                      <input type="text" name="meta_title" id="meta_title" value="{{$PageDetails->meta_title}}">
+                      </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">ຄຳອະທິບາຍ Meta</label>
+                        <div class="controls">
+                          <input type="text" name="meta_description" id="description"value="{{$PageDetails->meta_description}}">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                          <label class="control-label">keyword Meta</label>
+                          <div class="controls">
+                            <input type="text" name="meta_keyword" id="meta_keyword"value="{{$PageDetails->meta_keywords}}">
+                          </div>
+                        </div>
+                  <div class="control-group">
                       <label class="control-label">ການໃຊ້ງານ</label>
                       <div class="controls">
                         <input type="checkbox" name="status" id="status"@if ($PageDetails->status == "1") checked @endif value="1">

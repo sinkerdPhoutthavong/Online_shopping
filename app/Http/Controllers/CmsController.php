@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CmsPage;
 use App\Category;
 use Illuminate\Support\Facades\Mail;
+use Validator;
 
 class CmsController extends Controller
 {
@@ -17,6 +18,15 @@ class CmsController extends Controller
             $cmsPage->title = $data['title'];
             $cmsPage->url= $data['url'];
             $cmsPage->description = $data['description'];
+            $cmsPage->meta_title = $data['meta_title'];
+            $cmsPage->meta_description = $data['meta_description'];
+            if(empty($data['meta_description'])){
+                $data['meta_description'] = "";
+            }
+            $cmsPage->meta_keyword = $data['meta_keyword'];
+            if(empty($data['meta_keyword'])){
+                $data['meta_keyword'] = "";
+            }
             if(empty($data['status']=="on")){
                 $status = 0;
             }else{
@@ -45,9 +55,16 @@ class CmsController extends Controller
             if(empty($data['url'])){
                 return redirect()->back()->with('flash_message_error','ກະລຸນາໃສ່ URL');
             }
+            if(empty($data['meta_description'])){
+                $data['meta_description'] = "";
+            }
+
+            if(empty($data['meta_keyword'])){
+                $data['meta_keyword'] = "";
+            }
             // echo "<pre>";print_r($data);die;
-            CmsPage::where(['id'=>$id])->update(['title'=>$data['title'],'url'=>$data['url'],'description'=>$data['description'],
-            'status'=>$status]);
+            CmsPage::where(['id'=>$id])->update(['title'=>$data['title'],'url'=>$data['url'],'description'=>$data['description'],'meta_title'=>$data['meta_title'],
+            'meta_description'=>$data['meta_description'],'meta_keyword'=>$data['meta_keyword'],'status'=>$status]);
             return redirect('/admin/view-cms-pages')->with('flash_message_success','ອັບເດດຮຽບຮ້ອຍແລ້ວ');
         }
         $PageDetails = Cmspage::where(['id'=>$id])->first();
@@ -66,6 +83,9 @@ class CmsController extends Controller
          if($cmsPageCount>0){
             $cmsPageDetails = CmsPage::where('url',$url)->first();
             $cmsPageDetails = json_decode(json_encode($cmsPageDetails));
+            $meta_title = $cmsPageDetails->meta_title;
+            $meta_description = $cmsPageDetails->meta_description;
+            $meta_keyword = $cmsPageDetails->meta_keyword;
          }else{
             return redirect(url('.'))->with('flash_message_error','ຂໍອະໄພໜ້າທີ່ທ່ານຄົ້ົນຫາບໍ່ມີໃນເວັບໄຊ');
          }
@@ -74,7 +94,7 @@ class CmsController extends Controller
         //  echo "<pre>";print_r($categories);die;
          
         //  echo "<pre>";print_r($cmsPageDetails);die;
-         return view('pages.cms_page')->with(compact('categories','cmsPageDetails'));
+         return view('pages.cms_page')->with(compact('categories','cmsPageDetails','meta_title','meta_description','meta_keyword'));
     }
     public function contact(Request $request){
         if($request->isMethod('post')){
@@ -82,10 +102,16 @@ class CmsController extends Controller
             // echo "<pre>";print_r($data);die;
 
             //ກຳນົດການປ້ອນ
-            $validatedData = $request->validate([
-                'name' => 'required|unique:posts|max:255',
-                'email' => 'required',
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'email' => 'required|email',
+                'subject' => 'required'
             ]);
+
+            //ກວດສອບທີ່ປ້ອນມາ
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
             //ສົ່ງອີເມວໃຫ້ຜູ່ບໍລິຫານເວັບ
             $email = "smshopping.info@gmail.com";
@@ -102,6 +128,22 @@ class CmsController extends Controller
         }
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
          $categories = json_decode(json_encode($categories));
-        return view('pages.contact')->with(compact('categories'));
+
+         $meta_title = "Contact Us E-SMShopping Wesite";
+         $meta_description = " Contact Us for any quiries related to our products";
+         $meta_keyword = "Contact Us, Quiries";
+        return view('pages.contact')->with(compact('categories','meta_title','meta_description','meta_keyword'));
+    }
+    public function addPost(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>";print_r($data);die;
+        }
+
+        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+        $categories = json_decode(json_encode($categories));
+
+        return view('pages.post')->with(compact('categories'));
+          
     }
 }
