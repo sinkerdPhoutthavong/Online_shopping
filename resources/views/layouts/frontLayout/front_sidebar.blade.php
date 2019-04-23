@@ -7,7 +7,7 @@
                     @if ($cat->status == 1)
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordian" href="{{$cat->id}}">
+                            <a data-toggle="collapse" data-parent="#accordian" href="#{{$cat->id}}">
                                 <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                 {{$cat->name}}
                             </a>
@@ -19,9 +19,9 @@
                                 @foreach ($cat->categories as $subcat)
                                     @if ($subcat->status == 1)
                                     {{-- <li><a href="{{ asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a></li> --}}
-                                    <li><a href="{{asset('/products/'.$cat->url)}}">{{$cat->name}}</a></li>
+                                    <li><a href="{{asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a></li>
                                     @endif
-                            @endforeach
+                                @endforeach
                             </ul>
                         </div>
                     </div>
