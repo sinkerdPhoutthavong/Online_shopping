@@ -318,6 +318,28 @@ if($('#Paypal').is(':checked') || $('#bank').is(':checked') || $('#COD').is(':ch
 	return false;
 }
 }
+function checkPincode() {
+	var pincode = $("#chkPincode").val();
+	if(pincode==""){
+		alert("please Enter pincode");return false;
+	}
+	$.ajax({
+		type:'post',
+		data:{pincode:pincode},
+		url:'/check-pincode',
+		success:function(resp){
+			// alert(resp);
+			if(resp>0){
+				$("#pincodeResponse").html("<font color='green'>ລະຫັດໄປສະນີ ພ້ອມສໍາລັບການຈັດສົ່ງ</font>");
+			}else{
+				$("#pincodeResponse").html("<font color='red'>ລະຫັດໄປສະນີ ບໍ່ພ້ອມສໍາລັບການຈັດສົ່ງ</font>");
+			}
+			
+		},error:function(){
+			alert("Error");
+		}
+	});
+}
 
 
 

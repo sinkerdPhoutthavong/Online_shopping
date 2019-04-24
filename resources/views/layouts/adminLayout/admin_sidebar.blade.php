@@ -44,6 +44,11 @@
         <li <?php if (preg_match("/view-cms-pages/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-cms-pages')}}">CMS Pages ທັງໝົດ</a></li>
       </ul>
     </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>ການສອບຖາມຂອງລຸກຄ້າ</span> <span class="label label-important">2</span></a>
+      <ul <?php if (preg_match("/enquiries/i", $url)){?> style="display:block;"<?php }?>>
+        <li <?php if (preg_match("/view-enquiries/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-enquiries')}}">ການສອບຖາມທັງໝົດ</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 <!--sidebar-menu-->

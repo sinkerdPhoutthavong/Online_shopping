@@ -574,6 +574,7 @@ class ProductsController extends Controller
             $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         }
 
+       
         // //Update cart Table with user email
         // $session_id = Session::get('session_id');
         // DB::table('carts')->where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
@@ -581,8 +582,9 @@ class ProductsController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(empty($data['shipping_name']) || empty($data['shipping_address']) || empty($data['shipping_email']) || empty($data['shipping_city'])
-            || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile'])
-            ){
+                || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile'])
+                )
+            {
                 return redirect()->back()->with('flash_message_error','ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ ເພື່ອດໍາເນີນການຕໍ່!!');
             }else{
 
@@ -605,11 +607,17 @@ class ProductsController extends Controller
                     $shipping->country = $data['shipping_country'];
                     $shipping->pincode = $data['shipping_pincode'];
                     $shipping->mobile = $data['shipping_mobile'];
-                    $shipping->save();
-                    return redirect()->action('ProductsController@orderReview');
+                    $shipping->save(); 
                 }
+                $pincodeCount = DB::table('pincodes')->where('pincode',$data['shipping_pincode'])->count();
+                echo "<pre>";print_r($pincodeCount);die;
+                if($pincodeCount==0){
+                    return redirect()->back()->with('flash_message_error','ລະຫັດໄປສະນີທີ່ຈັດສົ່ງຂອງທ່ານ ແມ່ນບໍ່ສາມາດຈັດສົ່ງໄດ້ !! ກະລຸນາເລືອກສະຖານທີ່ຈັດສົ່ງໃໝ່ ');
+                }
+                return redirect()->action('ProductsController@orderReview');
             }
         }
+        
         $meta_title = "Checkout E-SMShopping Website";
         return view('products.checkout')->with(compact("userDetails","countries","shippingDetails","shippingCount","userCart","meta_title"));
     }
@@ -626,9 +634,12 @@ class ProductsController extends Controller
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
+       
+        $codpincodeCount = DB::table('cod_pincodes')->where('pincode',$shippingDetails->pincode)->count();
+        $prepaidpincodeCount = DB::table('prepaid_pincodes')->where('pincode',$shippingDetails->pincode)->count();
         //echo "<pre>";print_r($userCart);die;
         $meta_title = "Order Review E-SMShopping Website";
-        return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart','meta_title'));
+        return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart','meta_title','codpincodeCount','prepaidpincodeCount'));
     }
     public function placeOrder(Request $request){
         if($request->isMethod('post')){
@@ -638,7 +649,10 @@ class ProductsController extends Controller
             // echo "<pre>";print_r($data);die;
             //Get Shipping Address Of User
             $shippingDetails = DeliveryAddress::where(['user_email' => $user_email])->first();
-
+            $pincodeCount = DB::table('pincodes')->where('pincode',$shippingDetails->pincode)->count();
+            if($pincodeCount==0){
+                return redirect()->back()->with('flash_message_error','ລະຫັດໄປສະນີທີ່ຈັດສົ່ງຂອງທ່ານ ແມ່ນບໍ່ສາມາດຈັດສົ່ງໄດ້ !! ກະລຸນາເລືອກສະຖານທີ່ຈັດສົ່ງໃໝ່ ');
+            }
             //CHECK FOR IF EMPTY
             if(empty(Session::get('CouponCode'))){
                 $coupon_code =0;
@@ -825,5 +839,13 @@ class ProductsController extends Controller
         $shippingDetails = DeliveryAddress::where('user_id',$user_id)->first();
         $shippingDetails = json_decode(json_encode($shippingDetails));
         return view('admin.orders.order_invoice')->with(compact("orderDetails","userDetails","shippingDetails"));
+    }
+    public function checkPincode(Request $request){
+        if($request->ismethod('post')){
+            $data = $request->all();
+            // echo "<pre>";print_r($data);die;
+            echo $pincodeCount = DB::table('pincodes')->where('pincode',$data['pincode'])->count();
+   
+        }
     }
 }

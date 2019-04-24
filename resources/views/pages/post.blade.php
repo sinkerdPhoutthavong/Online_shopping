@@ -42,6 +42,7 @@
                 <div class="features_items"><!--features_items-->
                     <br>
                 <h2 class="title text-center"><font face="phetsarath OT">@{{test}}</font></h2>
+                <h2 class="title text-center"><font face="phetsarath OT">@{{responsemsg}}</font></h2>
                     <div id="contact-page" class="container">
                         <div class="bg">   	
                             <div class="row">  	
@@ -51,16 +52,16 @@
                                         <form  id="main-contact-form" class="contact-form row" name="contact-form" method="post" v-on:submit.prevent="addPost">
                                             {{ csrf_field() }}
                                             <div class="form-group col-md-6">
-                                                <input type="text" v-model="name" class="form-control"  placeholder="ຊື່">
+                                                <input type="text" v-model="name" class="form-control"  placeholder="ຊື່" required>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="email" v-model="email" class="form-control"  placeholder="ອີເມວ">
+                                                <input type="email" v-model="email" class="form-control"  placeholder="ອີເມວ"required>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <input type="text" v-model="subject" class="form-control"  placeholder="ເລື່ອງ">
+                                                <input type="text" v-model="subject" class="form-control"  placeholder="ເລື່ອງ"required>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <textarea v-model="message" id="message" class="form-control" rows="8" placeholder="ຂໍ້ຄວາມລາຍລະອຽດ"></textarea>
+                                                <textarea v-model="message" id="message" class="form-control" rows="8" placeholder="ຂໍ້ຄວາມລາຍລະອຽດ"required></textarea>
                                             </div>                        
                                             <div class="form-group col-md-12">
                                                 <button type="submit"  class="btn btn-primary pull-right">ຢືນຢັນ ສົ່ງຂໍ້ມູນ</button>

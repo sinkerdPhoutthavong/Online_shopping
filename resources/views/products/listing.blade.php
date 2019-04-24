@@ -50,7 +50,7 @@
                         @else
                             {{$cateogoryDetails->name}} Items
                         @endif
-                        
+                        ({{count($productsAll)}})
                     </font></h2>
                     @foreach ($productsAll as $product)   
                     <div class="col-sm-4">
@@ -134,6 +134,7 @@
                 </div><!--features_items-->
                 
             </div>
+            <div align="center">{{$productsAll->links()}}</div>
         </div>
     </div>
 </section>

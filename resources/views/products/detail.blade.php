@@ -166,6 +166,10 @@
 											@endif
 										</span></p>
 										<p><b>Condition:</b> New</p>
+										<label> ສະຖານທີ່ຈັດສົ່ງ:</label>
+										<input type="text" name="pincode" id="chkPincode" placeholder="ປ້ອນ Pincode">
+										<button type="button" class="btn btn-success" onclick="return checkPincode();">ກົດເລືອກ</button>
+										<span id="pincodeResponse"></span>
 								</div><!--/product-information-->
 						</form>
 					</div>

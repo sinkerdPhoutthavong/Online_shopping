@@ -1,4 +1,7 @@
-
+<?php 
+    use App\Product;
+  
+?>
 <div class="left-sidebar">
         <h2><font face="phetsarath OT">ປະເພດຂອງສິນຄ້າ</font></h2>
         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
@@ -17,9 +20,10 @@
                         <div class="panel-body">
                             <ul>
                                 @foreach ($cat->categories as $subcat)
+                                <?php $productCount = Product::ProductCount($subcat->id);?>
                                     @if ($subcat->status == 1)
                                     {{-- <li><a href="{{ asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a></li> --}}
-                                    <li><a href="{{asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a></li>
+                                    <li><a href="{{asset('/products/'.$subcat->url)}}"><font face="phetsarath OT">{{$subcat->name}}</font></a> ({{ $productCount }}) </li>
                                     @endif
                                 @endforeach
                             </ul>

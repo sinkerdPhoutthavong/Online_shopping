@@ -309,9 +309,11 @@
                         <span>
                             <label><input type="radio" name="payment_method" id="bank" value="bank"><strong><font face="phetsarath OT"> ໂອນຜ່ານບັນຊີທະນາຄານ</b></font></strong></label>
                         </span>
+                        @if($codpincodeCount>0)
                         <span>
                                 <label><input type="radio" name="payment_method" id="COD"value="COD"><strong><font face="phetsarath OT"> ຈ່າຍເງິນປາຍທາງ</b></font></strong></label>
-                            </span>
+                        </span>
+                        @endif
                         <span>
                             <label><input type="radio" name="payment_method" id="pay_in_offices" value="pay_in_offices"><strong><font face="phetsarath OT"> ຈ່າຍເງິນສົດທີ່ຫ້ອງການ</b></font></strong></label>
                         </span>

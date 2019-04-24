@@ -14193,18 +14193,38 @@ Vue.component('example-component', __webpack_require__(40));
 var app = new Vue({
     el: '#app',
     data: {
-        test: 'ສົ່ງຂໍ້ມູນ ໂດຍການໃຊ້ Vue js ແລະ Axios',
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+        test: 'ຕິດຕໍ່ພວກເຮົາ',
+        responsemsg: '',
+        enquiries: [],
+        search: ''
+    },
+    ready: function ready() {
+        this.created();
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/admin/get-enquiries').then(function (response) {
+            _this.enquiries = response.data;
+        });
+    },
+
+    computed: {
+        filtersEnquiries: function filtersEnquiries() {
+            var _this2 = this;
+
+            return this.enquiries.filter(function (enquiry) {
+                return enquiry.name.toLowerCase().includes(_this2.search.toLowerCase());
+            });
+        }
     },
     methods: {
         addPost: function addPost() {
-            var _this = this;
-
-            axios.post('/page/post', { name: this.name, email: this.email, subject: this.subject, message: this.message }).then(function (post) {
-                return _this.$emit('completed', name);
+            axios.post('/page/post', { name: this.name, email: this.email, subject: this.subject, message: this.message })
+            // .then(post=>this.$emit('completed',name));
+            .then(function (response) {
+                alert(response.data);
+                app.responsemsg = response.data;
             });
         }
     }

@@ -1,6 +1,8 @@
 <?php
     use App\Http\Controllers\Controller;
+    use App\Product;
     $mainCategories = Controller::mainCategories();
+    $cartCount = Product::cartCount();
 ?>
 <header id="header"><!--header-->
     <div class="header_top"><!--header_top-->
@@ -65,7 +67,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-star"></i><font face="phetsarath OT"> ສີ່ງທີ່ທ່ານຕ້ອງການ</font></a></li>
                             <li><a href="{{url('/orders')}}"><i class="fa fa-crosshairs"></i><font face="phetsarath OT"> ປະຫັວດການສັ່ງຊື້ສີນຄ້າ</font></a></li>
-                            <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT"> ກະຕ່າສິນຄ້າ</font></a></li>
+                        <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i><font face="phetsarath OT"> ກະຕ່າສິນຄ້າ ({{$cartCount}})</font></a></li>
                             @if (empty(Auth::check()))
                                 <li><a href="{{url('/user-registerpage')}}"><i class="fa fa-user"></i><font face="phetsarath OT"> ສະໝັກສະມາຊິກ</font></a></li>
                                 <li><a href="{{url('/user-Login')}}"><i class="fa fa-lock"></i><font face="phetsarath OT"> ເຂົ້າສູ່ລະບົບ</font></a></li>
@@ -112,7 +114,7 @@
                                 </ul>
                             </li> 
                             <li><a href="404.html">404</a></li>
-                            <li><a href="{{url('/page/contact')}}"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></a></li>
+                            <li><a href="{{url('/page/post')}}"><font face="phetsarath OT">ຕິດຕໍ່ພວກເຮົາ</font></a></li>
                         </ul>
                     </div>
                 </div>

@@ -84,6 +84,9 @@ Route::post('/user-login','UsersController@login');
 //CHECK ID USER ALREADY EXISTS
 Route::match(['get','post'],'/check-email','UsersController@checkEmail');
 
+//ກວດສອບ Pincode
+Route::post('/check-pincode','ProductsController@checkPincode');
+
 //ສໍາລັບການຄົ້ນຫາສິນຄ້າ
 Route::post('/search-products','ProductsController@searchProducts');
 
@@ -178,5 +181,8 @@ Route::group(['middleware' => ['adminlogin']],function(){
     Route::match(['get','post'],'/admin/edit-cms-page/{id}','CmsController@editCmsPage');
     Route::get('/admin/delete-cms-page/{id}','CmsController@deleteCmsPage');
 
-    
+    //Route ສໍາ່ລັບການສະແດງ ການສອບຖຸາມຂອງລູກຄ້າ
+    Route::get('/admin/view-enquiries','CmsController@viewEnquiries');
+    //Route ສໍາ່ລັບການເອົາ່ຂໍໍ້ມູນອອກມາສະແດງ ການສອບຖຸາມຂອງລູກຄ້າ
+    Route::get('/admin/get-enquiries','CmsController@getEnquiries');
 });
