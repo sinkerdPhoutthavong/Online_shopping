@@ -57,7 +57,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:200px;">
+                                        <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:90%;">
                                         <h2>
                                             <?php
                                                     $price_amount = $product->price;

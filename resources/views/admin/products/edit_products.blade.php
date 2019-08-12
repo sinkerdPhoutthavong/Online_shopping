@@ -91,6 +91,17 @@
                         </div>
                   </div>
                   <div class="control-group">
+                    <label class="control-label">ວີດີໂອ</label>
+                    <div class="controls">
+                      <input type="file" name="video" id="video">
+                        @if (!empty($productDetails->video))
+                            <input type="hidden" name="current_video" value="{{$productDetails->video}}">
+                            <a target="blank" href="{{ url('videos/'.$productDetails->video)}}">ເບີ່ງວີດີໂອ</a>
+                            <a href="{{url('/admin/delete-product-video/'.$productDetails->id)}}"> || ລືບວີດີໂອ</a>
+                        @endif
+                    </div>
+                  </div>
+                  <div class="control-group">
                       <label class="control-label">ເປີດໃຊ້ງານລາຍການສິນຄ້າ</label>
                       <div class="controls">
                         <input type="checkbox" name="feature_item" id="feature_item"  @if ($productDetails->feature_items == "1") checked @endif value="1">

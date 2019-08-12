@@ -1,6 +1,6 @@
 @extends('layouts.frontLayout.front_design')
 @section('content')
-
+<?php use app\product;?>
 <section>
 		<div class="container">
 			<div class="row">
@@ -34,7 +34,7 @@
 							<div class="view-product">
 									<div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
 										<a href="{{asset('images/backend_images/products/large/'.$productDetails->image)}}">
-                                    		<img style="width:300px;" class="MainImage" src="{{asset('images/backend_images/products/medium/'.$productDetails->image)}}"  alt="" />
+                                    		<center><img style="width:80%;" class="MainImage" src="{{asset('images/backend_images/products/medium/'.$productDetails->image)}}"  alt="" /></center>
 										{{-- <h3><font face="phetsarath OT">ຊຸມ</font></h3> --}}
 										</a>
 									</div>	
@@ -73,8 +73,7 @@
 						 <input type="hidden" name="product_name" value="{{$productDetails->product_name}}">
 						 <input type="hidden" name="product_code" value="{{$productDetails->product_code}}">
 						 <input type="hidden" name="product_color" value="{{$productDetails->product_color}}">
-						 <input type="hidden" name="price" id="price" 
-						 value=" 
+						 <input type="hidden" name="price" id="price"  value=" 
 						 			<?php
                                                     $price_amount = $productDetails->price;
                                                     //use for split yaek array
@@ -112,6 +111,7 @@
 											</select>
 										</p>
 										<span>
+											<?php $getCurrencyRates = product::getCurrencyRates($productDetails->price);?>
 										<span id="getPrice"><font face="phetsarath OT">ລາຄາ:
 											<?php
                                                     $price_amount = $productDetails->price;
@@ -137,7 +137,11 @@
                                                                         } 
                                                                                     
                                             ?>
-                                            <font face="phetsarath OT">ກີບ</font></span>
+											<font face="phetsarath OT">ກີບ</font>
+											<h5><font face="phetsarath OT">USD: {{$getCurrencyRates['USD_RATE']}}  ໂດລາ</font> </h5>
+											<h5><font face="phetsarath OT">YUAN: {{$getCurrencyRates['Y_RATE']}}  ຢວນ</h5>
+											<h5><font face="phetsarath OT">BATH: {{$getCurrencyRates['BATH_RATE']}} ບາດ</h5>
+										</span>
 										</span>
 										<span>
 											<label><font face="phetsarath OT">ຈໍານວນ:</font></label>
@@ -181,7 +185,10 @@
 								<li><a href="#description" data-toggle="tab"><font face="phetsarath OT">ຄໍາອະທິບາຍ</font></a></li>
 								<li><a href="#care" data-toggle="tab"><font face="phetsarath OT">ວັດສະດຸ</font></a></li>
 								<li><a href="#delivery" data-toggle="tab"><font face="phetsarath OT">ຮູບແບບການຈັດສົ່ງ</font></a></li>
-								<li class="active"><a href="#reviews" data-toggle="tab"><font face="phetsarath OT">ຄໍາແນະນໍາ (5)</font></a></li>
+								@if(!@empty($productDetails->video))
+								<li><a href="#video" data-toggle="tab"><font face="phetsarath OT">ວີດິໂອ ຂອງສິນຄ້າ</font></a></li>
+								@endif	
+								<li class="active"><a href="#reviews" data-toggle="tab"><font face="phetsarath OT">ສິນຄ້າແນະນໍາ (5)</font></a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -203,7 +210,16 @@
                                             ຈ່າຍເງິນທີ່ປາຍທາງ</P></center>
                                     </div>
 							</div>
-							
+							@if(!@empty($productDetails->video))
+							<div class="tab-pane fade active in" id="video" >
+									<center><font face="phetsarath OT"><span><b>ວີດີໂອສິນຄ້າ</b></span></font>
+                                    <div class="col-sm-12">
+											<video width="85%" height="85%" controls>
+												<source src="{{url('videos/'.$productDetails->video)}}" type="video/mp4">
+											</video></center>
+									</div>
+                            </div>
+							@endif
 							<div class="tab-pane fade active in" id="reviews" >
 								<div class="col-sm-12">
 									<ul>

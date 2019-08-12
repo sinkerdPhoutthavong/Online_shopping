@@ -137,6 +137,7 @@ Route::group(['middleware' => ['adminlogin']],function(){
     Route::match(['get','post'],'/admin/edit-product/{id}','ProductsController@editProduct');
     Route::get('/admin/delete-product/{id}','ProductsController@deleteProduct');
     Route::get('/admin/delete-product-image/{id}','ProductsController@deleteProductImage');
+    Route::get('/admin/delete-product-video/{id}','ProductsController@deleteProductVideo');
     Route::get('/admin/delete-alt-image/{id}','ProductsController@deleteAltImage');
 
     //Product Attributes Route
@@ -157,6 +158,12 @@ Route::group(['middleware' => ['adminlogin']],function(){
     Route::match(['get','post'],'/admin/edit-banner/{id}','BannersController@editBanner');
     Route::get('/admin/delete-banner/{id}','BannersController@deleteBanner');
     Route::get('/admin/delete-banner-image/{id}','BannersController@deleteBannerImage');
+
+    //Route ສໍາລັບສະກຸນເງິນ
+    Route::match(['get','post'],'/admin/add-currency','CurrencyController@addCurrency');
+    Route::get('/admin/view-currencies','CurrencyController@viewCurrencies');
+    Route::match(['get','post'],'/admin/edit-currency/{id}','CurrencyController@editCurrency');
+    Route::get('/admin/delete-currency/{id}','CurrencyController@deleteCurrency');
 
     //Admin order Route
     Route::get('/admin/view-orders','ProductsController@viewOrders');

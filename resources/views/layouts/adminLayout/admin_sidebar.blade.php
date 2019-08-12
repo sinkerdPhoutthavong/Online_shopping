@@ -49,6 +49,12 @@
         <li <?php if (preg_match("/view-enquiries/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-enquiries')}}">ການສອບຖາມທັງໝົດ</a></li>
       </ul>
     </li>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>ສະກຸນເງິນ</span> <span class="label label-important">2</span></a>
+      <ul <?php if (preg_match("/currencies/i", $url)){?> style="display:block;"<?php }?>>
+        <li <?php if (preg_match("/add-currency/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/add-currency')}}">ເພີ່ມສະກຸນເງິນໃໝ່</a></li>
+        <li <?php if (preg_match("/view-currencies/i", $url)){?> class="active"<?php }?>><a href="{{url('/admin/view-currencies')}}">ສະກຸນເງິນທັງໝົດ</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 <!--sidebar-menu-->

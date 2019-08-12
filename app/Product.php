@@ -28,4 +28,21 @@ class Product extends Model
         $catCount = Product::where(['category_id'=>$cat_id,'status'=>1])->count();
         return $catCount;
     }
+    public static function getCurrencyRates($price){
+        $getCurrencies = Currency::where('status',1)->get();
+        foreach ($getCurrencies as $currency){
+            if($currency->currency_code=="ໂດລາ"){
+                // $USD_RATE = round($price/$currency->exchange_rate);
+                $USD_RATE = round($price/$currency->exchange_rate,1);
+            }
+            if($currency->currency_code=="ຢວນ"){
+                $Y_RATE = round($price/$currency->exchange_rate,1);
+            }
+            if($currency->currency_code=="ບາດ"){
+                $BATH_RATE = round($price/$currency->exchange_rate,1);
+            }
+        }
+        $currenciesArr = array('USD_RATE'=>$USD_RATE,'Y_RATE'=>$Y_RATE,'BATH_RATE'=>$BATH_RATE);
+        return $currenciesArr;
+    }
 }

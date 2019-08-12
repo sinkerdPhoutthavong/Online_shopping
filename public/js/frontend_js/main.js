@@ -46,7 +46,8 @@ $("#selSize").change(function(){
 				// alert(resp);
 				//define this for show product becuase 2500#0 2500 is price and 0 instock
 				var arr = resp.split('#');
-				$("#getPrice").html("<font face='phetsarath OT'>ລາຄາ: "+ arr[0] +" ກີບ</font>");
+				var arr1 = arr[0].split('-');
+				$("#getPrice").html("<font face='phetsarath OT'>ລາຄາ: "+ arr1[0] +" ກີບ<br><h5>USD: "+ arr1[1]+"<font face='phetsarath OT'> ໂດລາ<br><h5>YUAN:"+ arr1[2]+"<font face='phetsarath OT'> ຢວນ<br><h5>BATH:"+ arr1[3]+"<font face='phetsarath OT'> ບາດ</h5></font>");
 				$("#price").val(arr[0]); 
 				if(arr[1]==0){
 					$("#cartButton1").show();

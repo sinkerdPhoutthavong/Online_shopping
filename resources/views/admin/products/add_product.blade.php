@@ -86,7 +86,13 @@
                         </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label">ເປີດໃຊ້ງານລາຍການສິນຄ້າ</label>
+                    <label class="control-label">ວີດີໂອ</label>
+                    <div class="controls">
+                      <input type="file" name="video" id="video"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">ເປີດໃຊ້ງານລາຍການສິນຄ້າເພີ່ມເຕີມ</label>
                     <div class="controls">
                       <input type="checkbox" name="feature_item" id="feature_item">
                     </div>

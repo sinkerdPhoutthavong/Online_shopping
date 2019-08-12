@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Collection;
+
 use Auth;
 use Session;
 use Image;
@@ -71,6 +72,14 @@ class ProductsController extends Controller
                     $product->image = $filename;
                 }
             }
+            //ການອັບໂຫຼດວີິດີໂອລົງໃນຖານຂໍ້ມູນ
+            if($request->hasFile('video')){
+                $video_tmp = Input::file('video');
+                $video_name = $video_tmp->getClientOriginalName();
+                $video_path = 'videos/';
+                $video_tmp->move($video_path,$video_name);
+                $product->video= $video_name;
+            }
             $product->feature_items= $feature_item;
             $product->status = $status;
             $product->save();
@@ -128,47 +137,63 @@ class ProductsController extends Controller
                  Image::make($image_tmp)->resize(600,600)->save($medium_image_path);
                  Image::make($image_tmp)->resize(300,300)->save($small_image_path);
              }
-
-         }else{
+            }else if(!empty($data['current_image'])){
                 $filename = $data['current_image'];
-         }
+            }else{
+                $filename = '';
+            }
 
-         if(empty($data['description'])){
-             $data['description'] = '';
-         }
-         if(empty($data['care'])){
-            return redirect()->back()->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
-        }
-          
-          Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'feature_items'=>$feature_item,'status'=>$status]);
-                 return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
-        }
-        // show product in form
-           // get Product detial
-            $productDetails = Product::where(['id'=>$id])->first();
-            // Categories dropdown start
-                $categories = Category::where(['parent_id'=>0])->get();
-                $categories_dropdown = "<option value='' selected disabled>Select</option>";
-                foreach ($categories as $cat) {
-                    if($cat->id == $productDetails->category_id){
-                        $selected = "selected";
-                    }else{
-                        $selected = "";
-                    }
-                    $categories_dropdown .= "<option value='".$cat->id."' ".$selected.">".$cat->name."</option>";
-                    $sub_categories = Category::where(['parent_id'=>$cat->id])->get();
-                    foreach ($sub_categories as $sub_cat) {
-                        if($sub_cat->id == $productDetails->category_id){
+            //ການອັບໂຫຼດວີິດີໂອລົງໃນຖານຂໍ້ມູນ
+            if($request->hasFile('video')){
+                $video_tmp = Input::file('video');
+                $video_name = $video_tmp->getClientOriginalName();
+                $video_path = 'videos/';
+                $video_tmp->move($video_path,$video_name);
+                $videoName = $video_name;
+            }else if(!empty($data['current_video'])){
+                $videoName = $data['current_video'];
+            }else{
+                $videoName = '';
+            }
+            // echo $videoName;die;
+
+            if(empty($data['description'])){
+                $data['description'] = '';
+            }
+            if(empty($data['care'])){
+                return redirect()->back()->with('flash_message_error','ແກ້ໄຂບໍ່ສໍາເລັດ!! ກາລຸນາປ້ອນ ວັດສະດຸຜິດລະພັນ!!');
+            }
+            
+            Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],
+            'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'image'=>$filename,'video'=>$videoName,'feature_items'=>$feature_item,'status'=>$status]);
+                    return redirect('/admin/view-products')->with('flash_message_success','ອັບເດດສີນຄ້າສຳເລັດແລ້ວ!!');
+            }
+            // show product in form
+            // get Product detial
+                $productDetails = Product::where(['id'=>$id])->first();
+                // Categories dropdown start
+                    $categories = Category::where(['parent_id'=>0])->get();
+                    $categories_dropdown = "<option value='' selected disabled>Select</option>";
+                    foreach ($categories as $cat) {
+                        if($cat->id == $productDetails->category_id){
                             $selected = "selected";
                         }else{
                             $selected = "";
                         }
-                        $categories_dropdown .= "<option value='".$sub_cat->id."' ".$selected.">&nbsp;--&nbsp;".$sub_cat->name."</option>";
+                        $categories_dropdown .= "<option value='".$cat->id."' ".$selected.">".$cat->name."</option>";
+                        $sub_categories = Category::where(['parent_id'=>$cat->id])->get();
+                        foreach ($sub_categories as $sub_cat) {
+                            if($sub_cat->id == $productDetails->category_id){
+                                $selected = "selected";
+                            }else{
+                                $selected = "";
+                            }
+                            $categories_dropdown .= "<option value='".$sub_cat->id."' ".$selected.">&nbsp;--&nbsp;".$sub_cat->name."</option>";
+                        }
                     }
-                }
-             // Categories dropdown end
-            return view('admin.products.edit_products')->with(compact('productDetails','categories_dropdown'));
-            //return redirect('/admin/view-product')->with('flash_message_success','ອັບເດດ ສິນຄ້າ ສຳເລັດແລ້ວ!!');       
+                // Categories dropdown end
+                return view('admin.products.edit_products')->with(compact('productDetails','categories_dropdown'));
+                //return redirect('/admin/view-product')->with('flash_message_success','ອັບເດດ ສິນຄ້າ ສຳເລັດແລ້ວ!!');       
     }
     public function deleteProductImage($id = null){
         // get Product Image name
@@ -191,6 +216,19 @@ class ProductsController extends Controller
         Product :: where(['id'=>$id])->update(['image'=>'']);
         return redirect()->back()->with('flash_message_success','ຮູບພາບສິນຄ້າຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
     }  
+    public function deleteProductVideo($id = null){
+        //Get VIDEO NAME
+        $productVideo = Product::select('video')->where('id',$id)->first();
+        //GET VIDEO PATH
+        $video_path = 'videos/';
+        //ລົບວີດີໂອຖ້າມີວີດີໂອ
+        if(file_exists($video_path.$productVideo->video)){
+            unlink($video_path.$productVideo->video);
+        }
+        //ລົບວີດີໂອອອກຈ່າກຕາຕະລາງສິນຄ້າ
+        Product::where('id',$id)->update(['video'=>'']);
+        return redirect()->back()->with('flash_message_success','ວີດີໂອສິນຄ້າຖືກລຶບຮຽບຮ້ອຍແລ້ວ!!');
+    } 
     public function deleteProduct($id = null){
         if(!empty($id)){
             Product::where(['id'=>$id])->delete();
@@ -254,10 +292,10 @@ class ProductsController extends Controller
             foreach ($subCategories as $subcat) {
                 $cat_ids[] = $subcat->id;
             }
-            $productsAll = Product::whereIn('category_id',$cat_ids)->where('status',1)->Paginate(6);
+            $productsAll = Product::whereIn('category_id',$cat_ids)->where('status',1)->orderBy('id','Desc')->Paginate(6);
         }else{
             // if url is sub category url
-            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->Paginate(6);
+            $productsAll = Product::where(['category_id' =>$cateogoryDetails->id])->where('status',1)->orderBy('id','Desc')->Paginate(6);
         }
         $banners = Banner::where('status','1')->get();
         $meta_title = $cateogoryDetails->meta_title;
@@ -303,7 +341,8 @@ class ProductsController extends Controller
         $data = $request->all();
         $proArr = explode("-",$data['idSize']);
         $proAttr = ProductsAttribute::where(['product_id'=>$proArr[0],'size'=>$proArr[1]])->first();
-        echo $proAttr->price;
+        $getCurrencyRates = product::getCurrencyRates($proAttr->price);
+        echo $proAttr->price."-".$getCurrencyRates['USD_RATE']."-".$getCurrencyRates['Y_RATE']."-".$getCurrencyRates['BATH_RATE'];
         echo "#";
         echo $proAttr->stock;
     }
@@ -810,12 +849,11 @@ class ProductsController extends Controller
     public function searchProducts(Request $request){
         if($request->ismethod('post')){
             $data = $request->all();
+            // echo "<pre>";print_r($data);die;
             $categories = Category::with('categories')->where(['parent_id'=>0])->get();
-
             $search_Products = $data['product'];
             $productsAll = Product::where('product_name','like','%'.$search_Products.'%')
-            ->orwhere('product_code',$search_Products)->where('status',1)->get();
-            
+            ->orwhere('product_code',$search_Products)->where('status',1)->Paginate(6);
             $productCount = Product::where('product_name','like','%'.$search_Products.'%')
             ->orwhere('product_code',$search_Products)->where('status',1)->count();
             if($productCount>6){

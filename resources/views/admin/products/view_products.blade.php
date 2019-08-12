@@ -58,7 +58,32 @@
                            <td>{{$product->product_name}}</td>
                            <td>{{$product->product_code}}</td>
                            <td>{{$product->product_color}}</td>
-                           <td>{{$product->price}}</td>
+                           <td>
+                           <?php
+                                                    $price_amount = $product->price;
+                                                    //use for split yaek array
+                                                    $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                        // print_r($totals);
+                                                                        //count index in array
+                                                                        $countArray = count($totals) ;
+                                                                        // echo $countArray;
+                                                                        if($countArray==8){
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                        }
+                                                                        elseif ($countArray==7) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                        }
+                                                                        elseif ($countArray==6) {
+                                                                            echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                        }
+                                                                        elseif ($countArray==5) {
+                                                                            echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                        }elseif ($countArray==4) {
+                                                                            echo $totals[0].".".$totals[1].$totals[2].$totals[3];
+                                                                        } 
+                                                                                    
+                                            ?>
+                               ກີບ</td>
                            <td><?php
                               $use="";
                               $use = $product->feature_items;
@@ -70,8 +95,6 @@
                               ?><center><font color="Green"><b>{{$show}}</b></font></center><?php
                             }?>
                             </td>
-
-
                            <td>
                                 @if(!empty($product->image))
                                 <img src="{{asset('/images/backend_images/products/medium/'.$product->image)}}" style="width:70px;">
@@ -86,7 +109,6 @@
                            </tr>
                               <div id="myModal{{$product->id}}" class="modal hide">
                                 <div class="modal-header">
-
                                   <button data-dismiss="modal" class="close" type="button">×</button>
                                   <h3>{{$product->product_name}} ລາຍລະອຽດທັງໝົດ</h3>
                                 </div>
@@ -95,7 +117,32 @@
                                   <p><strong>ລະຫັດ Category:</strong>  {{$product->category_id}}</p>
                                   <p><strong>ໝາຍເລກສິນຄ້າ:</strong>  {{$product->product_code}}</p>
                                   <p><strong>ສີ:</strong>  {{$product->product_color}}</p>
-                                  <p><strong>ລາຄາ:</strong>  {{$product->price}}</p>
+                                  <p><strong>ລາຄາ:</strong>  
+                                  <?php
+                                                $price_amount = $product->price;
+                                                //use for split yaek array
+                                                $totals = preg_split('//', $price_amount, -1, PREG_SPLIT_NO_EMPTY);
+                                                                    // print_r($totals);
+                                                                    //count index in array
+                                                                    $countArray = count($totals) ;
+                                                                    // echo $countArray;
+                                                                    if($countArray==8){
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4].".".$totals[5].$totals[6].$totals[7];
+                                                                    }
+                                                                    elseif ($countArray==7) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3].".".$totals[4].$totals[5].$totals[6];
+                                                                    }
+                                                                    elseif ($countArray==6) {
+                                                                        echo $totals[0].$totals[1].$totals[2].".".$totals[3].$totals[4].$totals[5];
+                                                                    }
+                                                                    elseif ($countArray==5) {
+                                                                        echo $totals[0].$totals[1].".".$totals[2].$totals[3].$totals[4];
+                                                                    }elseif ($countArray==4) {
+                                                                        echo $totals[0].".".$totals[1].$totals[2].$totals[3];
+                                                                    } 
+                                                                                
+                                        ?>
+                                    ກີບ</p>
                                   <p><strong>ຄໍາອະທິບາຍ:</strong>  {{$product->description}}</p>
                                 </div>
                               </div>

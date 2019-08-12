@@ -28,7 +28,7 @@
 
     @include('layouts.adminLayout.admin_footer')
     </font>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="{{asset('js/backend_js/jquery.min.js')}}"></script> 
 <script src="{{asset('js/backend_js/jquery.ui.custom.js')}}"></script> 
 <script src="{{asset('js/backend_js/bootstrap.min.js')}}"></script> 
@@ -41,7 +41,7 @@
 <script src="{{asset('js/backend_js/matrix.tables.js')}}"></script>
 <script src="{{asset('js/backend_js/matrix.popover.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 
 </body>
 </html>
